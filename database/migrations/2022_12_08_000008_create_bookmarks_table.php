@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('reposts', function (Blueprint $table) {
+        Schema::create('bookmarks', function (Blueprint $table) {
             $table->uuid('userId');
             $table->uuid('postId');
-            $table->text('textualContent');
             $table->primary(['userId','postId']);
             $table->foreign('userId')->references('id')->on('users');
             $table->foreign('postId')->references('id')->on('posts');
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reposts');
+        Schema::dropIfExists('bookmarks');
     }
 };

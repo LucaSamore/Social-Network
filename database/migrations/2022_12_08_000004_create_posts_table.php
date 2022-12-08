@@ -19,9 +19,9 @@ return new class extends Migration
             $table->bigInteger('numberOfLikes');
             $table->bigInteger('numberOfComments');
             $table->bigInteger('numberOfReposts');
-            $table->uuid('user');
+            $table->uuid('userId');
             $table->primary('id');
-            $table->foreign('user')->references('id')->on('users');
+            $table->foreign('userId')->references('id')->on('users');
         });
     }
 
