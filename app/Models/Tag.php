@@ -13,4 +13,9 @@ class Tag extends Model
     public $timestamps = false;
     protected $primaryKey = 'name';
     protected $keyType = 'string';
+
+    public function posts()
+    {
+        return $this->belongsToMany(Post::class)->using(TagsInPost::class);
+    }
 }

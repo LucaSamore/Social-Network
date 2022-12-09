@@ -13,4 +13,9 @@ class NotificationType extends Model
     public $timestamps = false;
     protected $primaryKey = 'name';
     protected $keyType = 'string';
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
 }
