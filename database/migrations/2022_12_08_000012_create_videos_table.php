@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('videos', function (Blueprint $table) {
             $table->uuid('id');
-            $table->uuid('postId');
+            $table->uuid('post_id');
             $table->string('path', 500)->unique();
             $table->primary('id');
-            $table->foreign('postId')->references('id')->on('posts');
+            $table->foreign('post_id')->references('id')->on('posts');
         });
     }
 

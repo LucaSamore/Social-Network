@@ -20,12 +20,12 @@ return new class extends Migration
             $table->string('username');
             $table->string('email')->unique();
             $table->string('password');
-            $table->date('dateOfBirth');
+            $table->date('date_of_birth');
             $table->text('bio')->nullable();
-            $table->bigInteger('numberOfFollowers');
-            $table->bigInteger('numberOfFollowees');
-            $table->string('profileImage')->nullable();
-            $table->string('bannerImage')->nullable();
+            $table->bigInteger('number_of_followers');
+            $table->bigInteger('number_of_followees');
+            $table->string('profile_image', 500)->unique()->nullable();
+            $table->string('banner_image', 500)->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

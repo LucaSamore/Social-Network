@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('likes', function (Blueprint $table) {
-            $table->uuid('userId');
-            $table->uuid('postId');
-            $table->primary(['userId','postId']);
-            $table->foreign('userId')->references('id')->on('users');
-            $table->foreign('postId')->references('id')->on('posts');
+            $table->uuid('user_id');
+            $table->uuid('post_id');
+            $table->primary(['user_id','post_id']);
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('post_id')->references('id')->on('posts');
         });
     }
 

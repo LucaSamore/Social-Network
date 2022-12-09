@@ -18,7 +18,7 @@ return new class extends Migration
             $table->uuid('from');
             $table->uuid('to');
             $table->string('type');
-            $table->dateTime('createdAt');
+            $table->dateTime('created_at');
             $table->primary('id');
             $table->foreign('from')->references('id')->on('users');
             $table->foreign('to')->references('id')->on('users');

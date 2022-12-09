@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tags_in_post', function (Blueprint $table) {
-            $table->string('tagName');
-            $table->uuid('postId');
-            $table->primary(['tagName','postId']);
-            $table->foreign('tagName')->references('name')->on('tags');
-            $table->foreign('postId')->references('id')->on('posts');
+            $table->string('tag_name');
+            $table->uuid('post_id');
+            $table->primary(['tag_name','post_id']);
+            $table->foreign('tag_name')->references('name')->on('tags');
+            $table->foreign('post_id')->references('id')->on('posts');
         });
     }
 
