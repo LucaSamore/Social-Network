@@ -59,43 +59,41 @@ class User extends Authenticatable
 
     public function reposts()
     {
-        return $this->belongsToMany(Post::class)->using(Repost::class);
+        return $this->belongsToMany(Post::class, 'reposts', 'user_id')->using(Repost::class);
     }
-
-    //! TODO Controllare nomi foreign key
 
     public function followers()
     {
-        return $this->belongsToMany(User::class)->using(Follower::class);
+        return $this->belongsToMany(User::class, 'followers', 'follower')->using(Follower::class);
     }
 
     public function followees()
     {
-        return $this->belongsToMany(User::class)->using(Follower::class);
+        return $this->belongsToMany(User::class, 'followers', 'followees')->using(Follower::class);
     }
 
     public function notificationsFrom()
     {
-        return $this->belongsToMany(User::class)->using(Notification::class);
+        return $this->belongsToMany(User::class, 'notifications', 'from')->using(Notification::class);
     }
 
     public function notificationsTo()
     {
-        return $this->belongsToMany(User::class)->using(Notification::class);
+        return $this->belongsToMany(User::class, 'notifications', 'to')->using(Notification::class);
     }
 
     public function likes()
     {
-        return $this->belongsToMany(Post::class)->using(Like::class);
+        return $this->belongsToMany(Post::class, 'likes', 'user_id')->using(Like::class);
     }
 
     public function comments()
     {
-        return $this->belongsToMany(Post::class)->using(Comment::class);
+        return $this->belongsToMany(Post::class, 'comments', 'user_id')->using(Comment::class);
     }
 
     public function bookmarks()
     {
-        return $this->belongsToMany(Post::class)->using(Bookmark::class);
+        return $this->belongsToMany(Post::class, 'bookmarks', 'user_id')->using(Bookmark::class);
     }
 }
