@@ -14,7 +14,7 @@ class Post extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'textual_content'
+        'textual_content',
     ];
 
     public function user()
