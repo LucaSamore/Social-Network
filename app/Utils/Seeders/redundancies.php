@@ -11,6 +11,7 @@ class RedundancyHelper
         (new self)->updateLikesOnPost();
         (new self)->updateCommentsOnPost();
         (new self)->updateRepostsOnPost();
+        (new self)->updateLikesOnComment();
     }
 
     private function updateFollowers()
@@ -86,6 +87,15 @@ class RedundancyHelper
 
     private function updateLikesOnComment()
     {
-
+        DB::table('comments')
+            ->selectRaw('comments.id, count(comments.id) as howMany')
+            ->join('likes_on_comment', 'comments.id', '=', 'likes_on_comment.comment_id')
+            ->groupBy('comments.id')
+            ->get()
+            ->each(function ($item, $key) {
+                DB::table('comments')
+                    ->where('id', $item->id)
+                    ->update(['number_of_likes' => $item->howMany]);
+            });
     }
 }

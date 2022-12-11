@@ -11,6 +11,7 @@ class DuplicatesHelper
         (new self)->removeNotificationsDuplicates();
         (new self)->removeBookmarksDuplicates();
         (new self)->removeTagsInPostDuplicates();
+        (new self)->removeLikesOnCommentDuplicates();
     }
 
     private function removeLikesDuplicates()
@@ -90,6 +91,22 @@ class DuplicatesHelper
         DB::table('tags_in_post')
             ->where('tag_name', '=', $tagInPost[0]->tag_name)
             ->where('post_id', '=', $tagInPost[0]->post_id)
+            ->delete();
+    }
+
+    private function removeLikesOnCommentDuplicates()
+    {
+        $likeOnComment = DB::table('likes_on_comment')
+            ->selectRaw('user_id, comment_id, count(id) as duplicates')
+            ->groupBy('user_id', 'comment_id')
+            ->having('duplicates', '>', 1)
+            ->get();
+
+        if($likeOnComment->isEmpty()) return;
+
+        DB::table('likes_on_comment')
+            ->where('user_id', '=', $likeOnComment[0]->user_id)
+            ->where('comment_id', '=', $likeOnComment[0]->comment_id)
             ->delete();
     }
 }

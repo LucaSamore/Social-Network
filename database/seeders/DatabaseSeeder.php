@@ -8,6 +8,7 @@ use App\Models\Bookmark;
 use App\Models\Comment;
 use App\Models\Follower;
 use App\Models\Like;
+use App\Models\LikesOnComment;
 use App\Models\Notification;
 use App\Models\NotificationType;
 use App\Models\Post;
@@ -39,6 +40,7 @@ class DatabaseSeeder extends Seeder
         Bookmark::factory()->count(50)->create();
         Follower::factory()->count(150)->create();
         Notification::factory()->count(150)->create();
+        LikesOnComment::factory()->count(100)->create();
         DuplicatesHelper::removeDuplicates();
         RedundancyHelper::updateRedundancies();
     }
