@@ -17,7 +17,14 @@ class NotificationTypeFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->unique()->sentence()
+            'name' => fake()
+                ->unique()
+                ->randomElement([
+                    'ha iniziato a seguirti', 
+                    'ha messo mi piace ad un tuo post', 
+                    'ha commentato un tuo post',
+                    'ha messo mi piace ad un tuo commento'
+                ])
         ];
     }
 }

@@ -10,6 +10,7 @@ class Like extends Pivot
 {
     use HasFactory, HasUuids;
 
+    protected $table = 'likes';
     public $incrementing = false;
     public $timestamps = false;
 }

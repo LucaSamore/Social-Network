@@ -10,7 +10,7 @@ class TagsInPost extends Pivot
 {
     use HasFactory, HasUuids;
 
-    protected $table = 'tags_in_post';    
+    protected $table = 'tags_in_post';
     public $incrementing = false;
     public $timestamps = false;
 }

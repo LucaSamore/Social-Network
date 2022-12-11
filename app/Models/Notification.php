@@ -10,6 +10,7 @@ class Notification extends Pivot
 {
     use HasFactory, HasUuids;
 
+    protected $table = 'notifications';
     public $incrementing = false;
     public $timestamps = false;
 

@@ -10,6 +10,7 @@ class Repost extends Pivot
 {
     use HasFactory, HasUuids;
 
+    protected $table = 'reposts';
     public $incrementing = false;
     public $timestamps = false;
 

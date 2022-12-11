@@ -10,6 +10,7 @@ class Bookmark extends Pivot
 {
     use HasFactory, HasUuids;
 
+    protected $table = 'bookmarks';
     public $incrementing = false;
     public $timestamps = false;
 }

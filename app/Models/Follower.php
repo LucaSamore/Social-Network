@@ -10,6 +10,7 @@ class Follower extends Pivot
 {
     use HasFactory, HasUuids;
 
+    protected $table = 'followers';
     public $incrementing = false;
     public $timestamps = false;
 }

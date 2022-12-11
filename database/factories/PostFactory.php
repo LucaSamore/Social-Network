@@ -11,13 +11,6 @@ use App\Models\User;
 class PostFactory extends Factory
 {
     /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
-    protected $model = Post::class;
-
-    /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
@@ -30,7 +23,7 @@ class PostFactory extends Factory
             'number_of_likes' => 0,
             'number_of_comments' => 0,
             'number_of_reposts' => 0,
-            'user_id' => User::factory()
+            'user_id' => User::all()->random()->id
         ];
     }
 }

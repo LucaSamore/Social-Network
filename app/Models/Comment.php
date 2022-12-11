@@ -10,6 +10,7 @@ class Comment extends Pivot
 {
     use HasFactory, HasUuids;
 
+    protected $table = 'comments';
     public $incrementing = false;
     public $timestamps = false;
 
