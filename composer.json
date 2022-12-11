@@ -28,7 +28,8 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/utils/seeders.php"
+            "app/utils/seeders/duplicates.php",
+            "app/utils/seeders/redundancies.php"
         ]
     },
     "autoload-dev": {

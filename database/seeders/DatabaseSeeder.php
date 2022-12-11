@@ -17,6 +17,7 @@ use App\Models\TagsInPost;
 use App\Models\User;
 use DuplicatesHelper;
 use Illuminate\Database\Seeder;
+use RedundancyHelper;
 
 class DatabaseSeeder extends Seeder
 {
@@ -31,13 +32,14 @@ class DatabaseSeeder extends Seeder
         Post::factory()->count(250)->create();
         NotificationType::factory()->count(4)->create();
         Tag::factory()->count(100)->create();
-        Like::factory()->count(75)->create();
-        Repost::factory()->count(50)->create();
-        Comment::factory()->count(100)->create();
+        Like::factory()->count(200)->create();
+        Repost::factory()->count(100)->create();
+        Comment::factory()->count(200)->create();
         TagsInPost::factory()->count(50)->create();
         Bookmark::factory()->count(50)->create();
         Follower::factory()->count(150)->create();
         Notification::factory()->count(150)->create();
         DuplicatesHelper::removeDuplicates();
+        RedundancyHelper::updateRedundancies();
     }
 }
