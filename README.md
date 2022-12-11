@@ -15,7 +15,7 @@ A social network application built for my Web Technologies course.
 ## Project setup
 1. Copy file `.env.example` to `.env`, configure your database params
 2. Install project dependencies running `composer install` and `npm install` commands
-4. Run migration running `php artisan migrate` command
+4. Run migration and seeder running `php artisan migrate --seed` command
 5. Generate application encryption key running `php artisan key:generate` command
 6. Run node server with `npm run dev` command
 7. Run the application with `php artisan serve` command
