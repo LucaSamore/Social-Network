@@ -4,6 +4,7 @@ A social network application built for my Web Technologies course.
 ## Featuring
 * [Laravel](https://laravel.com/)
 * [Tailwindcss](https://tailwindcss.com/)
+* [daisyUI](https://daisyui.com/)
 * [MySQL](https://www.mysql.com/)
 
 ## Requirements
