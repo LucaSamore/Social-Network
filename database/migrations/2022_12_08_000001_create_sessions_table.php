@@ -14,11 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('sessions', function (Blueprint $table) {
-            $table->uuid('id');
-            $table->uuid('user_id');
-            $table->dateTime('created_at');
-            $table->dateTime('expires_at');
-            $table->primary('id');
+            $table->string('id')->primary();
+            //$table->foreignId('user_id')->nullable()->index();
+            $table->uuid('user_id')->nullable();
+            $table->string('ip_address', 45)->nullable();
+            $table->text('user_agent')->nullable();
+            $table->text('payload');
+            $table->integer('last_activity')->index();
             $table->foreign('user_id')->references('id')->on('users');
         });
     }
