@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Public routes
+Route::view('/', 'welcome');
+Route::view('/login', 'test.login');
+Route::post('/login', [AuthController::class, 'login']);
+
+// Protected routes
+Route::middleware('auth')->group(function () {
+    Route::view('/home', 'test.home');
 });
