@@ -15,11 +15,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Public routes
-Route::view('/', 'welcome');
-Route::view('/login', 'test.login');
+Route::view('/', 'welcome')->name('welcome');
+Route::view('/login', 'test.login')->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
 // Protected routes
 Route::middleware('auth')->group(function () {
-    Route::view('/home', 'test.home');
+    Route::view('/home', 'test.home')->name('home');
+});
+
+Route::fallback(function () {
+    return view('test.fallback');
 });
