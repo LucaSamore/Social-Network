@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 // Public routes
 Route::view('/', 'welcome')->name('welcome');
 Route::view('/login', 'test.login')->name('login');
+Route::view('/register', 'test.register')->name('register');
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
 
 // Protected routes
 Route::middleware('auth')->group(function () {
@@ -25,6 +27,4 @@ Route::middleware('auth')->group(function () {
     Route::any('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-Route::fallback(function () {
-    return view('test.fallback');
-});
+Route::fallback(fn() => view('test.fallback'));
