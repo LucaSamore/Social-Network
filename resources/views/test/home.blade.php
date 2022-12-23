@@ -10,5 +10,6 @@
     </head>
     <body>
         <h1 class="text-3xl font-bold underline">Home</h1>
+        <a href="/logout">Logout</a>
     </body>
 </html>

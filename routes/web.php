@@ -22,6 +22,7 @@ Route::post('/login', [AuthController::class, 'login']);
 // Protected routes
 Route::middleware('auth')->group(function () {
     Route::view('/home', 'test.home')->name('home');
+    Route::any('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 Route::fallback(function () {
