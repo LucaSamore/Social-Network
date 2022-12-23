@@ -24,3 +24,7 @@ Route::get('/post', function () {
 Route::get('/leftMenu', function () {
     return view('leftMenu');
 });
+
+Route::get('/rightMenu', function () {
+    return view('rightMenu');
+});
