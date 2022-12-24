@@ -17,9 +17,7 @@ final class AuthController extends Controller
             return redirect()->intended('home');
         }
 
-        return back()
-            ->withErrors(['email' => 'Email o password non corrette',])
-            ->onlyInput('email');
+        return back()->withErrors(['error' => 'Login fallito']);
     }
 
     public function register(RegisterRequest $request)
@@ -29,13 +27,10 @@ final class AuthController extends Controller
         if ($user->save()) {
             $user->refresh();
             auth()->login($user);
-            return redirect('/home')->with('Success', 'Account creato con successo');
+            return redirect('/home')->with('success', 'Account creato con successo');
         }
-        
-        // ! TODO: make custom error message when registration fails
-        return back()
-            ->withErrors(['email' => 'Email o password non corrette',])
-            ->onlyInput('email');
+
+        return back()->withErrors(['error' => 'Registrazione fallita']);
     }
 
     public function logout(Request $request)
