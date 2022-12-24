@@ -7,6 +7,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 final class AuthController extends Controller
 {
@@ -22,8 +23,8 @@ final class AuthController extends Controller
 
     public function register(RegisterRequest $request)
     {
-        $user = new User($request->validated());
-
+        $user = new User(array_merge(array('id' => (string) Str::uuid()),$request->validated()));
+        
         if ($user->save()) {
             $user->refresh();
             auth()->login($user);

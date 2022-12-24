@@ -11,7 +11,31 @@
     <body>
         <h1 class="text-3xl font-bold underline">Register Page</h1>
 
-        <!-- TODO: make register form -->
-        <a href="/register">Register</a>
+        <form action="/register" method="post">
+            @csrf
+            <label for="name">Nome:</label><br/>
+            <input type="text" id="name" name="name" required /><br/>
+
+            <label for="surname">Cognome:</label><br/>
+            <input type="text" id="surname" name="surname" required /><br/>
+
+            <label for="username">Username:</label><br/>
+            <input type="text" id="username" name="username" required /><br/>
+
+            <label for="date_of_birth">Data di nascita:</label><br/>
+            <input type="date" id="date_of_birth" name="date_of_birth" required /><br/>
+
+            <label for="email">Email:</label><br/>
+            <input type="email" id="email" name="email" required /><br/>
+
+            <label for="password">Password:</label><br/>
+            <input type="password" id="password" name="password" required />
+
+            <input type="submit" value="Submit"/>
+
+            @error('error')
+                <p>{{ $message }}</p>
+            @enderror
+        </form>
     </body>
 </html>
