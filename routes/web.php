@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MediaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,8 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'welcome')->name('welcome');
 Route::view('/login', 'test.login')->name('login');
 Route::view('/register', 'test.register')->name('register');
+Route::view('/upload', 'test.upload')->name('upload');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
+Route::post('/upload', [MediaController::class, 'upload']);
 
 // Protected routes
 Route::middleware('auth')->group(function () {
