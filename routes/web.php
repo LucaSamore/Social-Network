@@ -22,7 +22,8 @@ Route::view('/register', 'test.register')->name('register');
 Route::view('/upload', 'test.upload')->name('upload');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
-Route::post('/upload', [MediaController::class, 'upload']);
+Route::post('/upload/image', [MediaController::class, 'uploadImage']);
+Route::post('/upload/video', [MediaController::class, 'uploadVideo']);
 
 // Protected routes
 Route::middleware('auth')->group(function () {
