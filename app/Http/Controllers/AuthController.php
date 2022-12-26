@@ -24,9 +24,9 @@ final class AuthController extends Controller
 
     public function register(RegisterRequest $request)
     {
-        $user = new User(array_merge(array('id' => (string) Str::uuid()), $request->validated()));
+        $user = new User(array_merge(array($request->validated(), 'id' => (string) Str::uuid())));
         $user->password = Hash::make($user->password);
-        
+        dd($user->username);
         if ($user->save()) {
             $user->refresh();
             auth()->login($user);

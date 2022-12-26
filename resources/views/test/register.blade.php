@@ -23,7 +23,7 @@
                             <div class="flex flex-col gap-4 w-full xl:w-1/2 lg:w-1/2 md:w-full sm:w-full">
                                 <fieldset class="flex flex-col gap-2">
                                     <label for="username" class="text-white font-quicksand font-bold text-lg">Username:</label>
-                                    <input type="text" id="username" name="username" required minlength="5" maxlength="25" placeholder="Username"
+                                    <input type="text" id="username" value="{{ old('username') }}" name="username" required minlength="5" maxlength="25" placeholder="Username"
                                         class="input h-10 w-full rounded-lg bg-white text-sm font-bold font-quicksand text-black px-2 border-2 border-gray-500"/>
                                         @error('username')
                                             <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
@@ -31,13 +31,13 @@
                                 </fieldset>
                                 <fieldset class="flex flex-col gap-2">
                                     <label for="bio" class="text-white font-quicksand font-bold text-lg">Biografia:</label>
-                                    <textarea id="bio" name="bio" placeholder="Bio"
+                                    <textarea id="bio" name="bio" placeholder="Bio" value="{{ old('bio') }}"
                                         class="textarea h-28 rounded-lg bg-white text-sm font-bold font-quicksand text-black px-2 border-2 border-gray-500"></textarea>
                                 </fieldset>
                             </div>
                             <div class="flex flex-col gap-4 xl:items-end lg:items-center md:items-center sm:items-center items-center w-full xl:w-1/2 lg:w-1/2 md:w-full sm:w-full">
                                 <img src="{{asset('img/default-avatar.png')}}" id="preview" alt="preview profile image" width="128" height="128" class="w-32 h-32 mb-6 object-cover xl:rounded-full lg:rounded-full md:rounded-none sm:rounded-none rounded-none border-4 border-gray-500" />
-                                <input type="file" id="input-preview" name="profile_image" class="text-white font-quicksand w-3/4 mt-6 border-2 border-gray-400 rounded-lg" />
+                                <input type="file" id="input-preview" name="profile_image" value="{{ old('profile_image') }}" accept=".png, .jpg, .jpeg" class="text-white font-quicksand w-3/4 mt-6 border-2 border-gray-400 rounded-lg" />
                                 @error('profile_image')
                                     <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
                                 @enderror
@@ -50,7 +50,7 @@
                         <fieldset class="grid gap-y-6 gap-x-10 grid-col-1 grid-rows-6 xl:grid-col-2 xl:grid-rows-3 lg:grid-col-1 lg:grid-rows-6 md:grid-col-1 md:grid-rows-6 sm:grid-col-1 sm:grid-rows-6 grid-flow-col">
                             <fieldset class="flex flex-col gap-2">
                                 <label for="name" class="text-white font-quicksand font-bold text-lg">Nome:</label>
-                                <input type="text" id="name" name="name" required minlength="5" maxlength="50" placeholder="Nome"
+                                <input type="text" id="name" name="name" required minlength="1" maxlength="50" placeholder="Nome" value="{{ old('name') }}"
                                     class="input h-10 rounded-lg bg-white text-sm font-bold font-quicksand text-black px-2 border-2 border-gray-500"/>
                                     @error('name')
                                         <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
@@ -58,7 +58,7 @@
                             </fieldset>
                             <fieldset class="flex flex-col gap-2">
                                 <label for="surname" class="text-white font-quicksand font-bold text-lg">Cognome:</label>
-                                <input type="text" id="surname" name="surname" required minlength="5" maxlength="50" placeholder="Cognome"
+                                <input type="text" id="surname" name="surname" required minlength="1" maxlength="50" placeholder="Cognome" value="{{ old('surname') }}"
                                     class="input h-10 rounded-lg bg-white text-sm font-bold font-quicksand text-black px-2 border-2 border-gray-500"/>
                                     @error('surname')
                                         <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
@@ -66,7 +66,7 @@
                             </fieldset>
                             <fieldset class="flex flex-col gap-2">
                                 <label for="date_of_birth" class="text-white font-quicksand font-bold text-lg">Data di nascita:</label>
-                                <input type="date" id="date_of_birth" name="date_of_birth" required
+                                <input type="date" id="date_of_birth" name="date_of_birth" required value="{{ old('date_of_birth') }}"
                                     class="h-10 rounded-lg bg-white text-sm font-bold font-quicksand text-black px-2 border-2 border-gray-500"/>
                                     @error('date_of_birth')
                                         <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
@@ -74,7 +74,7 @@
                             </fieldset>
                             <fieldset class="flex flex-col gap-2">
                                 <label for="email" class="text-white font-quicksand font-bold text-lg">Email:</label>
-                                <input type="email" id="email" name="email" required minlength="5" maxlength="50" placeholder="Email"
+                                <input type="email" id="email" name="email" required minlength="5" maxlength="50" placeholder="Email" value="{{ old('email') }}"
                                     class="input h-10 rounded-lg bg-white text-sm font-bold font-quicksand text-black px-2 border-2 border-gray-500"/>
                                     @error('email')
                                         <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
