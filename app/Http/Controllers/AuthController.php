@@ -19,7 +19,7 @@ final class AuthController extends Controller
             return redirect()->intended('home');
         }
 
-        return back()->withErrors(['error' => 'Login fallito']);
+        return back()->withErrors(['error' => 'Login fallito, utente non trovato']);
     }
 
     public function register(RegisterRequest $request)
