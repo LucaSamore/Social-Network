@@ -17,7 +17,7 @@
                 class="flex flex-col gap-6 items-center bg-dark-mode-3 rounded-xl py-12 w-3/5 xl:w-3/5 lg:w-3/5 md:w-3/5 sm:w-3/5 mb-8">
                 <form action="/register" method="post" enctype="multipart/form-data" class="flex flex-col xl:flex-col lg:flex-col md:flex-col sm:flex-col gap-4 w-full justify-evenly items-center">
                     @csrf
-                    <fieldset class="w-3/4 px-6">
+                    <fieldset class="w-full xl:w-3/4 lg:w-full md:w-full sm:w-full px-6">
                         <legend class="mb-8 text-white font-bold font-montserrat text-xl xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl">Profilo</legend>
                         <fieldset class="flex flex-col xl:flex-row lg:flex-col md:flex-col sm:flex-col gap-10 justify-center items-center">
                             <div class="flex flex-col gap-4 w-full xl:w-1/2 lg:w-1/2 md:w-full sm:w-full">
@@ -25,6 +25,9 @@
                                     <label for="username" class="text-white font-quicksand font-bold text-lg">Username:</label>
                                     <input type="text" id="username" name="username" required minlength="5" maxlength="25" placeholder="Username"
                                         class="input h-10 w-full rounded-lg bg-white text-sm font-bold font-quicksand text-black px-2 border-2 border-gray-500"/>
+                                        @error('username')
+                                            <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
+                                        @enderror
                                 </fieldset>
                                 <fieldset class="flex flex-col gap-2">
                                     <label for="bio" class="text-white font-quicksand font-bold text-lg">Biografia:</label>
@@ -34,7 +37,10 @@
                             </div>
                             <div class="flex flex-col gap-4 xl:items-end lg:items-center md:items-center sm:items-center items-center w-full xl:w-1/2 lg:w-1/2 md:w-full sm:w-full">
                                 <img src="{{asset('img/default-avatar.png')}}" id="preview" alt="preview profile image" width="128" height="128" class="w-32 h-32 mb-6 object-cover xl:rounded-full lg:rounded-full md:rounded-none sm:rounded-none rounded-none border-4 border-gray-500" />
-                                <input type="file" id="input-preview" class="text-white font-quicksand w-full mt-6" />
+                                <input type="file" id="input-preview" name="profile_image" class="text-white font-quicksand w-3/4 mt-6 border-2 border-gray-400 rounded-lg" />
+                                @error('profile_image')
+                                    <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
+                                @enderror
                             </div>
                         </fieldset>
                     </fieldset>
@@ -46,31 +52,49 @@
                                 <label for="name" class="text-white font-quicksand font-bold text-lg">Nome:</label>
                                 <input type="text" id="name" name="name" required minlength="5" maxlength="50" placeholder="Nome"
                                     class="input h-10 rounded-lg bg-white text-sm font-bold font-quicksand text-black px-2 border-2 border-gray-500"/>
+                                    @error('name')
+                                        <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
+                                    @enderror
                             </fieldset>
                             <fieldset class="flex flex-col gap-2">
                                 <label for="surname" class="text-white font-quicksand font-bold text-lg">Cognome:</label>
                                 <input type="text" id="surname" name="surname" required minlength="5" maxlength="50" placeholder="Cognome"
                                     class="input h-10 rounded-lg bg-white text-sm font-bold font-quicksand text-black px-2 border-2 border-gray-500"/>
+                                    @error('surname')
+                                        <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
+                                    @enderror
                             </fieldset>
                             <fieldset class="flex flex-col gap-2">
                                 <label for="date_of_birth" class="text-white font-quicksand font-bold text-lg">Data di nascita:</label>
                                 <input type="date" id="date_of_birth" name="date_of_birth" required
                                     class="h-10 rounded-lg bg-white text-sm font-bold font-quicksand text-black px-2 border-2 border-gray-500"/>
+                                    @error('date_of_birth')
+                                        <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
+                                    @enderror
                             </fieldset>
                             <fieldset class="flex flex-col gap-2">
                                 <label for="email" class="text-white font-quicksand font-bold text-lg">Email:</label>
                                 <input type="email" id="email" name="email" required minlength="5" maxlength="50" placeholder="Email"
                                     class="input h-10 rounded-lg bg-white text-sm font-bold font-quicksand text-black px-2 border-2 border-gray-500"/>
+                                    @error('email')
+                                        <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
+                                    @enderror
                             </fieldset>
                             <fieldset class="flex flex-col gap-2">
                                 <label for="password" class="text-white font-quicksand font-bold text-lg">Password:</label>
                                 <input type="password" id="password" name="password" required minlength="8" maxlength="50" placeholder="●●●●●●●●"
                                     class="input h-10 rounded-lg bg-white text-sm font-bold font-quicksand text-black px-2 border-2 border-gray-500"/>
+                                    @error('password')
+                                        <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
+                                    @enderror
                             </fieldset>
                             <fieldset class="flex flex-col gap-2">
                                 <label for="password_confirmation" class="text-white font-quicksand font-bold text-lg w-full">Conferma password:</label>
                                 <input type="password" id="password_confirmation" name="password_confirmation" required minlength="8" maxlength="50" placeholder="●●●●●●●●"
                                     class="input h-10 rounded-lg bg-white text-sm font-bold font-quicksand text-black px-2 border-2 border-gray-500"/>
+                                    @error('password_confirmation')
+                                        <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
+                                    @enderror
                             </fieldset>
                         </fieldset>
                     </fieldset>
