@@ -23,15 +23,15 @@
                     @csrf
 
                     <label for="email" class="text-white font-quicksand font-bold text-sm">Email:</label>
-                    <input type="email" id="email" name="email" required placeholder="test@gmail.com"
-                        class="input rounded-lg bg-white text-sm font-bold font-quicksand text-black px-2 border-2 border-gray-500"/>
+                    <input type="email" id="email" name="email" required placeholder="test@gmail.com" minlength="5" maxlength="50"
+                        class="input h-10 rounded-lg bg-white text-sm font-bold font-quicksand text-black px-2 border-2 border-gray-500"/>
                     @error('email')
                         <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
                     @enderror
                 
                     <label for="password" class="text-white font-quicksand font-bold text-sm">Password:</label>
-                    <input type="password" id="password" name="password" required placeholder="●●●●●●●●"
-                        class="input rounded-lg py-1 bg-white text-sm font-bold font-quicksand text-black px-2 border-2 border-gray-500 focus:border-2 focus:border-gray-500"/>
+                    <input type="password" id="password" name="password" required placeholder="●●●●●●●●" minlength="8" maxlength="50"
+                        class="input h-10 rounded-lg py-1 bg-white text-sm font-bold font-quicksand text-black px-2 border-2 border-gray-500 focus:border-2 focus:border-gray-500"/>
                     @error('password')
                         <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
                     @enderror
