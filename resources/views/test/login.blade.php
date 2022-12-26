@@ -8,13 +8,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         @vite('resources/css/app.css')
     </head>
-    <body>
+    <body class="bg-[url('../../public/svg/layered-waves.svg')] bg-cover">
         <main class="flex flex-col justify-evenly gap-6 items-center min-h-screen">
             <header>
-                <h1 class="font-montserrat font-bold mt-6 xl:text-8xl lg:text-8xl md:text-6xl sm:text-6xl text-4xl text-white">My Social App</h1>
+                <h1 class="text-white font-bold font-lobster text-8xl">Social App</h1>
             </header>
+
             <section class="flex flex-col gap-6 justify-around items-center bg-dark-mode-3 rounded-xl py-8 w-3/4 xl:w-1/5 lg:w-1/3 md:w-1/2 sm:w-1/2">
-                <h2 class="text-white font-bold text-2xl xl:text-2xl lg:text-2xl md:text-2xl sm:text-2xl font-montserrat">Login</h2>
+                <h2 class="text-white font-bold text-2xl xl:text-2xl lg:text-2xl md:text-2xl sm:text-2xl font-quicksand">Login</h2>
                 @error('error')
                     <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
                 @enderror

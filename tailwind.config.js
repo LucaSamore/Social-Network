@@ -9,7 +9,8 @@ module.exports = {
     extend: {
       fontFamily: {
         quicksand: ["Quicksand", "sans-serif"],
-        montserrat: ["Montserrat", "sans-serif"]
+        montserrat: ["Montserrat", "sans-serif"],
+        lobster: ["Lobster", "cursive"]
       },
       colors: {
         transparent: 'transparent',
