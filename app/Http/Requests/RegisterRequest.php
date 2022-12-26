@@ -50,16 +50,16 @@ final class RegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Questo campo &egrave; obbligatorio',
-            'surname.required' => 'Questo campo &egrave; obbligatorio',
-            'username.required' => 'Questo campo &egrave; obbligatorio',
-            'username.unique:users,username' => 'Username gi&agrave; in uso',
-            'email.required' => 'Questo campo &egrave; obbligatorio',
-            'email.unique:users,email' => 'Email gi&agrave; in uso',
-            'password.required' => 'Questo campo &egrave; obbligatorio',
-            'email.email' => 'Il contenuto non &egrave; una email valida',
-            'date_of_birth.required' => 'Questo campo &egrave; obbligatorio',
-            'date_of_birth.date' => 'La data inserita non &egrave; valida',
+            'name.required' => 'Questo campo è obbligatorio',
+            'surname.required' => 'Questo campo è obbligatorio',
+            'username.required' => 'Questo campo è obbligatorio',
+            'username.unique:users,username' => 'Username già in uso',
+            'email.required' => 'Questo campo è obbligatorio',
+            'email.unique:users,email' => 'Email già in uso',
+            'password.required' => 'Questo campo è obbligatorio',
+            'email.email' => 'Il contenuto non è una email valida',
+            'date_of_birth.required' => 'Questo campo è obbligatorio',
+            'date_of_birth.date' => 'La data inserita non è valida',
         ];
     }
 }

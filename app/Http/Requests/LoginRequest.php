@@ -42,9 +42,9 @@ final class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.required' => 'Questo campo &egrave; obbligatorio',
-            'password.required' => 'Questo campo &egrave; obbligatorio',
-            'email.email' => 'Il contenuto non &egrave; una email valida'
+            'email.required' => 'Questo campo è obbligatorio',
+            'password.required' => 'Questo campo è obbligatorio',
+            'email.email' => 'Il contenuto non è una email valida'
         ];
     }
 

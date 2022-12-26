@@ -9,17 +9,36 @@
         @vite('resources/css/app.css')
     </head>
     <body>
-        <h1 class="text-3xl font-bold underline">
-            Login
-        </h1>
-
-        <form action="/login" method="post">
-            @csrf
-            <label for="email">Email:</label><br/>
-            <input type="email" id="email" name="email" required /><br/>
-            <label for="password">Password:</label><br/>
-            <input type="password" id="password" name="password" required />
-            <input type="submit" value="Submit"/>
-        </form>
+        <main class="flex flex-col justify-evenly gap-6 items-center min-h-screen">
+            <header class="">
+                <h1 class="font-montserrat font-bold mt-6 xl:text-8xl lg:text-8xl md:text-6xl sm:text-6xl text-4xl text-white">My Social App</h1>
+            </header>
+            <section class="flex flex-col gap-6 justify-around items-center bg-dark-mode-3 rounded-xl py-8 w-3/4 xl:w-1/5 lg:w-1/3 md:w-1/2 sm:w-1/2">
+                <h2 class="text-white font-bold text-2xl xl:text-2xl lg:text-2xl md:text-2xl sm:text-2xl font-montserrat">Login</h2>
+                <form action="/login" method="post" class="flex flex-col gap-4 w-3/4">
+                    @csrf
+                    
+                    <label for="email" class="text-white font-quicksand font-bold text-sm">Email:</label>
+                    <input type="email" id="email" name="email" required placeholder="test@gmail.com"
+                        class="input rounded-lg bg-white text-sm font-bold font-quicksand text-black px-2 border-2 border-gray-500"/>
+                    @error('email')
+                        <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
+                    @enderror
+                
+                    <label for="password" class="text-white font-quicksand font-bold text-sm">Password:</label>
+                    <input type="password" id="password" name="password" required placeholder="●●●●●●●●"
+                        class="input rounded-lg py-1 bg-white text-sm font-bold font-quicksand text-black px-2 border-2 border-gray-500 focus:border-2 focus:border-gray-500"/>
+                    @error('password')
+                        <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
+                    @enderror
+                    
+                    <input type="submit" value="Accedi" class="btn border-none hover:bg-lavanda text-white font-bold font-montserrat text-lg bg-lavanda rounded-lg py-1 mt-6 normal-case"/>
+                </form>
+                <footer class="flex justify-around gap-4 items-center mt-4 xl:flex-row lg:flex-col md:flex-col sm:flex-col flex-col">
+                    <p class="text-white font-quicksand text-sm">Non hai un account?</p>
+                    <a href="/register" class="text-white font-bold font-quicksand text-sm hover:underline">Registrati</a>
+                </footer>
+            </section>
+        </main>
     </body>
 </html>
