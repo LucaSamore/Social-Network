@@ -82,19 +82,6 @@
                 </footer>
             </section>
         </main>
-        <script src="https://unpkg.com/flowbite@1.5.5/dist/datepicker.js"></script>
-        <script>
-            const image = document.getElementById('input-preview');
-            const preview = document.getElementById('preview');
-
-            image.onchange = e => {
-                const [file] = image.files;
-
-                if (file) {
-                    preview.src = URL.createObjectURL(file);
-                    //preview.style.visibility = 'visible';
-                }
-            }
-        </script>
+        @vite('resources/js/preview.js')
     </body>
 </html>
