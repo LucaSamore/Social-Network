@@ -11,16 +11,16 @@
     <body class="bg-[url('../../public/svg/layered-waves.svg')] bg-cover">
         <main class="flex flex-col justify-evenly gap-6 items-center min-h-screen">
             <header>
-                <h1 class="text-white font-bold font-lobster text-8xl p-4">Crea account</h1>
+                <h1 class="text-white font-bold font-lobster text-6xl xl:text-8xl lg:text-8xl md:text-8xl sm:text-6xl p-4">Crea account</h1>
             </header>
             <section 
                 class="flex flex-col gap-6 items-center bg-dark-mode-3 rounded-xl py-12 w-3/5 xl:w-3/5 lg:w-3/5 md:w-3/5 sm:w-3/5 mb-8">
                 <form action="/register" method="post" enctype="multipart/form-data" class="flex flex-col xl:flex-col lg:flex-col md:flex-col sm:flex-col gap-4 w-full justify-evenly items-center">
                     @csrf
-                    <fieldset class="w-1/2 px-6">
+                    <fieldset class="w-3/4 px-6">
                         <legend class="mb-8 text-white font-bold font-montserrat text-xl xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl">Profilo</legend>
-                        <fieldset class="flex gap-4 justify-center items-center">
-                            <div class="flex flex-col w-3/4 gap-4">
+                        <fieldset class="flex flex-col xl:flex-row lg:flex-col md:flex-col sm:flex-col gap-10 justify-center items-center">
+                            <div class="flex flex-col gap-4 w-full xl:w-1/2 lg:w-1/2 md:w-full sm:w-full">
                                 <fieldset class="flex flex-col gap-2">
                                     <label for="username" class="text-white font-quicksand font-bold text-lg">Username:</label>
                                     <input type="text" id="username" name="username" required minlength="5" maxlength="25" placeholder="Username"
@@ -32,14 +32,14 @@
                                         class="textarea h-28 rounded-lg bg-white text-sm font-bold font-quicksand text-black px-2 border-2 border-gray-500"></textarea>
                                 </fieldset>
                             </div>
-                            <div class="flex flex-col w-1/4">
-
+                            <div class="flex flex-col gap-4 xl:items-end lg:items-center md:items-center sm:items-center items-center w-full xl:w-1/2 lg:w-1/2 md:w-full sm:w-full">
+                                <img src="{{asset('img/default-avatar.png')}}" id="preview" alt="preview profile image" width="128" height="128" class="w-32 h-32 mb-6 object-cover xl:rounded-full lg:rounded-full md:rounded-none sm:rounded-none rounded-none border-4 border-gray-500" />
+                                <input type="file" id="input-preview" class="text-white font-quicksand w-full mt-6" />
                             </div>
                         </fieldset>
-
                     </fieldset>
                     <div class="divider"></div> 
-                    <fieldset class="w-1/2 px-6">
+                    <fieldset class="w-3/4 px-6">
                         <legend class="w-full mb-8 text-white font-bold font-montserrat text-xl xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl">Dati personali</legend>
                         <fieldset class="grid gap-y-6 gap-x-10 grid-col-1 grid-rows-6 xl:grid-col-2 xl:grid-rows-3 lg:grid-col-1 lg:grid-rows-6 md:grid-col-1 md:grid-rows-6 sm:grid-col-1 sm:grid-rows-6 grid-flow-col">
                             <fieldset class="flex flex-col gap-2">
@@ -55,7 +55,7 @@
                             <fieldset class="flex flex-col gap-2">
                                 <label for="date_of_birth" class="text-white font-quicksand font-bold text-lg">Data di nascita:</label>
                                 <input type="date" id="date_of_birth" name="date_of_birth" required
-                                    class="input h-10 rounded-lg bg-white text-sm font-bold font-quicksand text-black px-2 border-2 border-gray-500"/>
+                                    class="h-10 rounded-lg bg-white text-sm font-bold font-quicksand text-black px-2 border-2 border-gray-500"/>
                             </fieldset>
                             <fieldset class="flex flex-col gap-2">
                                 <label for="email" class="text-white font-quicksand font-bold text-lg">Email:</label>
@@ -82,5 +82,19 @@
                 </footer>
             </section>
         </main>
+        <script src="https://unpkg.com/flowbite@1.5.5/dist/datepicker.js"></script>
+        <script>
+            const image = document.getElementById('input-preview');
+            const preview = document.getElementById('preview');
+
+            image.onchange = e => {
+                const [file] = image.files;
+
+                if (file) {
+                    preview.src = URL.createObjectURL(file);
+                    //preview.style.visibility = 'visible';
+                }
+            }
+        </script>
     </body>
 </html>
