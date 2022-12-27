@@ -15,7 +15,8 @@
             </header>
             <section 
                 class="flex flex-col gap-6 items-center bg-dark-mode-3 rounded-xl py-12 w-3/5 xl:w-3/5 lg:w-3/5 md:w-3/5 sm:w-3/5 mb-8">
-                <form action="/register" method="post" enctype="multipart/form-data" class="flex flex-col xl:flex-col lg:flex-col md:flex-col sm:flex-col gap-4 w-full justify-evenly items-center">
+                <form action="/register" method="post" enctype="multipart/form-data" 
+                    class="flex flex-col xl:flex-col lg:flex-col md:flex-col sm:flex-col gap-4 w-full justify-evenly items-center">
                     @csrf
                     <fieldset class="w-full xl:w-3/4 lg:w-full md:w-full sm:w-full px-6">
                         <legend class="mb-8 text-white font-bold font-montserrat text-xl xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl">Profilo</legend>
@@ -36,8 +37,10 @@
                                 </fieldset>
                             </div>
                             <div class="flex flex-col gap-4 xl:items-end lg:items-center md:items-center sm:items-center items-center w-full xl:w-1/2 lg:w-1/2 md:w-full sm:w-full">
-                                <img src="{{asset('img/default-avatar.png')}}" id="preview" alt="preview profile image" width="128" height="128" class="w-32 h-32 mb-6 object-cover xl:rounded-full lg:rounded-full md:rounded-none sm:rounded-none rounded-none border-4 border-gray-500" />
-                                <input type="file" id="input-preview" name="profile_image" value="{{ old('profile_image') }}" accept=".png, .jpg, .jpeg" class="text-white font-quicksand w-3/4 mt-6 border-2 border-gray-400 rounded-lg" />
+                                <img src="{{asset('img/default-avatar.png')}}" id="preview" alt="preview profile image" width="128" height="128" 
+                                    class="w-32 h-32 mb-6 object-cover xl:rounded-full lg:rounded-full md:rounded-none sm:rounded-none rounded-none border-4 border-gray-500" />
+                                <input type="file" id="input-preview" name="profile_image" value="{{ old('profile_image') }}" accept=".png, .jpg, .jpeg" 
+                                    class="text-white font-quicksand w-3/4 mt-6 border-2 border-gray-400 rounded-lg" />
                                 @error('profile_image')
                                     <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
                                 @enderror
@@ -98,7 +101,8 @@
                             </fieldset>
                         </fieldset>
                     </fieldset>
-                    <input type="submit" value="Crea" class="btn border-none px-16 hover:bg-lavanda text-white font-bold font-montserrat text-lg bg-lavanda rounded-lg py-1 mt-6 normal-case"/>
+                    <input type="submit" value="Crea" 
+                        class="btn border-none px-16 hover:bg-lavanda text-white font-bold font-montserrat text-lg bg-lavanda rounded-lg py-1 mt-6 normal-case"/>
                 </form>
                 <footer class="flex justify-around gap-4 items-center mt-4 xl:flex-row lg:flex-col md:flex-col sm:flex-col flex-col">
                     <p class="text-white font-quicksand text-sm">Hai già un account?</p>

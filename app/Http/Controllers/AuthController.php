@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 final class AuthController extends Controller
 {
@@ -24,9 +25,27 @@ final class AuthController extends Controller
 
     public function register(RegisterRequest $request)
     {
-        $user = new User(array_merge(array($request->validated(), 'id' => (string) Str::uuid())));
-        $user->password = Hash::make($user->password);
-        dd($user->username);
+        $request->validated();
+        $uploadedFileUrl = null;
+
+        if ($request->file('profile_image') !== null) {
+            $uploadedFileUrl = Cloudinary::upload($request->file('profile_image')->getRealPath())->getSecurePath();
+        }
+
+        $user = new User(
+            [
+                'id' => (string) Str::uuid(),
+                'name' => $request->name,
+                'surname' => $request->surname,
+                'username' => $request->username,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'date_of_birth' => $request->date_of_birth,
+                'bio' => $request->bio,
+                'profile_image' => $uploadedFileUrl
+            ]
+        );
+
         if ($user->save()) {
             $user->refresh();
             auth()->login($user);
