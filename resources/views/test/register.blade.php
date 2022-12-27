@@ -101,6 +101,9 @@
                             </fieldset>
                         </fieldset>
                     </fieldset>
+                    @error('error')
+                        <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
+                    @enderror
                     <input type="submit" value="Crea" 
                         class="btn border-none px-16 hover:bg-lavanda text-white font-bold font-montserrat text-lg bg-lavanda rounded-lg py-1 mt-6 normal-case"/>
                 </form>

@@ -23,7 +23,7 @@
                     @csrf
 
                     <label for="email" class="text-white font-quicksand font-bold text-sm">Email:</label>
-                    <input type="email" id="email" name="email" required placeholder="test@gmail.com" minlength="5" maxlength="50"
+                    <input type="email" id="email" name="email" required placeholder="test@gmail.com" minlength="5" maxlength="50" value="{{ old('email') }}"
                         class="input h-10 rounded-lg bg-white text-sm font-bold font-quicksand text-black px-2 border-2 border-gray-500"/>
                     @error('email')
                         <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
