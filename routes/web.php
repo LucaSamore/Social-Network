@@ -16,9 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Public routes
-Route::view('/', 'welcome')->name('welcome');
-Route::view('/login', 'test.login')->name('login');
-Route::view('/register', 'test.register')->name('register');
+Route::view('/login', 'login')->name('login');
+Route::view('/register', 'register')->name('register');
 Route::view('/upload', 'test.upload')->name('upload');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
@@ -27,8 +26,9 @@ Route::post('/upload/video', [MediaController::class, 'uploadVideo']);
 
 // Protected routes
 Route::middleware('auth')->group(function () {
-    Route::view('/home', 'test.home')->name('home');
+    Route::view('/', 'home');
+    Route::view('/home', 'home')->name('home');
     Route::any('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-Route::fallback(fn() => view('test.fallback'));
+Route::fallback(fn() => view('fallback'));
