@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MediaController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -46,5 +47,11 @@ Route::get('/testPostView', function () {
 });
 
 Route::resource('/testPostController', PostController::class);
+
+Route::controller(NotificationController::class)->group(function () {
+    //Route::get('/orders/{id}', 'show');
+    Route::get('/NotificationController/{userDo}/{userReceive}', 'notifyLikeToPost');
+    Route::get('/NotificationControllerGet/{userId}/{n}', 'show')->whereNumber('n');
+});
 
 Route::fallback(fn() => view('fallback'));
