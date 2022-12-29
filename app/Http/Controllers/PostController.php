@@ -44,6 +44,8 @@ class PostController extends Controller
 
         /*Bisogna prendere l'id dell'utente che pubblica il post dalla sessione*/
         $user_id = '0198cc50-2b38-3a65-9216-90aca113f6bc';
+        $user_id = $request->session()->get("user_id");
+        echo "ID:".$user_id;
 
         /*SAVE THE POST*/
         $post = new Post(['user_id' => $user_id, 'textual_content' => $request->input('textual_content'), ]);
@@ -87,15 +89,18 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($post)
     {
-        $data = [
-            "username" => "username",
-            "textual_content" => $post->textual_content,
-            "number_of_likes" => 0/*$post->number_of_likes*/,
-            "number_of_comments" => 0 /*$post->number_of_comments*/,
-            "photo_path" => "",
-        ];
+        /*$data = [
+            /*"username" => "username",
+            /*"textual_content" => $post->textual_content,
+            /*"number_of_likes" => 0/*$post->number_of_likes,
+            /*"number_of_comments" => 0 /*$post->number_of_comments,
+            /*"photo_path" => "",
+        ];*/
+        $data = Post::findOrFail($post)->user()->first();
+        echo $data->username;
+        dd($data);
         return View("post", $data);
     }
 
@@ -130,6 +135,6 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //Storage::delete('file.jpg');
+        //
     }
 }
