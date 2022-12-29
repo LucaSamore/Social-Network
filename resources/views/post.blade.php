@@ -19,7 +19,7 @@
              </div>
             </div>
 
-            <h2 class="card-title float-right p-2">@Username</h2>
+            <h2 class="card-title float-right p-2">{{$username}}</h2>
 
         </div>
 

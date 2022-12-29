@@ -10,6 +10,11 @@ class Image extends Model
 {
     use HasFactory, HasUuids;
 
+    protected $fillable = [
+        'path',
+        'post_id',
+    ];
+
     public $incrementing = false;
     public $timestamps = false;
 

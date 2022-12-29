@@ -6,15 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class PostRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return false;
-    }
+
 
     /**
      * Get the validation rules that apply to the request.
@@ -24,7 +16,9 @@ class PostRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'textual_content' => 'max:255',
+            'photoPath' => 'max:500',
+            'videoPath' => 'max:500',
         ];
     }
 }

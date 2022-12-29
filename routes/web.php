@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,9 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/post', function () {
-    return view('post');
-});
 
 Route::get('/leftMenu', function () {
     return view('leftMenu');
@@ -28,3 +26,17 @@ Route::get('/leftMenu', function () {
 Route::get('/rightMenu', function () {
     return view('rightMenu');
 });
+
+Route::get('/testPostView', function () {
+    return view('test/testPost');
+});
+
+/*
+Route::get('/post', function () {
+    return view('post');
+});*/
+
+Route::resource('testPostController', 'App\Http\Controllers\PostController');
+/*Route::get('/testPostController', function () {
+    return view('post');
+});*/
