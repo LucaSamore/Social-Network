@@ -18,7 +18,7 @@ class NotificationController extends Controller
     public function show(User $userId, int $n)
     {
         echo Notification::where('to', $userId->id)->orderBy('created_at', 'desc')->take($n)->get();
-        //return View()
+        return View('Notification');
     }
 
   
