@@ -15,7 +15,7 @@
             </header>
 
             <section class="flex flex-col gap-6 justify-around items-center bg-dark-mode-3 rounded-xl py-8 w-3/4 xl:w-1/5 lg:w-1/3 md:w-1/2 sm:w-1/2">
-                <h2 class="text-white font-bold text-2xl xl:text-2xl lg:text-2xl md:text-2xl sm:text-2xl font-quicksand">Login</h2>
+                <h2 class="text-white font-bold text-2xl xl:text-3xl lg:text-2xl md:text-2xl sm:text-2xl font-montserrat">Login</h2>
                 @error('error')
                     <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
                 @enderror

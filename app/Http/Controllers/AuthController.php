@@ -17,6 +17,7 @@ final class AuthController extends Controller
     {
         if (Auth::attempt($request->validated())) {
             $request->session()->regenerate();
+            session(['user_id' => User::where('email', $request->email)->first()->id]);
             return redirect()->intended('home');
         }
 
@@ -49,6 +50,7 @@ final class AuthController extends Controller
         if ($user->save()) {
             $user->refresh();
             auth()->login($user);
+            session(['user_id' => $user->id]);
             return redirect('/home')->with('success', 'Account creato con successo');
         }
 
