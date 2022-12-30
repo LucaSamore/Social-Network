@@ -18,7 +18,8 @@
 
             </section>
         </main>
-        <x-trends-menu/>
+        <!-- :top="$top" -->
+        <x-top-trends/>
     </body>
     <script src="https://kit.fontawesome.com/6b12fba364.js" crossorigin="anonymous"></script>
 </html>

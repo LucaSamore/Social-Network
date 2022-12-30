@@ -18,7 +18,7 @@ final class AuthController extends Controller
         if (Auth::attempt($request->validated())) {
             $request->session()->regenerate();
             session(['user_id' => User::where('email', $request->email)->first()->id]);
-            return redirect()->intended('home');
+            return redirect('/home');
         }
 
         return back()->withErrors(['error' => 'Login fallito, utente non trovato']);

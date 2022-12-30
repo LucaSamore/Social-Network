@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\MediaController;
+use App\Http\Controllers\FeedController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,32 +19,14 @@ use Illuminate\Support\Facades\Route;
 // Public routes
 Route::view('/login', 'login')->name('login');
 Route::view('/register', 'register')->name('register');
-Route::view('/upload', 'test.upload')->name('upload');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
-Route::post('/upload/image', [MediaController::class, 'uploadImage']);
-Route::post('/upload/video', [MediaController::class, 'uploadVideo']);
 
 // Protected routes
 Route::middleware('auth')->group(function () {
     Route::view('/', 'home');
-    Route::view('/home', 'home')->name('home');
+    Route::get('/home', [FeedController::class, 'feed'])->name('home');
     Route::any('/logout', [AuthController::class, 'logout'])->name('logout');
 });
-
-
-Route::get('/leftMenu', function () {
-    return view('leftMenu');
-});
-
-Route::get('/rightMenu', function () {
-    return view('rightMenu');
-});
-
-Route::get('/testPostView', function () {
-    return view('test/testPost');
-});
-
-Route::resource('/testPostController', PostController::class);
 
 Route::fallback(fn() => view('fallback'));

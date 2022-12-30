@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
         Comment::factory()->count(200)->create();
         TagsInPost::factory()->count(50)->create();
         Bookmark::factory()->count(50)->create();
-        Follower::factory()->count(150)->create();
+        Follower::factory()->count(1000)->create();
         Notification::factory()->count(150)->create();
         LikesOnComment::factory()->count(100)->create();
         DuplicatesHelper::removeDuplicates();
