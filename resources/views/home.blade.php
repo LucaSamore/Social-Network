@@ -16,12 +16,18 @@
             </header>
             <section class="flex flex-col justify-start items-center w-3/4
                             xl:w-4/5 lg:w-3/4 md:w-3/4 sm:w-4/5 rounded-xl overflow-auto">
-                <x-post-card/>
-                <x-post-card/>
-                <x-post-card/>
+
+                @foreach ($feeds as $feed)
+                    <x-post-card :post="$feed"
+                                 :creator="$creators[$feed['id']][0]"
+                                 :images="$images[$feed['id']]"
+                                 :videos="$videos[$feed['id']]"
+                                 :bookmarked="$bookmarked[$feed['id']]"
+                                 :editable="false" />
+                @endforeach
             </section>
         </main>
         <x-top-trends :trends="$trends"/>
+        <script src="https://kit.fontawesome.com/6b12fba364.js" crossorigin="anonymous"></script>
     </body>
-    <script src="https://kit.fontawesome.com/6b12fba364.js" crossorigin="anonymous"></script>
 </html>

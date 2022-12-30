@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bookmark;
 use App\Models\Follower;
 use App\Models\Image;
 use App\Models\Post;
 use App\Models\TagsInPost;
+use App\Models\User;
 use App\Models\Video;
 use Illuminate\Http\Request;
 
@@ -17,9 +19,11 @@ final class FeedController extends Controller
 
         return view('/home', [
             'feeds' => $feeds,
+            'creators' => $this->creators($feeds),
             'images' => $this->images($feeds),
             'videos' => $this->videos($feeds),
-            'trends' => $this->topTrends()
+            'trends' => $this->topTrends(),
+            'bookmarked' => $this->areBookmarked($feeds, $request->session()->get('user_id'))
         ]);
     }
 
@@ -40,12 +44,28 @@ final class FeedController extends Controller
             ->toArray();
     }
 
+    private function creators(array $posts)
+    {
+        $creators = array();
+
+        foreach ($posts as $post) {
+            array_push($creators, [
+                $post["id"] => User::where('id', $post["user_id"])
+                    ->get()
+                    ->flatten()
+                    ->toArray()
+            ]);
+        }
+
+        return array_merge(...array_values($creators));
+    }
+
     private function images(array $posts)
     {
         $images = array();
 
         foreach ($posts as $post) {
-            array_merge($images, [
+            array_push($images, [
                 $post["id"] => Image::where('post_id', $post["id"])
                     ->get()
                     ->transform(fn($item, $key) => $item->path)
@@ -53,7 +73,7 @@ final class FeedController extends Controller
             ]);
         }
 
-        return $images;
+        return array_merge(...array_values($images));
     }
 
     private function videos(array $posts)
@@ -61,7 +81,7 @@ final class FeedController extends Controller
         $videos = array();
 
         foreach ($posts as $post) {
-            array_merge($videos, [
+            array_push($videos, [
                 $post["id"] => Video::where('post_id', $post["id"])
                     ->get()
                     ->transform(fn($item, $key) => $item->path)
@@ -69,7 +89,23 @@ final class FeedController extends Controller
             ]);
         }
 
-        return $videos;
+        return array_merge(...array_values($videos));;
+    }
+
+    private function areBookmarked(array $posts, string $user)
+    {
+        $bookmarked = array();
+
+        foreach ($posts as $post) {
+            array_push($bookmarked, [
+                $post["id"] => Bookmark::where('post_id', $post["id"])
+                    ->where('user_id', $user)
+                    ->get()
+                    ->isEmpty()
+            ]);
+        }
+
+        return array_merge(...array_values($bookmarked));
     }
 
     private function topTrends()
