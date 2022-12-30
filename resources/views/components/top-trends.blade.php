@@ -5,18 +5,14 @@
         </header>
         <section class="flex gap-12 text-white font-quicksand py-4">
             <ul class="font-bold flex flex-col gap-4">
-                <li>#Mondiali2022</li>
-                <li>#F1</li>
-                <li>#GoldenRetriever</li>
-                <li>#SanRemo2023</li>
-                <li>#UniBO</li>
+                @foreach ($trends as $key => $value)
+                    <li>#{{ $key }}</li>
+                @endforeach
             </ul>
             <ul class="flex flex-col gap-4">
-                <li>4.5M</li>
-                <li>3.4M</li>
-                <li>1.2M</li>
-                <li>670k</li>
-                <li>56k</li>
+                @foreach ($trends as $key => $value)
+                    <li>{{ $value }}</li>
+                @endforeach
             </ul>
         </section>
     </section>

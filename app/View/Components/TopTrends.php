@@ -11,7 +11,7 @@ final class TopTrends extends Component
      *
      * @var array<string,string>
      */
-    //public $top;
+    public $trends;
 
 
     /**
@@ -19,9 +19,9 @@ final class TopTrends extends Component
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($trends)
     {
-        //$this->top = $top;
+        $this->trends = $trends;
     }
 
     /**

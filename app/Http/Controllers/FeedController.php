@@ -82,6 +82,6 @@ final class FeedController extends Controller
 
         arsort($tags);
 
-        return array_slice($tags, 0, 10);
+        return array_slice($tags, 0, 5);
     }
 }
