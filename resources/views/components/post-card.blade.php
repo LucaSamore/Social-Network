@@ -61,10 +61,51 @@
 
 <input type="checkbox" id="post/{{$post["id"]}}" class="modal-toggle" />
 <div class="modal">
-  <div class="modal-box relative">
-    <label for="post/{{$post["id"]}}" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-    <h3 class="text-lg font-bold">Congratulations random Internet user!</h3>
-    <p class="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
+  <div class="modal-box relative bg-dark-mode-3 w-11/12 max-w-5xl flex flex-col xl:flex-row lg:flex-row md:flex-row sm:flex-col">
+    <label for="post/{{$post["id"]}}" class="btn btn-sm btn-circle absolute right-2 top-2 bg-dark-mode-4 hover:bg-dark-mode-2 border-none">✕</label>
+    <section class="flex flex-col w-full xl:w-3/5 lg:w-3/5 md:w-full sm:full px-8">
+        <header>
+            <div class="w-full flex flex-col items-center xl:flex-row lg:flex-row md:flex-row sm:flex-col gap-6">
+                <div class="flex flex-col items-center gap-4">
+                    <img src="{{asset('img/default-avatar.png')}}" alt="user profile picture" width="64" height="64" 
+                        class="w-24 h-24 object-cover xl:rounded-full lg:rounded-full md:rounded-none sm:rounded-none rounded-none border-2 border-gray-500" />
+                    <a href="/user/{{$creator["username"]}}" class="text-white font-bold font-quicksand text-lg hover:underline">{{ "@".$creator["username"] }}</a>
+                </div>
+                <div class="flex flex-col gap-1 items-start">
+                    <h2 class="text-white font-quicksand text-xl font-bold">{{ $creator["name"] }} {{ $creator["surname"] }}</h2>
+                    <p class="text-white text-lg font-quicksand">
+                        Membro dal {{date('Y', strtotime($creator["created_at"]))}}
+                    </p>
+                </div>
+            </div>
+        </header>
+        <p class="text-white font-quicksand text-lg text-justify my-6">
+            {{ $post["textual_content"] }}
+        </p>
+    </section>
+    <aside class="w-full xl:w-2/5 lg:w-2/5 md:w-full sm:full bg-dark-mode-2 rounded-xl py-2">
+        <div class="flex px-4 py-4">
+            <div class="flex w-3/4 gap-4">
+                <div class="flex flex-col items-center gap-4">
+                    <img src="{{asset('img/default-avatar.png')}}" alt="user profile picture" width="64" height="64" 
+                        class="w-12 h-12 object-cover xl:rounded-full lg:rounded-full md:rounded-none sm:rounded-none rounded-none border-2 border-gray-500" />
+                </div>
+                <div class="flex flex-col gap-1 items-start">
+                    <h2 class="text-white font-quicksand text-sm font-bold">{{ $creator["name"] }}</h2>
+                    <a href="/user/{{$creator["username"]}}" class="text-white font-bold font-quicksand text-sm hover:underline">{{ "@".$creator["username"] }}</a>
+                </div>
+            </div>
+            <div class="flex flex-col w-1/4">
+                <button class="flex flex-col gap-2 items-center text-white border-none">
+                    <i class="fa-solid fa-heart"></i>
+                    <span>{{ $post["number_of_likes"] }}</span>
+                </button>
+            </div>
+        </div>
+        <p class="text-white text-sm font-quicksand text-justify px-4 py-4 border-b-2 border-gray-500">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, voluptas corporis! Corporis enim ab architecto porro corrupti sunt quibusdam praesentium placeat velit. Nemo explicabo nesciunt molestiae qui delectus tempora dolorum.
+        </p>
+    </aside>
   </div>
 </div>
 
