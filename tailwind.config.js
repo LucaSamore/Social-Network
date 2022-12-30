@@ -19,7 +19,8 @@ module.exports = {
         'dark-mode-3': '#2d2d30',
         'dark-mode-4': '#3e3e42',
         'lavanda': '#9795F0',
-        'rosy': '#FBC8D4'
+        'rosy': '#FBC8D4',
+        'dark-lavanda': '#8481f0'
       },
     },
   },

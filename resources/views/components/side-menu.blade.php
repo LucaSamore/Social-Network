@@ -57,7 +57,7 @@
             </li>
         </ul>
     </nav>
-    <label for="#" class="btn border-none hover:bg-lavanda
+    <label for="#" class="btn border-none hover:bg-dark-lavanda
                         text-white font-bold font-montserrat 
                         text-lg bg-lavanda rounded-full
                         px-4 py-2 xl:px-16 xl:py-2 lg:px-12 lg:py-2 md:px-8 md:py-2 sm:px-4 sm:py-2 normal-case">

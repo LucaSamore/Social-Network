@@ -17,7 +17,9 @@
     <p class="text-white font-quicksand text-xl text-left xl:text-justify lg:text-justify md:text-justify sm:text-left my-6">
         {{ $post["textual_content"] }}
     </p>
-    <label for="post/{{$post["id"]}}" class="text-white font-lg font-quicksand font-bold hover:underline hover:cursor-pointer pb-8">Mostra tutto</label>
+    <label for="post/{{$post["id"]}}" class="text-white font-lg font-quicksand font-bold hover:underline hover:cursor-pointer pb-8">
+        Mostra tutto
+    </label>
     <footer>
         <ul class="grid gap-y-4 grid-cols-2 grid-rows-2 
                    xl:grid-cols-4 xl:grid-rows-1 
@@ -25,25 +27,33 @@
                    md:grid-cols-4 md:grid-rows-1 
                    sm:grid-cols-2 sm:grid-rows-2 
                    place-items-center list-none text-white font-bold font-quicksand">
-            <li class="flex gap-2 items-center">
-                <i class="fa-solid fa-heart"></i>
-                <span>{{ $post["number_of_likes"] }}</span>
+            <li>
+                <button class="flex gap-2 items-center btn bg-lavanda text-white border-none hover:bg-dark-lavanda">
+                    <i class="fa-solid fa-heart"></i>
+                    <span>{{ $post["number_of_likes"] }}</span>
+                </button>
             </li>
-            <li class="flex gap-2 items-center">
-                <i class="fa-solid fa-message"></i>
-                <span>{{ $post["number_of_comments"] }}</span>
+            <li>
+                <label for="post@comment" class="flex gap-2 items-center btn bg-lavanda text-white border-none hover:bg-dark-lavanda">
+                    <i class="fa-solid fa-message"></i>
+                    <span>{{ $post["number_of_comments"] }}</span>
+                </label>
             </li>
-            <li class="flex gap-2 items-center">
-                <i class="fa-solid fa-retweet"></i>
-                <span>{{ $post["number_of_reposts"] }}</span>
+            <li>
+                <button class="flex gap-2 items-center btn bg-lavanda text-white border-none hover:bg-dark-lavanda">
+                    <i class="fa-solid fa-retweet"></i>
+                    <span>{{ $post["number_of_reposts"] }}</span>
+                </button>
             </li>
-            <li class="flex gap-2 items-center">
-                <i class="fa-solid fa-bookmark"></i>
-                @if ($bookmarked)
-                    <span>1</span>
-                @else
-                    <span>0</span>
-                @endif
+            <li>
+                <button class="flex gap-2 items-center btn bg-lavanda text-white border-none hover:bg-dark-lavanda">
+                    <i class="fa-solid fa-bookmark"></i>
+                    @if ($bookmarked)
+                        <span>1</span>
+                    @else
+                        <span>0</span>
+                    @endif
+                </button>
             </li>
         </ul>
     </footer>
@@ -55,5 +65,31 @@
     <label for="post/{{$post["id"]}}" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
     <h3 class="text-lg font-bold">Congratulations random Internet user!</h3>
     <p class="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
+  </div>
+</div>
+
+<input type="checkbox" id="post@comment" class="modal-toggle" />
+<div class="modal">
+  <div class="modal-box relative bg-dark-mode-3">
+    <label for="post@comment" class="btn btn-sm btn-circle absolute right-2 top-2 bg-dark-mode-4 hover:bg-dark-mode-2 border-none">✕</label>
+    <section class="flex flex-col gap-8">
+        <header>
+            <h3 class="text-xl font-bold text-white font-montserrat">Aggiungi un commento</h3>
+        </header>
+        <textarea class="rounded-xl text-white font-xl font-quicksand px-4 py-4" placeholder="Nuovo commento..."></textarea>
+        <footer class="flex justify-end gap-4">
+            <label for="post@comment" class="px-6 py-2 rounded-full 
+                                           border-lavanda border-2 hover:bg-dark-lavanda hover:border-dark-lavanda 
+                                             hover:cursor-pointer text-white font-bold
+                                             font-quicksand text-sm normal-case">
+                Annulla
+            </label>
+            <button class="px-4 py-2 rounded-full hover:bg-dark-lavanda
+                         bg-lavanda font-bold border-none
+                         text-white font-quicksand text-sm normal-case">
+              Commenta
+            </button>
+        </footer>
+    </section>
   </div>
 </div>
