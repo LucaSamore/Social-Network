@@ -1,4 +1,4 @@
-<aside class="w-1/4 xl:1/5 lg:1/4 md:1/4 sm:1/4 hidden xl:flex lg:hidden md:hidden sm:hidden flex-col justify-center items-center gap-12">
+<aside class="w-1/6 xl:1/5 lg:1/5 md:1/6 sm:1/6 hidden xl:flex lg:hidden md:hidden sm:hidden flex-col justify-center items-center gap-12">
     <section class="flex flex-col justify-start items-center gap-6 bg-dark-mode-2 rounded-xl w-4/5 h-1/3 overflow-auto">
         <header class="text-center">
             <h2 class="text-white font-montserrat text-lg xl:text-xl lg:text:lg md:text-sm sm:text-sm mt-8">I Trend più seguiti</h2>
