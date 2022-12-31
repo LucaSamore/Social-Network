@@ -83,28 +83,13 @@
             {{ $post["textual_content"] }}
         </p>
     </section>
-    <aside class="w-full xl:w-2/5 lg:w-2/5 md:w-full sm:full bg-dark-mode-2 rounded-xl py-2">
-        <div class="flex px-4 py-4">
-            <div class="flex w-3/4 gap-4">
-                <div class="flex flex-col items-center gap-4">
-                    <img src="{{asset('img/default-avatar.png')}}" alt="user profile picture" width="64" height="64" 
-                        class="w-12 h-12 object-cover xl:rounded-full lg:rounded-full md:rounded-none sm:rounded-none rounded-none border-2 border-gray-500" />
-                </div>
-                <div class="flex flex-col gap-1 items-start">
-                    <h2 class="text-white font-quicksand text-sm font-bold">{{ $creator["name"] }}</h2>
-                    <a href="/user/{{$creator["username"]}}" class="text-white font-bold font-quicksand text-sm hover:underline">{{ "@".$creator["username"] }}</a>
-                </div>
-            </div>
-            <div class="flex flex-col w-1/4">
-                <button class="flex flex-col gap-2 items-center text-white border-none">
-                    <i class="fa-solid fa-heart"></i>
-                    <span>{{ $post["number_of_likes"] }}</span>
-                </button>
-            </div>
-        </div>
-        <p class="text-white text-sm font-quicksand text-justify px-4 py-4 border-b-2 border-gray-500">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, voluptas corporis! Corporis enim ab architecto porro corrupti sunt quibusdam praesentium placeat velit. Nemo explicabo nesciunt molestiae qui delectus tempora dolorum.
-        </p>
+    <aside class="w-full xl:w-2/5 lg:w-2/5 md:w-full sm:full rounded-xl py-2 overflow-auto">
+        <x-comment/>
+        <x-comment/>
+        <x-comment/>
+        <x-comment/>
+        <x-comment/>
+        <x-comment/>
     </aside>
   </div>
 </div>
