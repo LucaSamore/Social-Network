@@ -142,7 +142,7 @@ final class PostController extends Controller
     public function like(Request $request, string $post_id): int
     {
         $user_id = $request->session()->get('user_id');
-        $like = Like::where('user_id', $user_id);
+        $like = Like::where('user_id', $user_id)->where('post_id', $post_id);
         $numberOfLikes = Like::where('post_id', $post_id)->get()->count();
 
         if ($like->get()->isEmpty()) {
@@ -156,7 +156,7 @@ final class PostController extends Controller
             Post::where('id', $post_id)->update(['number_of_likes' => $numberOfLikes]);
         } else {
             $like->delete();
-            $numberOfLikes -= 1;
+            $numberOfLikes = $numberOfLikes <= 0 ? 0 : $numberOfLikes - 1;
             Post::where('id', $post_id)->update(['number_of_likes' => $numberOfLikes]);
         }
 

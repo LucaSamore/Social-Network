@@ -40,10 +40,10 @@
                    sm:grid-cols-2 sm:grid-rows-2 
                    place-items-center list-none text-white font-bold font-quicksand">
             <li>
-                <button class="parent flex gap-2 items-center btn bg-lavanda text-white border-none hover:bg-dark-lavanda">
+                <button class="like-btn flex gap-2 items-center btn bg-lavanda text-white border-none hover:bg-dark-lavanda">
                     <i class="fa-solid fa-heart"></i>
                     <span id="like-span/{{ $post["id"] }}">{{ $post["number_of_likes"] }}</span>
-                    <input type="hidden" class="like-button" value="{{ $post['id'] }}" />
+                    <input type="hidden" class="like" value="{{ $post['id'] }}" />
                 </button>
             </li>
             <li>

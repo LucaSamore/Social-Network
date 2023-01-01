@@ -10,9 +10,10 @@ const updateLikes = (e) => {
         .catch(err => console.log(err));
 }
 
-Array.from(document.getElementsByClassName('like-button')).forEach(btn => {
-    const element = btn.closest('.parent');
-    element.postId = btn.value;
-    element.addEventListener("click", updateLikes);
+Array.from(document.getElementsByClassName('like')).forEach(ith => {
+    const button = ith.closest('.like-btn');
+    button.postId = ith.value;
+    Array.from(button.children).forEach(c => c.postId = ith.value);
+    button.addEventListener("click", updateLikes);
 });
     

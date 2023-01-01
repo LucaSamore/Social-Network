@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
         Post::factory()->count(250)->create();
         NotificationType::factory()->count(4)->create();
         Tag::factory()->count(100)->create();
-        Like::factory()->count(500)->create();
+        Like::factory()->count(100)->create();
         Repost::factory()->count(250)->create();
         Comment::factory()->count(500)->create();
         TagsInPost::factory()->count(500)->create();

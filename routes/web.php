@@ -24,7 +24,7 @@ Route::post('/register', [AuthController::class, 'register']);
 
 // Protected routes
 Route::middleware('auth')->group(function () {
-    Route::view('/', 'home');
+    Route::get('/', [FeedController::class, 'feed'])->name('home');
     Route::get('/home', [FeedController::class, 'feed'])->name('home');
     Route::get('/like/{post_id}', [PostController::class, 'like'])->name('post.like');
     Route::any('/logout', [AuthController::class, 'logout'])->name('logout');

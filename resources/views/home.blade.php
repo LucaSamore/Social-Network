@@ -17,16 +17,20 @@
             </header>
             <section class="flex flex-col justify-start items-center w-3/4 pb-12
                             xl:w-4/5 lg:w-3/4 md:w-3/4 sm:w-4/5 rounded-xl overflow-auto">
-                @foreach ($feeds as $feed)
-                    <x-post-card :post="$feed"
-                                 :creator="$creators[$feed['id']][0]"
-                                 :images="$images[$feed['id']]"
-                                 :videos="$videos[$feed['id']]"
-                                 :bookmarked="$bookmarked[$feed['id']]"
-                                 :comments="$comments[$feed['id']]"
-                                 :tags="$tags[$feed['id']]"
-                                 :editable="false" />
-                @endforeach
+                @forelse ($feeds as $feed)
+                    <x-post-card 
+                        :post="$feed"
+                        :creator="$creators[$feed['id']][0]"
+                        :images="$images[$feed['id']]"
+                        :videos="$videos[$feed['id']]"
+                        :bookmarked="$bookmarked[$feed['id']]"
+                        :comments="$comments[$feed['id']]"
+                        :tags="$tags[$feed['id']]"
+                        :editable="false" 
+                    />
+                @empty
+                    <h2 class="text-white font-quicksand text-2xl">Non hai post da visualizzare...</h2>
+                @endforelse
             </section>
         </main>
         <x-top-trends :trends="$trends"/>
