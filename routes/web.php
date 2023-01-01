@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
@@ -24,9 +25,10 @@ Route::post('/register', [AuthController::class, 'register']);
 
 // Protected routes
 Route::middleware('auth')->group(function () {
-    Route::get('/', [FeedController::class, 'feed'])->name('home');
+    Route::get('/', [FeedController::class, 'feed'])->name('root');
     Route::get('/home', [FeedController::class, 'feed'])->name('home');
     Route::get('/like/{post_id}', [PostController::class, 'like'])->name('post.like');
+    Route::post('comment/{post_id}/create', [CommentController::class, 'store'])->name('comment.store');
     Route::any('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 

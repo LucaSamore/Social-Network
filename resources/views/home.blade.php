@@ -15,7 +15,7 @@
             <header class="pt-8 pb-4 w-3/4">
                 <h1 class="text-white font-bold font-montserrat text-4xl xl:text-8xl lg:text-8xl md:text-6xl sm:text-6xl">Home 🏠</h1>
             </header>
-            <section class="flex flex-col justify-start items-center w-3/4 pb-12
+            <section id="feeds" class="flex flex-col justify-start items-center w-3/4 pb-12
                             xl:w-4/5 lg:w-3/4 md:w-3/4 sm:w-4/5 rounded-xl overflow-auto">
                 @forelse ($feeds as $feed)
                     <x-post-card 
@@ -35,6 +35,7 @@
         </main>
         <x-top-trends :trends="$trends"/>
         @vite('resources/js/like.js')
+        @vite('resources/js/comment.js')
         <script src="https://kit.fontawesome.com/6b12fba364.js" crossorigin="anonymous"></script>
     </body>
 </html>

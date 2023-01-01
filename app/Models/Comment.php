@@ -15,7 +15,10 @@ final class Comment extends Pivot
     public $timestamps = false;
 
     protected $fillable = [
-        'textual_content'
+        'textual_content',
+        'user_id',
+        'post_id',
+        'number_of_likes'
     ];
 
     public function likes()

@@ -97,9 +97,9 @@
                 </div>
             </div>
         </header>
-        <p class="text-white font-quicksand text-lg text-justify my-6">
+        <article class="text-white font-quicksand text-lg text-justify my-6">
             {{ $post["textual_content"] }}
-        </p>
+        </article>
         <div class="w-full flex flex-wrap gap-4 py-3">
             @foreach ($tags as $tag)
                 <p class="text-white font-quicksand text-lg bg-lavanda px-4 py-2 rounded-full">{{"#".$tag["tag_name"]}}</p>
@@ -116,15 +116,18 @@
   </div>
 </div>
 
-<input type="checkbox" id="post/{{$post["id"]}}/comment" class="modal-toggle" />
+<input type="checkbox" id="post/{{ $post["id"] }}/comment" class="modal-toggle" />
 <div class="modal">
   <div class="modal-box relative bg-dark-mode-3">
-    <label for="post/{{$post["id"]}}/comment" class="btn btn-sm btn-circle absolute right-2 top-2 bg-dark-mode-4 hover:bg-dark-mode-2 border-none">✕</label>
+    <label for="post/{{ $post["id"] }}/comment" class="btn btn-sm btn-circle absolute right-2 top-2 bg-dark-mode-4 hover:bg-dark-mode-2 border-none">✕</label>
     <section class="flex flex-col gap-8">
         <header>
             <h3 class="text-xl font-bold text-white font-montserrat">Aggiungi un commento</h3>
         </header>
-        <textarea class="rounded-xl text-white font-xl font-quicksand px-4 py-4" placeholder="Nuovo commento..."></textarea>
+        <textarea id="area/{{ $post["id"] }}" class="rounded-xl text-white font-xl font-quicksand px-4 py-4" placeholder="Nuovo commento..."></textarea>
+        @error('error')
+            <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
+        @enderror
         <footer class="flex justify-end gap-4">
             <label for="post/{{$post["id"]}}/comment" class="px-6 py-2 rounded-full 
                                            border-lavanda border-2 hover:bg-dark-lavanda hover:border-dark-lavanda 
@@ -132,10 +135,11 @@
                                              font-quicksand text-sm normal-case">
                 Annulla
             </label>
-            <button class="px-4 py-2 rounded-full hover:bg-dark-lavanda
+            <button class="comment-btn px-4 py-2 rounded-full hover:bg-dark-lavanda
                          bg-lavanda font-bold border-none
                          text-white font-quicksand text-sm normal-case">
               Commenta
+              <input type="hidden" value="{{ $post['id'] }}" />
             </button>
         </footer>
     </section>
