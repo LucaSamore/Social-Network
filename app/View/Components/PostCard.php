@@ -41,6 +41,19 @@ final class PostCard extends Component
      */
     public $bookmarked;
 
+    /**
+     *  All comments within this post
+     *
+     * @var boolean
+     */
+    public $comments;
+
+    /**
+     *  All tags within this post
+     *
+     * @var boolean
+     */
+    public $tags;
 
     /**
      *  Can I edit this post?
@@ -55,13 +68,15 @@ final class PostCard extends Component
      *
      * @return void
      */
-    public function __construct($post, $creator, $images, $videos, $bookmarked, $editable)
+    public function __construct($post, $creator, $images, $videos, $bookmarked, $comments, $tags, $editable)
     {
         $this->post = $post;
         $this->creator = $creator;
         $this->images = $images;
         $this->videos = $videos;
         $this->bookmarked = $bookmarked;
+        $this->comments = $comments;
+        $this->tags = $tags;
         $this->editable = $editable;
     }
 

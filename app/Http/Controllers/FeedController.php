@@ -18,7 +18,6 @@ final class FeedController extends Controller
     public function feed(Request $request)
     {
         $feeds = $this->recentPosts($request->session()->get('user_id'));
-        $comments = $this->comments($feeds);
 
         return view('/home', [
             'feeds' => $feeds,
@@ -27,7 +26,8 @@ final class FeedController extends Controller
             'videos' => $this->videos($feeds),
             'trends' => $this->topTrends(),
             'bookmarked' => $this->areBookmarked($feeds, $request->session()->get('user_id')),
-            'comments' => $comments
+            'comments' => $this->comments($feeds),
+            'tags' => $this->tags($feeds)
         ]);
     }
 
@@ -119,15 +119,28 @@ final class FeedController extends Controller
         foreach ($posts as $post) {
             array_push($comments, [
                 $post["id"] => Comment::where('post_id', $post["id"])
+                    ->with('user')
                     ->get()
-                    ->map(fn($item, $key) => 
-                        array_merge($item->toArray(), 
-                            User::where('id', $item->user_id)->get()->toArray()))
                     ->toArray()
             ]);
         }
 
         return array_merge(...array_values($comments));
+    }
+
+    private function tags(array $posts)
+    {
+        $tags = array();
+
+        foreach ($posts as $post) {
+            array_push($tags, [
+                $post["id"] => TagsInPost::where('post_id', $post["id"])
+                    ->get()
+                    ->toArray()
+            ]);
+        }
+
+        return array_merge(...array_values($tags));
     }
 
     private function topTrends()

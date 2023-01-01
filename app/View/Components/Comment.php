@@ -4,16 +4,24 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class Comment extends Component
+final class Comment extends Component
 {
+    /**
+     *  
+     *
+     * @var boolean
+     */
+    public $comment;
+
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($comment)
     {
-        //
+        $this->comment = $comment;
     }
 
     /**

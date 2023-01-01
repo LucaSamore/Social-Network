@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class Comment extends Pivot
+final class Comment extends Pivot
 {
     use HasFactory, HasUuids;
 
@@ -21,5 +21,10 @@ class Comment extends Pivot
     public function likes()
     {
         return $this->belongsToMany(User::class, 'likes_on_comment', 'comment_id')->using(LikesOnComment::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
