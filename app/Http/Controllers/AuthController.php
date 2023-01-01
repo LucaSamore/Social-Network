@@ -17,7 +17,9 @@ final class AuthController extends Controller
     {
         if (Auth::attempt($request->validated())) {
             $request->session()->regenerate();
-            session(['user_id' => User::where('email', $request->email)->first()->id]);
+            $user = User::where('email', $request->email)->first();
+            session(['user_id' => $user->id]);
+            session(['user_name' => $user->name]);
             return redirect('/home');
         }
 

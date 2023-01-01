@@ -10,7 +10,10 @@
     </head>
     <body>
         <main class="flex justify-center items-center min-h-screen">
-            <h1 class="text-3xl">404 Not found</h1>
+            <section>
+                <h1 class="text-5xl font-montserrat text-white">404 Not found</h1>
+                <p class="text-8xl text-center mt-12">😿</p>
+            </section>
         </main>
     </body>
 </html>
