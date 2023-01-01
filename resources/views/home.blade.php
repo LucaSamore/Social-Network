@@ -9,7 +9,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         @vite('resources/css/app.css')
     </head>
-    <body class="flex">
+    <body class="flex overflow-hidden">
         <x-side-menu/>
         <main class="w-11/12 xl:w-3/5 lg:w-4/5 md:w-11/12 sm:w-11/12 flex flex-col justify-start items-center gap-4 h-screen">
             <header class="pt-8 pb-4 w-3/4">

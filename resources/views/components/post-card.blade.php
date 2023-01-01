@@ -29,6 +29,27 @@
         @endforeach
     </div>
 
+    <div class="w-full flex items-center py-3">
+        <video width="640" height="480" controls muted autoplay class="rounded-xl">
+            <source src="{{asset('video/dog.mp4')}}" type="video/mp4">
+            <source src="{{asset('video/dog.mp4')}}" type="video/ogg">
+            Il tuo browser non supporta il tag video
+        </video>
+        @forelse ($images as $image)
+            <img src="{{ $image->path }}" alt="user image post" class="rounded-md w-64 h-64">
+        @empty
+            @forelse ($videos as $video)
+                <video width="640" height="480" controls autoplay muted loop>
+                    <source src="{{ $video->path }}" type="video/mp4">
+                    <source src="{{ $video->path }}" type="video/ogg">
+                    Il tuo browser non supporta il tag video
+                </video>
+            @empty
+                
+            @endforelse
+        @endforelse
+    </div>
+
     <label for="post/{{$post["id"]}}" class="text-white font-lg font-quicksand font-bold hover:underline hover:cursor-pointer py-8">
         Mostra tutto
     </label>
@@ -105,6 +126,28 @@
                 <p class="text-white font-quicksand text-lg bg-lavanda px-4 py-2 rounded-full">{{"#".$tag["tag_name"]}}</p>
             @endforeach
         </div>
+
+        <div class="w-full flex items-center py-3">
+            <video width="640" height="480" controls muted class="rounded-xl">
+                <source src="{{asset('video/dog.mp4')}}" type="video/mp4">
+                <source src="{{asset('video/dog.mp4')}}" type="video/ogg">
+                Il tuo browser non supporta il tag video
+            </video>
+            @forelse ($images as $image)
+                <img src="{{ $image->path }}" alt="user image post" class="rounded-md w-64 h-64">
+            @empty
+                @forelse ($videos as $video)
+                    <video width="640" height="480" controls autoplay muted loop>
+                        <source src="{{ $video->path }}" type="video/mp4">
+                        <source src="{{ $video->path }}" type="video/ogg">
+                        Il tuo browser non supporta il tag video
+                    </video>
+                @empty
+                    
+                @endforelse
+            @endforelse
+        </div>
+        
     </section>
     <aside class="flex flex-col justify-center items-center gap-3 w-full xl:w-3/5 lg:w-2/5 md:w-full sm:full rounded-xl py-4 mt-6 overflow-auto">
         @forelse ($comments as $comment)
