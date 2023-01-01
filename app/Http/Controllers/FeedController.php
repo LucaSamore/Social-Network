@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bookmark;
+use App\Models\Comment;
 use App\Models\Follower;
 use App\Models\Image;
 use App\Models\Post;
+use App\Models\Tag;
 use App\Models\TagsInPost;
 use App\Models\User;
 use App\Models\Video;
@@ -16,6 +18,7 @@ final class FeedController extends Controller
     public function feed(Request $request)
     {
         $feeds = $this->recentPosts($request->session()->get('user_id'));
+        $comments = $this->comments($feeds);
 
         return view('/home', [
             'feeds' => $feeds,
@@ -23,7 +26,8 @@ final class FeedController extends Controller
             'images' => $this->images($feeds),
             'videos' => $this->videos($feeds),
             'trends' => $this->topTrends(),
-            'bookmarked' => $this->areBookmarked($feeds, $request->session()->get('user_id'))
+            'bookmarked' => $this->areBookmarked($feeds, $request->session()->get('user_id')),
+            'comments' => $comments
         ]);
     }
 
@@ -108,16 +112,30 @@ final class FeedController extends Controller
         return array_merge(...array_values($bookmarked));
     }
 
+    private function comments(array $posts)
+    {
+        $comments = array();
+
+        foreach ($posts as $post) {
+            array_push($comments, [
+                $post["id"] => Comment::where('post_id', $post["id"])
+                    ->get()
+                    ->map(fn($item, $key) => 
+                        array_merge($item->toArray(), 
+                            User::where('id', $item->user_id)->get()->toArray()))
+                    ->toArray()
+            ]);
+        }
+
+        return array_merge(...array_values($comments));
+    }
+
     private function topTrends()
     {
-        $tags = TagsInPost::all()
-            ->groupBy('tag_name')
-            ->map
-            ->count()
+        return Tag::withCount('posts')
+            ->orderByDesc('posts_count')
+            ->take(5)
+            ->get()
             ->toArray();
-
-        arsort($tags);
-
-        return array_slice($tags, 0, 5);
     }
 }

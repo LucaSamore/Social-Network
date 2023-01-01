@@ -5,13 +5,13 @@
         </header>
         <section class="flex gap-12 text-white font-quicksand py-4">
             <ul class="font-bold flex flex-col gap-4">
-                @foreach ($trends as $key => $value)
-                    <li>#{{ $key }}</li>
+                @foreach ($trends as $trend)
+                    <li>#{{ $trend["name"] }}</li>
                 @endforeach
             </ul>
             <ul class="flex flex-col gap-4">
                 @foreach ($trends as $key => $value)
-                    <li>{{ $value }}</li>
+                    <li>{{ $trend["posts_count"] }}</li>
                 @endforeach
             </ul>
         </section>
