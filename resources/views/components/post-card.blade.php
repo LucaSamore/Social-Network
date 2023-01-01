@@ -29,17 +29,13 @@
         @endforeach
     </div>
 
-    <div class="w-full flex items-center py-3">
-        <video width="640" height="480" controls muted autoplay class="rounded-xl">
-            <source src="{{asset('video/dog.mp4')}}" type="video/mp4">
-            <source src="{{asset('video/dog.mp4')}}" type="video/ogg">
-            Il tuo browser non supporta il tag video
-        </video>
+    <div class="w-full flex justify-center items-center py-3">
+        <img src="{{asset('img/mountains.jpg')}}" alt="user image post" class="rounded-md object-cover">
         @forelse ($images as $image)
-            <img src="{{ $image->path }}" alt="user image post" class="rounded-md w-64 h-64">
+            <img src="{{ $image->path }}" alt="user image post" class="rounded-md object-cover">
         @empty
             @forelse ($videos as $video)
-                <video width="640" height="480" controls autoplay muted loop>
+                <video width="640" height="480" controls muted autoplay muted class="rounded-xl">
                     <source src="{{ $video->path }}" type="video/mp4">
                     <source src="{{ $video->path }}" type="video/ogg">
                     Il tuo browser non supporta il tag video
@@ -128,16 +124,12 @@
         </div>
 
         <div class="w-full flex items-center py-3">
-            <video width="640" height="480" controls muted class="rounded-xl">
-                <source src="{{asset('video/dog.mp4')}}" type="video/mp4">
-                <source src="{{asset('video/dog.mp4')}}" type="video/ogg">
-                Il tuo browser non supporta il tag video
-            </video>
+            <img src="{{asset('img/mountains.jpg')}}" alt="user image post" class="rounded-md object-cover">
             @forelse ($images as $image)
-                <img src="{{ $image->path }}" alt="user image post" class="rounded-md w-64 h-64">
+                <img src="{{ $image->path }}" alt="user image post" class="rounded-md object-cover">
             @empty
                 @forelse ($videos as $video)
-                    <video width="640" height="480" controls autoplay muted loop>
+                    <video width="640" height="480" controls muted autoplay muted class="rounded-xl">
                         <source src="{{ $video->path }}" type="video/mp4">
                         <source src="{{ $video->path }}" type="video/ogg">
                         Il tuo browser non supporta il tag video
@@ -149,7 +141,7 @@
         </div>
         
     </section>
-    <aside class="flex flex-col justify-center items-center gap-3 w-full xl:w-3/5 lg:w-2/5 md:w-full sm:full rounded-xl py-4 mt-6 overflow-auto">
+    <aside class="flex flex-col justify-start items-center gap-3 w-full xl:w-2/5 lg:w-2/5 md:w-full sm:w-full rounded-xl py-4 mt-3 xl:overflow-auto lg:overflow-auto md:overflow-auto">
         @forelse ($comments as $comment)
             <x-comment :comment="$comment"/>
         @empty
