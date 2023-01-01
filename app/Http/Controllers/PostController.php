@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use App\Models\Image;
+use App\Models\Like;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 final class PostController extends Controller
@@ -136,5 +137,29 @@ final class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+    }
+
+    public function like(Request $request, string $post_id): int
+    {
+        $user_id = $request->session()->get('user_id');
+        $like = Like::where('user_id', $user_id);
+        $numberOfLikes = Like::where('post_id', $post_id)->get()->count();
+
+        if ($like->get()->isEmpty()) {
+            $newLike = new Like([
+                'id' => (string) Str::uuid(),
+                'user_id' => $user_id,
+                'post_id' => $post_id
+            ]);
+            $newLike->save();
+            $numberOfLikes += 1;
+            Post::where('id', $post_id)->update(['number_of_likes' => $numberOfLikes]);
+        } else {
+            $like->delete();
+            $numberOfLikes -= 1;
+            Post::where('id', $post_id)->update(['number_of_likes' => $numberOfLikes]);
+        }
+
+        return $numberOfLikes;
     }
 }
