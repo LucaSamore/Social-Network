@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->uuid('id');
-            $table->text('textual_content');
+            $table->text('textual_content')->nullable();
             $table->timestamps();
             $table->bigInteger('number_of_likes')->default('0');
             $table->bigInteger('number_of_comments')->default('0');

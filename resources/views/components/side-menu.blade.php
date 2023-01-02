@@ -76,8 +76,10 @@
         <header>
             <h3 class="text-xl font-bold text-white font-montserrat">Crea un post ✍🏻</h3>
         </header>
-        <form action="/post/create" method="post" class="w-full flex flex-col items-center gap-8">
-            <textarea class="w-full h-32 rounded-xl text-white font-xl font-quicksand px-4 py-4" placeholder="Scrivi qualcosa..."></textarea>
+        <form action="/posts/store" method="post" enctype="multipart/form-data" class="w-full flex flex-col items-center gap-8">
+            @csrf
+
+            <textarea name="textual_content" class="w-full h-32 rounded-xl text-white font-xl font-quicksand px-4 py-4" placeholder="Scrivi qualcosa..."></textarea>
             @error('error')
                 <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
             @enderror
@@ -93,10 +95,10 @@
                         </svg>
                         <span class="font-medium text-white">
                             Allega immagine o video, oppure
-                            <span class="text-white underline">browse</span>
+                            <span class="text-white underline">seleziona</span>
                         </span>
                     </span>
-                    <input type="file" id="file-upload" accept="image/*, video/*" name="file-upload" class="hidden">
+                    <input type="file" id="file-upload" accept="image/*, video/*" name="media" class="hidden">
                 </label>
             </fieldset>
             <input type="submit" name="create" value="Crea" class="btn w-1/2 bg-lavanda hover:bg-dark-lavanda text-white font-montserrat font-bold border-none" />

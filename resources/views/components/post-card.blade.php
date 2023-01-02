@@ -114,9 +114,9 @@
                 </div>
             </div>
         </header>
-        <article class="text-white font-quicksand text-lg text-justify my-6">
+        <p class="text-white font-quicksand text-lg text-justify my-6">
             {{ $post["textual_content"] }}
-        </article>
+        </p>
         <div class="w-full flex flex-wrap gap-4 py-3">
             @foreach ($tags as $tag)
                 <p class="text-white font-quicksand text-lg bg-lavanda px-4 py-2 rounded-full">{{"#".$tag["tag_name"]}}</p>

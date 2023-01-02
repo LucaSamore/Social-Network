@@ -53,6 +53,7 @@ final class AuthController extends Controller
             $user->refresh();
             auth()->login($user);
             session(['user_id' => $user->id]);
+            session(['user_name' => $user->name]);
             return redirect('/home')->with('success', 'Account creato con successo');
         }
 

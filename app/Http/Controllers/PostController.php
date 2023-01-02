@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
-use App\Models\Post;
 use App\Models\Image;
+use App\Models\Post;
 use App\Models\Like;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Video;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 final class PostController extends Controller
 {
@@ -38,51 +39,55 @@ final class PostController extends Controller
      * @param  \Illuminate\Http\Request\PostRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PostRequest $request)
+    public function store(Request $request)
     {
-        $request->validated();
+        //$request->validated();
 
-
-        /*Bisogna prendere l'id dell'utente che pubblica il post dalla sessione*/
-        $user_id = '0198cc50-2b38-3a65-9216-90aca113f6bc';
-        $user_id = $request->session()->get("user_id");
-        echo "ID:".$user_id;
-
-        /*SAVE THE POST*/
-        $post = new Post(['user_id' => $user_id, 'textual_content' => $request->input('textual_content'), ]);
-        $post->save();
-
-        //save the image in a folder 
-        /*if per controllare se l'immagine è presente*/
-        if($request->hasFile('photoPath')){
-            $path = $request->file("photoPath")->path();
-            $extension = $request->file("photoPath")->extension();
-            //$size = $request->file("photoPath")->getSize();
-            //echo "SIZE:".$size;
-            /*if per controllare estensione e dimensione file*/
-            $validExtensions = array("png", "jpeg","jpg");
-            //$MAX_SIZE_IMAGE = ;
-            if (in_array( $extension, $validExtensions) /*&& extension <= MAX_SIZE_IMAGE*/){
-                //echo $path."\n";
-                //echo $extension."\n";
-                $path = $request->file('photoPath')->storeAs(
-                    "public/images/".$user_id, $post->id.".".$extension
-                );
-                Storage::setVisibility($path, 'private');
-                $image = new Image(['post_id' => $post["id"], 'path' => "/storage/".$path]);
-                $image->save();
-                
-                $url = Storage::url($path);
-                echo "URL:".asset($path);
-    
-                /*$contents = Storage::get($path);
-                echo "CONTENT:".$contents;*/
-                //echo $request[""]."\n";
-                return $request->input('textual_content') . " published <img src='".asset($url)."'/>" ;
+        if (!$request->hasFile('media') && $request->textual_content === null) {
+            return back()->withErrors('error', 'Contenuto testuale o multimediale non specificato');
         }
-        return "post saved without image.";
+
+        $user_id = $request->session()->get('user_id');
+
+        $post = new Post([
+            'id' => (string) Str::uuid(),
+            'user_id' => $user_id,
+            'textual_content' => $request->textual_content,
+            'created_at' => now(),
+            'number_of_likes' => 0,
+            'number_of_comments' => 0,
+            'number_of_reposts' => 0
+        ]);
+
+        $res = $post->save();
+
+        if ($request->hasFile('media')) {
+            $fileType = explode('/', $request->file('media')->getMimeType())[0];
+            if ($fileType === 'image') {
+                $uploadedFileUrl = Cloudinary::upload($request->file('media')->getRealPath())->getSecurePath();
+                $image = new Image([
+                    'id' => (string) Str::uuid(),
+                    'post_id' => $post->id,
+                    'path' => $uploadedFileUrl
+                ]);
+                $res = $image->save();
+            } else if ($fileType === 'video') {
+                $uploadedFileUrl = Cloudinary::uploadVideo($request->file('media')->getRealPath())->getSecurePath();
+                $video = new Video([
+                    'id' => (string) Str::uuid(),
+                    'post_id' => $post->id,
+                    'path' => $uploadedFileUrl
+                ]);
+                $res = $video->save();
+            }
+        }
+
+        if ($res) {
+            return redirect('/home')->with('success', 'Post creato con successo');
+        }
+
+        return back()->withErrors('error', 'Errore durante la creazione del post');
     }
-}
 
     /**
      * Display the specified resource.
@@ -92,17 +97,7 @@ final class PostController extends Controller
      */
     public function show($post)
     {
-        /*$data = [
-            /*"username" => "username",
-            /*"textual_content" => $post->textual_content,
-            /*"number_of_likes" => 0/*$post->number_of_likes,
-            /*"number_of_comments" => 0 /*$post->number_of_comments,
-            /*"photo_path" => "",
-        ];*/
-        $data = Post::findOrFail($post)->user()->first();
-        echo $data->username;
-        dd($data);
-        return View("post", $data);
+        //
     }
 
     /**

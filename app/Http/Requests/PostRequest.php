@@ -16,7 +16,7 @@ final class PostRequest extends FormRequest
     {
         return [
             'textual_content' => ['string', 'size:1500'],
-            'file-upload' => [new Media]
+            'file_upload' => [new Media]
         ];
     }
 
