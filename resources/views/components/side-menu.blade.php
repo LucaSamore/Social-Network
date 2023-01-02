@@ -81,19 +81,7 @@
             @error('error')
                 <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
             @enderror
-
-            <fieldset id="media-content">
-
-            </fieldset>
-
-            <!-- <img id="new-image" src="{{asset('img/mountains.jpg')}}" alt="user image post" class="rounded-md object-cover"> -->
-
-            <!-- <video id="new-video" width="640" height="480" controls muted autoplay muted class="rounded-xl">
-                <source src="{{asset('video/dog.mp4')}}" type="video/mp4">
-                <source src="{{asset('video/dog.mp4')}}" type="video/ogg">
-                Il tuo browser non supporta il tag video
-            </video> -->
-
+            <fieldset id="media-content"></fieldset>
             <fieldset id="dropzone" class="w-full">
                 <label
                     class="flex justify-center w-full h-32 px-4 transition border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
@@ -111,10 +99,6 @@
                     <input type="file" id="file-upload" accept="image/*, video/*" name="file-upload" class="hidden">
                 </label>
             </fieldset>
-
-
-
-
             <input type="submit" name="create" value="Crea" class="btn w-1/2 bg-lavanda hover:bg-dark-lavanda text-white font-montserrat font-bold border-none" />
         </form>
     </section>
