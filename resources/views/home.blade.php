@@ -34,6 +34,7 @@
             </section>
         </main>
         <x-top-trends :trends="$trends"/>
+        @vite('resources/js/post.js')
         @vite('resources/js/like.js')
         @vite('resources/js/comment.js')
         <script src="https://kit.fontawesome.com/6b12fba364.js" crossorigin="anonymous"></script>
