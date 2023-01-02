@@ -39,12 +39,12 @@ final class PostController extends Controller
      * @param  \Illuminate\Http\Request\PostRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        //$request->validated();
+        $request->validated();
 
         if (!$request->hasFile('media') && $request->textual_content === null) {
-            return back()->withErrors('error', 'Contenuto testuale o multimediale non specificato');
+            return back()->with('error', '🙃 Contenuto non specificato 🙃');
         }
 
         $user_id = $request->session()->get('user_id');
@@ -83,10 +83,10 @@ final class PostController extends Controller
         }
 
         if ($res) {
-            return redirect('/home')->with('success', 'Post creato con successo');
+            return redirect('/home')->with('success', '🥳 Post creato con successo! 🥳');
         }
 
-        return back()->withErrors('error', 'Errore durante la creazione del post');
+        return back()->withErrors('error', '😢 Errore durante la creazione del post 😢');
     }
 
     /**

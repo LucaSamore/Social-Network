@@ -15,7 +15,7 @@ final class PostRequest extends FormRequest
     public function rules()
     {
         return [
-            'textual_content' => ['string', 'size:1500'],
+            'textual_content' => ['string', 'nullable'],
             'file_upload' => [new Media]
         ];
     }
@@ -28,7 +28,6 @@ final class PostRequest extends FormRequest
     public function messages()
     {
         return [
-            'textual_content.size' => 'Il contenuto è troppo lungo',
             'textual_content.string' => 'Il contenuto non è valido',
         ];
     }

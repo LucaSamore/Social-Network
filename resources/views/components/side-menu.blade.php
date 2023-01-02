@@ -76,11 +76,11 @@
         <header>
             <h3 class="text-xl font-bold text-white font-montserrat">Crea un post ✍🏻</h3>
         </header>
-        <form action="/posts/store" method="post" enctype="multipart/form-data" class="w-full flex flex-col items-center gap-8">
+        <form action="/posts/store" method="post" enctype="multipart/form-data" class="w-full flex flex-col items-center gap-4">
             @csrf
 
-            <textarea name="textual_content" class="w-full h-32 rounded-xl text-white font-xl font-quicksand px-4 py-4" placeholder="Scrivi qualcosa..."></textarea>
-            @error('error')
+            <textarea id="textual-content" name="textual_content" class="w-full h-32 rounded-xl text-white font-xl font-quicksand px-4 py-4" placeholder="Scrivi qualcosa..."></textarea>
+            @error('textual_content')
                 <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
             @enderror
             <fieldset id="media-content"></fieldset>
@@ -100,8 +100,12 @@
                     </span>
                     <input type="file" id="file-upload" accept="image/*, video/*" name="media" class="hidden">
                 </label>
+                @error('media')
+                        <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
+                @enderror
             </fieldset>
-            <input type="submit" name="create" value="Crea" class="btn w-1/2 bg-lavanda hover:bg-dark-lavanda text-white font-montserrat font-bold border-none" />
+            <input id="send-new-post" type="submit" name="create" value="Crea" disabled
+                class="btn w-1/2 bg-lavanda hover:bg-dark-lavanda text-white font-montserrat font-bold border-none mt-4" />
         </form>
     </section>
   </div>

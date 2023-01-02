@@ -1,3 +1,5 @@
+const textArea = document.getElementById('textual-content');
+const sendButton = document.getElementById('send-new-post');
 const file = document.getElementById('file-upload');
 const mediaContainer = document.getElementById('media-content');
 const dropzone = document.getElementById('dropzone');
@@ -52,6 +54,8 @@ const deleteMedia = (e) => {
     }
 
     document.getElementById('delete-media').remove();
+    sendButton.disabled = textArea.value === "";
+    file.value = "";
 }
 
 const handleFile = (uploaded) => {
@@ -82,6 +86,7 @@ const handleFile = (uploaded) => {
     }
 
     createDeleteButton();
+    sendButton.disabled = false;
 }
 
 ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -89,6 +94,14 @@ const handleFile = (uploaded) => {
 })
 
 dropzone.addEventListener('drop', handleDrop, false);
+
+textArea.onkeyup = e => {
+    if (e.target.value === "" && file.files.length == 0) {
+        sendButton.disabled = true;
+    } else {
+        sendButton.disabled = false;
+    }
+}
 
 file.onchange = e => {
     const [uploaded] = file.files;
