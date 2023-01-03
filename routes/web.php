@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::middleware('auth')->group(function () {
     Route::get('/', [FeedController::class, 'feed'])->name('root');
     Route::get('/home', [FeedController::class, 'feed'])->name('home');
+    Route::get('/profile/{username}', [ProfileController::class, 'profile'])->name('user.profile');
     Route::get('/like/{post_id}', [PostController::class, 'like'])->name('post.like');
     Route::post('/posts/store', [PostController::class, 'store'])->name('post.store');
     Route::post('comment/{post_id}/create', [CommentController::class, 'store'])->whereUuid('post_id')->name('comment.store');

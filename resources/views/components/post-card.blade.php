@@ -9,7 +9,7 @@
                     <img src="{{asset('img/default-avatar.png')}}" alt="user profile picture" width="64" height="64" 
                         class="w-24 h-24 object-cover xl:rounded-full lg:rounded-full md:rounded-none sm:rounded-none rounded-none border-2 border-gray-500" />
                 @endif
-                <a href="/user/{{$creator["username"]}}" class="text-white font-bold font-quicksand text-lg hover:underline">{{ "@".$creator["username"] }}</a>
+                <a href="/profile/{{$creator["username"]}}" class="text-white font-bold font-quicksand text-lg hover:underline">{{ "@".$creator["username"] }}</a>
             </div>
             <div class="flex flex-col gap-1 items-start">
                 <h2 class="text-white font-quicksand text-xl font-bold">{{ $creator["name"] }} {{ $creator["surname"] }}</h2>
@@ -104,7 +104,7 @@
                         <img src="{{asset('img/default-avatar.png')}}" alt="user profile picture" width="64" height="64" 
                             class="w-24 h-24 object-cover xl:rounded-full lg:rounded-full md:rounded-none sm:rounded-none rounded-none border-2 border-gray-500" />
                     @endif
-                    <a href="/user/{{$creator["username"]}}" class="text-white font-bold font-quicksand text-lg hover:underline">{{ "@".$creator["username"] }}</a>
+                    <a href="/profile/{{$creator["username"]}}" class="text-white font-bold font-quicksand text-lg hover:underline">{{ "@".$creator["username"] }}</a>
                 </div>
                 <div class="flex flex-col gap-1 items-center xl:items-start lg:items-start md:items-start sm:items-center">
                     <h2 class="text-white font-quicksand text-xl font-bold">{{ $creator["name"] }} {{ $creator["surname"] }}</h2>

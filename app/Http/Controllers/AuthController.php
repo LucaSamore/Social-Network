@@ -20,6 +20,7 @@ final class AuthController extends Controller
             $user = User::where('email', $request->email)->first();
             session(['user_id' => $user->id]);
             session(['user_name' => $user->name]);
+            session(['username' => $user->username]);
             return redirect('/home');
         }
 
@@ -54,6 +55,7 @@ final class AuthController extends Controller
             auth()->login($user);
             session(['user_id' => $user->id]);
             session(['user_name' => $user->name]);
+            session(['username' => $user->username]);
             return redirect('/home')->with('success', '🥳 Account creato con successo! 🥳');
         }
 
