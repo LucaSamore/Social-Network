@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Traits\UserTrait;
+use App\Models\Follower;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -73,5 +74,13 @@ final class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function isFollowing(string $follower, string $followee)
+    {
+        return Follower::where('follower', $follower)
+            ->where('followee', $followee)
+            ->get()
+            ->isEmpty();
     }
 }

@@ -6,16 +6,16 @@ use Illuminate\View\Component;
 
 final class FollowersModal extends Component
 {
-    public $followers;
+    public $user;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($followers)
+    public function __construct($user)
     {
-        $this->followers = $followers;
+        $this->user = $user;
     }
 
     /**
