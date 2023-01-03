@@ -34,7 +34,7 @@
                             <p class="text-white font-bold font-montserrat text-xl xl:text-2xl lg:text-2xl md:text-xl sm:text-xl">{{ $user->followers->count() }}</p>
                             <p class="text-white font-bold font-quicksand text-sm xl:text-lg lg:text-lg md:text-sm sm:text-sm">follower</p>
                         </label>
-                        <label class="flex flex-col gap-3 justify-center items-center hover:underline hover:cursor-pointer">
+                        <label for="followees" class="flex flex-col gap-3 justify-center items-center hover:underline hover:cursor-pointer">
                             <p class="text-white font-bold font-montserrat text-xl xl:text-2xl lg:text-2xl md:text-xl sm:text-xl">{{ $user->followees->count() }}</p>
                             <p class="text-white font-bold font-quicksand text-sm xl:text-lg lg:text-lg md:text-sm sm:text-sm">seguiti</p>
                         </label>
@@ -78,6 +78,7 @@
         </main>
         <x-top-trends :trends="$trends"/>
         <x-modals.followers :followers="$user->followers"/>
+        <x-modals.followees :followees="$user->followees"/>
         @vite('resources/js/post.js')
         @vite('resources/js/like.js')
         @vite('resources/js/comment.js')
