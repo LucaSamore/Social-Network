@@ -12,23 +12,34 @@
     <body class="flex overflow-hidden">
         <x-side-menu/>
         <main class="w-11/12 xl:w-3/5 lg:w-4/5 md:w-11/12 sm:w-11/12 flex flex-col justify-start items-center gap-4 h-screen">
-            <header class="pt-8 pb-4 w-3/4 flex flex-col gap-4 justify-center items-center">
-                <h1 class="text-white text-center font-bold font-montserrat text-4xl xl:text-8xl lg:text-8xl md:text-6xl sm:text-6xl">Profilo 🤓</h1>
-                @if(Session::has('success'))
-                    <span class="text-green-400 font-montserrat text-center font-bold mt-4 text-lg xl:text-2xl lg:text-2xl md:text-xl sm:text-lg">
-                        {{ Session::get('success') }}
-                    </span>
-                    @php
-                        Session::forget('success');
-                    @endphp
-                @elseif(Session::has('error'))
-                    <span class="text-red-600 font-montserrat font-bold text-lg xl:text-2xl lg:text-2xl md:text-xl sm:text-lg mt-4">
-                        {{ Session::get('error') }}
-                    </span>
-                    @php
-                        Session::forget('error');
-                    @endphp
-                @endif
+            <header class="mt-12 pb-4 w-3/4 xl:w-1/2 lg:w-1/2 md:w-1/2 sm:w-3/4 flex flex-col gap-4 justify-center items-start">
+                <div class="w-full flex">
+                    <div class="w-1/2 flex flex-col gap-4 justify-center items-start">
+                        <figure>
+                            <img src="{{asset('img/mountains.jpg')}}" alt="user profile picture" width="64" height="64" 
+                                class="w-32 h-32 object-cover rounded-full border-2 border-gray-500" />
+                        </figure>
+                    </div>
+                    <div class="w-1/2 flex gap-6 justify-evenly items-center">
+                        <div class="flex flex-col gap-3 justify-center items-center">
+                            <p class="text-white font-bold font-montserrat text-xl xl:text-2xl lg:text-2xl md:text-xl sm:text-xl">12</p>
+                            <p class="text-white font-bold font-quicksand text-sm xl:text-lg lg:text-lg md:text-sm sm:text-sm">post</p>
+                        </div>
+                        <label class="flex flex-col gap-3 justify-center items-center">
+                            <p class="text-white font-bold font-montserrat text-xl xl:text-2xl lg:text-2xl md:text-xl sm:text-xl">368</p>
+                            <p class="text-white font-bold font-quicksand text-sm xl:text-lg lg:text-lg md:text-sm sm:text-sm">follower</p>
+                        </label>
+                        <label class="flex flex-col gap-3 justify-center items-center">
+                            <p class="text-white font-bold font-montserrat text-xl xl:text-2xl lg:text-2xl md:text-xl sm:text-xl">280</p>
+                            <p class="text-white font-bold font-quicksand text-sm xl:text-lg lg:text-lg md:text-sm sm:text-sm">seguiti</p>
+                        </label>
+                    </div>
+                </div>
+                <h1 class="text-white font-bold font-montserrat text-lg xl:text-2xl lg:text-2xl md:text-xl sm:text-lg">Luca Samorè</h1>
+                <p class="text-white font-quicksand text-xl">@lucasamo</p>
+                <p class="text-white font-quicksand text-lg text-justify">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos id itaque enim ab, cupiditate suscipit repellat aliquid dignissimos similique quod unde veniam, eveniet iure fuga optio culpa dolores alias quo.
+                </p>
             </header>
             <section id="feeds" class="flex flex-col justify-start items-center w-3/4 pb-12
                             xl:w-4/5 lg:w-3/4 md:w-3/4 sm:w-4/5 rounded-xl overflow-auto">
