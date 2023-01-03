@@ -16,30 +16,40 @@
                 <div class="w-full flex">
                     <div class="w-1/2 flex flex-col gap-4 justify-center items-start">
                         <figure>
-                            <img src="{{asset('img/mountains.jpg')}}" alt="user profile picture" width="64" height="64" 
-                                class="w-32 h-32 object-cover rounded-full border-2 border-gray-500" />
+                            @if ($user->profile_image !== null)
+                                <img src="{{ $user->profile_image }}" alt="user profile picture" width="64" height="64" 
+                                    class="w-32 h-32 object-cover rounded-full border-2 border-gray-500" />
+                            @else
+                                <img src="{{asset('img/default-avatar.png')}}" alt="user profile picture" width="64" height="64" 
+                                    class="w-32 h-32 object-cover rounded-full border-2 border-gray-500" />
+                            @endif
                         </figure>
                     </div>
                     <div class="w-1/2 flex gap-6 justify-evenly items-center">
                         <div class="flex flex-col gap-3 justify-center items-center">
-                            <p class="text-white font-bold font-montserrat text-xl xl:text-2xl lg:text-2xl md:text-xl sm:text-xl">12</p>
+                            <p class="text-white font-bold font-montserrat text-xl xl:text-2xl lg:text-2xl md:text-xl sm:text-xl">{{ $user->posts->count() }}</p>
                             <p class="text-white font-bold font-quicksand text-sm xl:text-lg lg:text-lg md:text-sm sm:text-sm">post</p>
                         </div>
                         <label class="flex flex-col gap-3 justify-center items-center">
-                            <p class="text-white font-bold font-montserrat text-xl xl:text-2xl lg:text-2xl md:text-xl sm:text-xl">368</p>
+                            <p class="text-white font-bold font-montserrat text-xl xl:text-2xl lg:text-2xl md:text-xl sm:text-xl">{{ $user->followers->count() }}</p>
                             <p class="text-white font-bold font-quicksand text-sm xl:text-lg lg:text-lg md:text-sm sm:text-sm">follower</p>
                         </label>
                         <label class="flex flex-col gap-3 justify-center items-center">
-                            <p class="text-white font-bold font-montserrat text-xl xl:text-2xl lg:text-2xl md:text-xl sm:text-xl">280</p>
+                            <p class="text-white font-bold font-montserrat text-xl xl:text-2xl lg:text-2xl md:text-xl sm:text-xl">{{ $user->followees->count() }}</p>
                             <p class="text-white font-bold font-quicksand text-sm xl:text-lg lg:text-lg md:text-sm sm:text-sm">seguiti</p>
                         </label>
                     </div>
                 </div>
-                <h1 class="text-white font-bold font-montserrat text-lg xl:text-2xl lg:text-2xl md:text-xl sm:text-lg">Luca Samorè</h1>
-                <p class="text-white font-quicksand text-xl">@lucasamo</p>
+                <h1 class="text-white font-bold font-montserrat text-lg xl:text-2xl lg:text-2xl md:text-xl sm:text-lg">{{ $user->name." ".$user->surname }}</h1>
+                <p class="text-white font-quicksand text-xl">{{ "@".$user->username }}</p>
                 <p class="text-white font-quicksand text-lg text-justify">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos id itaque enim ab, cupiditate suscipit repellat aliquid dignissimos similique quod unde veniam, eveniet iure fuga optio culpa dolores alias quo.
+                    {{ $user->bio }}
                 </p>
+                @if (!$isItMe)
+                    <button class="btn w-full mt-2 bg-lavanda hover:bg-dark-lavanda border-none text-white normal-case font-montserrat">
+                        Segui
+                    </button>
+                @endif
                 {{-- <button class="btn w-full mt-2 bg-lavanda hover:bg-dark-lavanda border-none text-white normal-case font-montserrat">
                     Segui
                 </button>
@@ -62,7 +72,7 @@
                         :editable="false"
                     />
                 @empty
-                    <h2 class="text-white font-quicksand text-2xl">Non hai post da visualizzare...</h2>
+                    <h2 class="text-white font-quicksand text-2xl">Non ci sono post</h2>
                 @endforelse
             </section>
         </main>
