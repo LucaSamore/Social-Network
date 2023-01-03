@@ -69,7 +69,7 @@
                         :bookmarked="false"
                         :comments="$post->comments"
                         :tags="$post->tags"
-                        :editable="false"
+                        :editable="true"
                     />
                 @empty
                     <h2 class="text-white font-quicksand text-2xl">Non ci sono post</h2>
