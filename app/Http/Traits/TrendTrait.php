@@ -9,8 +9,7 @@ trait TrendTrait {
     {
         return Tag::withCount('posts')
             ->orderByDesc('posts_count')
-            ->take(5)
-            ->get()
-            ->toArray();
+            ->limit(5)
+            ->get();
     }
 }

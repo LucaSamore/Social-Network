@@ -3,14 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Traits\TrendTrait;
-use App\Models\Bookmark;
-use App\Models\Comment;
 use App\Models\Follower;
-use App\Models\Image;
 use App\Models\Post;
-use App\Models\TagsInPost;
-use App\Models\User;
-use App\Models\Video;
 use Illuminate\Http\Request;
 
 final class FeedController extends Controller
