@@ -40,6 +40,12 @@
                 <p class="text-white font-quicksand text-lg text-justify">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos id itaque enim ab, cupiditate suscipit repellat aliquid dignissimos similique quod unde veniam, eveniet iure fuga optio culpa dolores alias quo.
                 </p>
+                <button class="btn w-full mt-2 bg-lavanda hover:bg-dark-lavanda border-none text-white normal-case font-montserrat">
+                    Segui
+                </button>
+                <button class="btn w-full mt-2 bg-black border-lavanda border-2 text-white normal-case font-montserrat">
+                    Non seguire più
+                </button>
             </header>
             <section id="feeds" class="flex flex-col justify-start items-center w-3/4 pb-12
                             xl:w-4/5 lg:w-3/4 md:w-3/4 sm:w-4/5 rounded-xl overflow-auto">
