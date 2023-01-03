@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+final class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasUuids;
 
@@ -33,7 +33,6 @@ class User extends Authenticatable
         'number_of_followers',
         'number_of_followees',
         'profile_image',
-        'banner_image',
         'email_verified_at',
         'remember_token',
         'created_at',

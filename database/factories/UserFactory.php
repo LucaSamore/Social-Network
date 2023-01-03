@@ -30,7 +30,6 @@ class UserFactory extends Factory
             'number_of_followers' => 0,
             'number_of_followees' => 0,
             'profile_image' => null,
-            'banner_image' => null,
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
             'created_at' => now(),
