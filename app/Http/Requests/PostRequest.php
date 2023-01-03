@@ -16,7 +16,8 @@ final class PostRequest extends FormRequest
     {
         return [
             'textual_content' => ['string', 'nullable'],
-            'file_upload' => [new Media]
+            'file_upload' => [new Media],
+            'tags' => ['string', 'nullable']
         ];
     }
 

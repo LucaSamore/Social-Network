@@ -25,7 +25,7 @@
 
     <div class="w-full flex flex-wrap gap-4 py-3">
         @foreach ($tags as $tag)
-            <p class="text-white font-quicksand text-lg bg-lavanda px-4 py-2 rounded-full">{{ "#".$tag->name }}</p>
+            <p class="text-white font-quicksand text-lg bg-lavanda px-4 py-2 rounded-full">{{ $tag->name }}</p>
         @endforeach
     </div>
 
@@ -118,7 +118,7 @@
         </p>
         <div class="w-full flex flex-wrap gap-4 py-3">
             @foreach ($tags as $tag)
-                <p class="text-white font-quicksand text-lg bg-lavanda px-4 py-2 rounded-full">{{ "#".$tag->name }}</p>
+                <p class="text-white font-quicksand text-lg bg-lavanda px-4 py-2 rounded-full">{{ $tag->name }}</p>
             @endforeach
         </div>
 

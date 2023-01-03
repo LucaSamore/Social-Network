@@ -12,6 +12,7 @@
             @error('textual_content')
                 <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
             @enderror
+            <textarea id="tags" name="tags" class="w-full h-16 rounded-xl text-white font-xl font-quicksand px-4 py-4" placeholder="Aggiungi tag (esempio: #dogs)"></textarea>
             <fieldset id="media-content"></fieldset>
             <fieldset id="dropzone" class="w-full">
                 <label

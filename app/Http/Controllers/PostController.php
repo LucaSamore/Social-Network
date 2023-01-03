@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
 use App\Http\Traits\PostTrait;
+use App\Http\Traits\TrendTrait;
 use App\Models\Image;
 use App\Models\Post;
 use App\Models\Like;
-use App\Models\User;
 use App\Models\Video;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -15,7 +15,7 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 final class PostController extends Controller
 {
-    use PostTrait;
+    use PostTrait, TrendTrait;
 
     /**
      * Show the form for creating a new resource.
@@ -54,6 +54,8 @@ final class PostController extends Controller
         ]);
 
         $res = $post->save();
+
+        $this->storeTags($post->id, $this->parseTags($request->tags));
 
         if ($request->hasFile('media')) {
             $fileType = explode('/', $request->file('media')->getMimeType())[0];
