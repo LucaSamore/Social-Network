@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [FeedController::class, 'feed'])->name('home');
     Route::get('/profile/{username}', [ProfileController::class, 'profile'])->name('user.profile');
     Route::get('/like/{post_id}', [PostController::class, 'like'])->name('post.like');
+    Route::get('/{username}/posts', [PostController::class, 'index'])->name('post.index');
     Route::post('/posts/store', [PostController::class, 'store'])->name('post.store');
     Route::post('comment/{post_id}/create', [CommentController::class, 'store'])->whereUuid('post_id')->name('comment.store');
     Route::any('/logout', [AuthController::class, 'logout'])->name('logout');

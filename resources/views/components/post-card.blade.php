@@ -2,35 +2,34 @@
     <header>
         <div class="w-full flex flex-col xl:flex-row lg:flex-row md:flex-row sm:flex-col gap-6">
             <div class="flex flex-col items-center gap-4">
-                @if ($creator["profile_image"] !== null)
-                    <img src="{{$creator["profile_image"]}}" alt="user profile picture" width="64" height="64" 
+                @if ($creator->profile_image !== null)
+                    <img src="{{$creator->profile_image}}" alt="user profile picture" width="64" height="64" 
                         class="w-24 h-24 object-cover xl:rounded-full lg:rounded-full md:rounded-none sm:rounded-none rounded-none border-2 border-gray-500" />
                 @else
                     <img src="{{asset('img/default-avatar.png')}}" alt="user profile picture" width="64" height="64" 
                         class="w-24 h-24 object-cover xl:rounded-full lg:rounded-full md:rounded-none sm:rounded-none rounded-none border-2 border-gray-500" />
                 @endif
-                <a href="/profile/{{$creator["username"]}}" class="text-white font-bold font-quicksand text-lg hover:underline">{{ "@".$creator["username"] }}</a>
+                <a href="/profile/{{$creator->username}}" class="text-white font-bold font-quicksand text-lg hover:underline">{{ "@".$creator->username }}</a>
             </div>
             <div class="flex flex-col gap-1 items-start">
-                <h2 class="text-white font-quicksand text-xl font-bold">{{ $creator["name"] }} {{ $creator["surname"] }}</h2>
+                <h2 class="text-white font-quicksand text-xl font-bold">{{ $creator->name }} {{ $creator->surname }}</h2>
                 <p class="text-white text-sm xl:text-lg lg:text-lg md:text-sm sm:text-sm font-quicksand">
-                    Membro dal {{date('Y', strtotime($creator["created_at"]))}}
+                    Membro dal {{date('Y', strtotime($creator->created_at))}}
                 </p>
             </div>
         </div>
     </header>
     <p class="text-white font-quicksand text-xl text-left xl:text-justify lg:text-justify md:text-justify sm:text-left mt-6 mb-3">
-        {{ $post["textual_content"] }}
+        {{ $post->textual_content }}
     </p>
 
     <div class="w-full flex flex-wrap gap-4 py-3">
         @foreach ($tags as $tag)
-            <p class="text-white font-quicksand text-lg bg-lavanda px-4 py-2 rounded-full">{{"#".$tag["tag_name"]}}</p>
+            <p class="text-white font-quicksand text-lg bg-lavanda px-4 py-2 rounded-full">{{ "#".$tag->name }}</p>
         @endforeach
     </div>
 
     <div class="w-full flex justify-center items-center py-3">
-        <img src="{{asset('img/mountains.jpg')}}" alt="user image post" class="rounded-md object-cover">
         @forelse ($images as $image)
             <img src="{{ $image->path }}" alt="user image post" class="rounded-md object-cover">
         @empty
@@ -46,7 +45,7 @@
         @endforelse
     </div>
 
-    <label for="post/{{$post["id"]}}" class="text-white font-lg font-quicksand font-bold hover:underline hover:cursor-pointer py-8">
+    <label for="post/{{$post->id}}" class="text-white font-lg font-quicksand font-bold hover:underline hover:cursor-pointer py-8">
         Mostra tutto
     </label>
     <footer>
@@ -59,20 +58,20 @@
             <li>
                 <button class="like-btn flex gap-2 items-center btn bg-lavanda text-white border-none hover:bg-dark-lavanda">
                     <i class="fa-solid fa-heart"></i>
-                    <span id="like-span/{{ $post["id"] }}">{{ $post["number_of_likes"] }}</span>
-                    <input type="hidden" class="like" value="{{ $post['id'] }}" />
+                    <span id="like-span/{{ $post->id }}">{{ $post->number_of_likes }}</span>
+                    <input type="hidden" class="like" value="{{ $post->id }}" />
                 </button>
             </li>
             <li>
-                <label for="post/{{$post["id"]}}/comment" class="flex gap-2 items-center btn bg-lavanda text-white border-none hover:bg-dark-lavanda">
+                <label for="post/{{ $post->id }}/comment" class="flex gap-2 items-center btn bg-lavanda text-white border-none hover:bg-dark-lavanda">
                     <i class="fa-solid fa-message"></i>
-                    <span>{{ $post["number_of_comments"] }}</span>
+                    <span>{{ $post->number_of_comments }}</span>
                 </label>
             </li>
             <li>
                 <button class="flex gap-2 items-center btn bg-lavanda text-white border-none hover:bg-dark-lavanda">
                     <i class="fa-solid fa-retweet"></i>
-                    <span>{{ $post["number_of_reposts"] }}</span>
+                    <span>{{ $post->number_of_reposts }}</span>
                 </button>
             </li>
             <li>
@@ -89,42 +88,41 @@
     </footer>
 </section>
 
-<input type="checkbox" id="post/{{$post["id"]}}" class="modal-toggle" />
+<input type="checkbox" id="post/{{ $post->id }}" class="modal-toggle" />
 <div class="modal">
   <div class="modal-box relative bg-dark-mode-3 w-11/12 max-w-5xl flex flex-col xl:flex-row lg:flex-row md:flex-row sm:flex-col">
-    <label for="post/{{$post["id"]}}" class="btn btn-sm btn-circle absolute right-2 top-2 bg-dark-mode-4 hover:bg-dark-mode-2 border-none">✕</label>
+    <label for="post/{{ $post->id }}" class="btn btn-sm btn-circle absolute right-2 top-2 bg-dark-mode-4 hover:bg-dark-mode-2 border-none">✕</label>
     <section class="flex flex-col w-full xl:w-3/5 lg:w-3/5 md:w-full sm:full px-8">
         <header>
             <div class="w-full flex flex-col items-center xl:flex-row lg:flex-row md:flex-row sm:flex-col gap-6">
                 <div class="flex flex-col items-center gap-4">
-                    @if ($creator["profile_image"] !== null)
-                        <img src="{{$creator["profile_image"]}}" alt="user profile picture" width="64" height="64" 
+                    @if ($creator->profile_image !== null)
+                        <img src="{{ $creator->profile_image }}" alt="user profile picture" width="64" height="64" 
                             class="w-24 h-24 object-cover xl:rounded-full lg:rounded-full md:rounded-none sm:rounded-none rounded-none border-2 border-gray-500" />
                     @else
                         <img src="{{asset('img/default-avatar.png')}}" alt="user profile picture" width="64" height="64" 
                             class="w-24 h-24 object-cover xl:rounded-full lg:rounded-full md:rounded-none sm:rounded-none rounded-none border-2 border-gray-500" />
                     @endif
-                    <a href="/profile/{{$creator["username"]}}" class="text-white font-bold font-quicksand text-lg hover:underline">{{ "@".$creator["username"] }}</a>
+                    <a href="/profile/{{ $creator->username }}" class="text-white font-bold font-quicksand text-lg hover:underline">{{ "@".$creator->username }}</a>
                 </div>
                 <div class="flex flex-col gap-1 items-center xl:items-start lg:items-start md:items-start sm:items-center">
-                    <h2 class="text-white font-quicksand text-xl font-bold">{{ $creator["name"] }} {{ $creator["surname"] }}</h2>
+                    <h2 class="text-white font-quicksand text-xl font-bold">{{ $creator->name }} {{ $creator->surname }}</h2>
                     <p class="text-white text-lg font-quicksand">
-                        Membro dal {{date('Y', strtotime($creator["created_at"]))}}
+                        Membro dal {{date('Y', strtotime($creator->created_at))}}
                     </p>
                 </div>
             </div>
         </header>
         <p class="text-white font-quicksand text-lg text-justify my-6">
-            {{ $post["textual_content"] }}
+            {{ $post->textual_content }}
         </p>
         <div class="w-full flex flex-wrap gap-4 py-3">
             @foreach ($tags as $tag)
-                <p class="text-white font-quicksand text-lg bg-lavanda px-4 py-2 rounded-full">{{"#".$tag["tag_name"]}}</p>
+                <p class="text-white font-quicksand text-lg bg-lavanda px-4 py-2 rounded-full">{{ "#".$tag->name }}</p>
             @endforeach
         </div>
 
         <div class="w-full flex items-center py-3">
-            <img src="{{asset('img/mountains.jpg')}}" alt="user image post" class="rounded-md object-cover">
             @forelse ($images as $image)
                 <img src="{{ $image->path }}" alt="user image post" class="rounded-md object-cover">
             @empty
@@ -151,20 +149,20 @@
   </div>
 </div>
 
-<input type="checkbox" id="post/{{ $post["id"] }}/comment" class="modal-toggle" />
+<input type="checkbox" id="post/{{ $post->id }}/comment" class="modal-toggle" />
 <div class="modal">
   <div class="modal-box relative bg-dark-mode-3">
-    <label for="post/{{ $post["id"] }}/comment" class="btn btn-sm btn-circle absolute right-2 top-2 bg-dark-mode-4 hover:bg-dark-mode-2 border-none">✕</label>
+    <label for="post/{{ $post->id }}/comment" class="btn btn-sm btn-circle absolute right-2 top-2 bg-dark-mode-4 hover:bg-dark-mode-2 border-none">✕</label>
     <section class="flex flex-col gap-8">
         <header>
             <h3 class="text-xl font-bold text-white font-montserrat">Aggiungi un commento</h3>
         </header>
-        <textarea id="area/{{ $post["id"] }}" class="rounded-xl text-white font-xl font-quicksand px-4 py-4" placeholder="Nuovo commento..."></textarea>
+        <textarea id="area/{{ $post->id }}" class="rounded-xl text-white font-xl font-quicksand px-4 py-4" placeholder="Nuovo commento..."></textarea>
         @error('error')
             <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
         @enderror
         <footer class="flex justify-end gap-4">
-            <label for="post/{{$post["id"]}}/comment" class="px-6 py-2 rounded-full 
+            <label for="post/{{ $post->id }}/comment" class="px-6 py-2 rounded-full 
                                            border-lavanda border-2 hover:bg-dark-lavanda hover:border-dark-lavanda 
                                              hover:cursor-pointer text-white font-bold
                                              font-quicksand text-sm normal-case">
@@ -174,7 +172,7 @@
                          bg-lavanda font-bold border-none
                          text-white font-quicksand text-sm normal-case">
               Commenta
-              <input type="hidden" value="{{ $post['id'] }}" />
+              <input type="hidden" value="{{ $post->id }}" />
             </button>
         </footer>
     </section>

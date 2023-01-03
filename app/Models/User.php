@@ -100,7 +100,7 @@ final class User extends Authenticatable
 
     public function comments()
     {
-        return $this->belongsToMany(Post::class, 'comments', 'user_id')->using(Comment::class);
+        return $this->hasMany(Comment::class);
     }
 
     public function likesOnComments()

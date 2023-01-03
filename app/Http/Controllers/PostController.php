@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
+use App\Http\Traits\PostTrait;
 use App\Models\Image;
 use App\Models\Post;
 use App\Models\Like;
+use App\Models\User;
 use App\Models\Video;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -13,15 +15,7 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 final class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+    use PostTrait;
 
     /**
      * Show the form for creating a new resource.
@@ -83,7 +77,7 @@ final class PostController extends Controller
         }
 
         if ($res) {
-            return redirect('/home')->with('success', '🥳 Post creato con successo! 🥳');
+            return back()->with('success', '🥳 Post creato con successo! 🥳');
         }
 
         return back()->withErrors('error', '😢 Errore durante la creazione del post 😢');

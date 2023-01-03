@@ -50,7 +50,7 @@ class Post extends Model
 
     public function comments()
     {
-        return $this->belongsToMany(User::class, 'comments', 'post_id')->using(Comment::class);
+        return $this->hasMany(Comment::class);
     }
 
     public function bookmarks()

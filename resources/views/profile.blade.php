@@ -11,7 +11,7 @@
     </head>
     <body class="flex overflow-hidden">
         <x-side-menu/>
-        <main class="w-11/12 xl:w-3/5 lg:w-4/5 md:w-11/12 sm:w-11/12 flex flex-col justify-start items-center gap-4 h-screen">
+        <main class="w-11/12 xl:w-3/5 lg:w-4/5 md:w-11/12 sm:w-11/12 flex flex-col justify-start items-center gap-4 h-screen overflow-auto">
             <header class="mt-12 pb-4 w-3/4 xl:w-1/2 lg:w-1/2 md:w-1/2 sm:w-3/4 flex flex-col gap-4 justify-center items-start">
                 <div class="w-full flex">
                     <div class="w-1/2 flex flex-col gap-4 justify-center items-start">
@@ -40,16 +40,30 @@
                 <p class="text-white font-quicksand text-lg text-justify">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos id itaque enim ab, cupiditate suscipit repellat aliquid dignissimos similique quod unde veniam, eveniet iure fuga optio culpa dolores alias quo.
                 </p>
-                <button class="btn w-full mt-2 bg-lavanda hover:bg-dark-lavanda border-none text-white normal-case font-montserrat">
+                {{-- <button class="btn w-full mt-2 bg-lavanda hover:bg-dark-lavanda border-none text-white normal-case font-montserrat">
                     Segui
                 </button>
                 <button class="btn w-full mt-2 bg-black border-lavanda border-2 text-white normal-case font-montserrat">
                     Non seguire più
                 </button>
+                <a href="/{{ $username }}/posts">Posts</a> --}}
             </header>
             <section id="feeds" class="flex flex-col justify-start items-center w-3/4 pb-12
-                            xl:w-4/5 lg:w-3/4 md:w-3/4 sm:w-4/5 rounded-xl overflow-auto">
-
+                            xl:w-4/5 lg:w-3/4 md:w-3/4 sm:w-4/5 rounded-xl">
+                @forelse ($posts as $post)
+                    <x-post-card 
+                        :post="$post"
+                        :creator="$post->user"
+                        :images="$post->images"
+                        :videos="$post->videos"
+                        :bookmarked="false"
+                        :comments="$post->comments"
+                        :tags="$post->tags"
+                        :editable="false"
+                    />
+                @empty
+                    <h2 class="text-white font-quicksand text-2xl">Non hai post da visualizzare...</h2>
+                @endforelse
             </section>
         </main>
         <x-top-trends :trends="$trends"/>
