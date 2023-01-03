@@ -157,7 +157,7 @@
         <header>
             <h3 class="text-xl font-bold text-white font-montserrat">Aggiungi un commento</h3>
         </header>
-        <textarea id="area/{{ $post->id }}" class="rounded-xl text-white font-xl font-quicksand px-4 py-4" placeholder="Nuovo commento..."></textarea>
+        <textarea id="area/{{ $post->id }}" name="new-comment" class="rounded-xl text-white font-xl font-quicksand px-4 py-4" placeholder="Nuovo commento..."></textarea>
         @error('error')
             <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
         @enderror
