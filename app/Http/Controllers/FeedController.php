@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\TrendTrait;
 use App\Models\Bookmark;
 use App\Models\Comment;
 use App\Models\Follower;
 use App\Models\Image;
 use App\Models\Post;
-use App\Models\Tag;
 use App\Models\TagsInPost;
 use App\Models\User;
 use App\Models\Video;
@@ -15,6 +15,8 @@ use Illuminate\Http\Request;
 
 final class FeedController extends Controller
 {
+    use TrendTrait;
+
     public function feed(Request $request)
     {
         $feeds = $this->recentPosts($request->session()->get('user_id'));
@@ -141,14 +143,5 @@ final class FeedController extends Controller
         }
 
         return array_merge(...array_values($tags));
-    }
-
-    private function topTrends()
-    {
-        return Tag::withCount('posts')
-            ->orderByDesc('posts_count')
-            ->take(5)
-            ->get()
-            ->toArray();
     }
 }

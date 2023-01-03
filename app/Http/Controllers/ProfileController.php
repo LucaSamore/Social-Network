@@ -2,24 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tag;
+use App\Http\Traits\TrendTrait;
 use Illuminate\Http\Request;
 
 final class ProfileController extends Controller
 {
+    use TrendTrait;
+
     public function profile(Request $request, string $username)
     {
         return view('profile', [
             'trends' => $this->topTrends()
         ]);
-    }
-
-    private function topTrends()
-    {
-        return Tag::withCount('posts')
-            ->orderByDesc('posts_count')
-            ->take(5)
-            ->get()
-            ->toArray();
     }
 }
