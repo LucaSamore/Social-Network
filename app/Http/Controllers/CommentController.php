@@ -55,7 +55,7 @@ final class CommentController extends Controller
             return $comment->toArray();
         }
 
-        return back()->withErrors('Errore nella creazione del commento');
+        return back()->with('error', 'Errore nella creazione del commento 🙄');
     }
 
     /**

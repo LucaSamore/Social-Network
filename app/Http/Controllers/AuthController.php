@@ -54,10 +54,10 @@ final class AuthController extends Controller
             auth()->login($user);
             session(['user_id' => $user->id]);
             session(['user_name' => $user->name]);
-            return redirect('/home')->with('success', 'Account creato con successo');
+            return redirect('/home')->with('success', '🥳 Account creato con successo! 🥳');
         }
 
-        return back()->withErrors(['error' => 'Registrazione fallita']);
+        return back()->with('error', 'Registrazione fallita 🙄');
     }
 
     public function logout(Request $request)

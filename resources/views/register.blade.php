@@ -15,6 +15,14 @@
             </header>
             <section 
                 class="flex flex-col gap-6 items-center bg-dark-mode-3 rounded-xl py-12 w-3/5 xl:w-3/5 lg:w-3/5 md:w-3/5 sm:w-3/5 mb-8">
+                @if(Session::has('error'))
+                    <span class="text-red-600 font-montserrat font-bold text-lg xl:text-2xl lg:text-2xl md:text-xl sm:text-lg mt-4">
+                        {{ Session::get('error') }}
+                    </span>
+                    @php
+                        Session::forget('error');
+                    @endphp
+                @endif
                 <form action="/register" method="post" enctype="multipart/form-data" 
                     class="flex flex-col xl:flex-col lg:flex-col md:flex-col sm:flex-col gap-4 w-full justify-evenly items-center">
                     @csrf
@@ -101,9 +109,6 @@
                             </fieldset>
                         </fieldset>
                     </fieldset>
-                    @error('error')
-                        <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
-                    @enderror
                     <input type="submit" value="Crea" 
                         class="btn border-none px-16 hover:bg-lavanda text-white font-bold font-montserrat text-lg bg-lavanda rounded-lg py-1 mt-6 normal-case"/>
                 </form>
