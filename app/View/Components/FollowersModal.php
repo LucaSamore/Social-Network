@@ -4,18 +4,18 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-final class Comment extends Component
+final class FollowersModal extends Component
 {
-    public $comment;
+    public $followers;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($comment)
+    public function __construct($followers)
     {
-        $this->comment = $comment;
+        $this->followers = $followers;
     }
 
     /**
@@ -25,6 +25,6 @@ final class Comment extends Component
      */
     public function render()
     {
-        return view('components.comment');
+        return view('components.modals.followers');
     }
 }

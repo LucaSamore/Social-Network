@@ -14,13 +14,13 @@ final class Follower extends Pivot
     public $incrementing = false;
     public $timestamps = false;
 
-    public function follower()
+    public function userFollower()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'followee');
     }
 
-    public function followee()
+    public function userFollowee()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'follower');
     }
 }

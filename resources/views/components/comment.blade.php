@@ -11,7 +11,7 @@
                 @endif
             </div>
             <div class="flex flex-col gap-1 items-start">
-                <h2 class="text-white font-quicksand text-sm font-bold">{{ $comment["user"]["name"] }}</h2>
+                <h2 class="text-white font-quicksand text-sm font-bold">{{ $comment->user->name }}</h2>
                 <a href="/profile/{{ $comment->user->username }}" class="text-white font-bold font-quicksand text-sm hover:underline">{{ "@".$comment->user->username }}</a>
             </div>
         </div>
