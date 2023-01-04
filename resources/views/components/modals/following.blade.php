@@ -22,10 +22,6 @@
                         class="text-white font-quicksand text-lg hover:underline">{{"@".$f->userFollower->username}}</a>
                 </div>
                 <div>
-                    {{-- {{ dd($f->userFollowee->followees->find($f) === null) }} --}}
-
-                    {{-- {{ dd($f->userFollower->followers->where('follower', $me)->first()) }} --}}
-
                     @if ($f->userFollower->followers->where('follower', $me)->first())
                         <button class="unfollow btn border-lavanda border-2 hover:border-dark-lavanda bg-dark-mode-2 hover:bg-dark-lavanda normal-case text-white font-montserrat">
                             Non seguire più

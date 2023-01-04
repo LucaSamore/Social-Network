@@ -80,7 +80,7 @@
             </section>
         </main>
         <x-top-trends :trends="$trends"/>
-        <x-modals.followers :user="$user"/>
+        <x-modals.followers :followers="$user->followers" :me="Session::get('user_id')" />
         <x-modals.following :following="$user->followees" :me="Session::get('user_id')" />
         @vite('resources/js/profile.js')
         @vite('resources/js/follow-modals.js')

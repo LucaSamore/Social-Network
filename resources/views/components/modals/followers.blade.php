@@ -6,7 +6,7 @@
         <h3 class="text-xl font-bold text-white font-montserrat border-b-4 border-lavanda">Followers</h3>
     </header>
     <div class="flex flex-col gap-6 mt-8">
-        @foreach ($user->followers as $follower)
+        @foreach ($followers as $follower)
             <div class="flex justify-between hover:bg-dark-mode-3 p-4 rounded-xl">
                 <div class="flex justify-center items-center gap-4">
                     <figure>
@@ -21,12 +21,17 @@
                     <a href="/profile/{{$follower->userFollowee->username}}"
                         class="text-white font-quicksand text-lg hover:underline">{{"@".$follower->userFollowee->username}}</a>
                 </div>
-                <div class="">
-                    <button class="btn border-none bg-lavanda hover:bg-dark-lavanda normal-case text-white font-montserrat">
-                        Segui
-                    </button>
-                    {{-- <input id="my-username-modal" type="hidden" name="me" value="{{ Session::get('username') }}" />
-                    <input id="other-username-modal" type="hidden" name="other" value="{{ $follower->userFollowee->username }}" /> --}}
+                <div>
+                    @if ($follower->userFollowee->followers->where('follower', $me)->first())
+                        <button class="unfollow btn border-lavanda border-2 hover:border-dark-lavanda bg-dark-mode-2 hover:bg-dark-lavanda normal-case text-white font-montserrat">
+                            Non seguire più
+                        </button>
+                    @else
+                        <button class="follow btn w-36 border-none bg-lavanda hover:bg-dark-lavanda normal-case text-white font-montserrat">
+                            Segui
+                        </button>
+                    @endif
+                    <input type="hidden" name="{{ $follower->userFollowee->username }}" value="{{ $follower->userFollowee->username }}" />
                 </div>
             </div>
         @endforeach

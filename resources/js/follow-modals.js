@@ -5,9 +5,8 @@ const unfollowButtons = Array.from(document.getElementsByClassName('unfollow'));
 const followButtons = Array.from(document.getElementsByClassName('follow'));
 const myUsername = document.getElementById('my-username').value;
 
-function insertAfter(referenceNode, newNode) {
+const insertAfter = (referenceNode, newNode) => 
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-}
 
 const follow = (e) => {
     if (followUser(e.target.myUsername, e.target.otherUsername)) {
