@@ -45,17 +45,19 @@
                 <p class="text-white font-quicksand text-lg text-justify">
                     {{ $user->bio }}
                 </p>
-                @if (!$isItMe)
-                    @if ($isFollowing !== null)
-                        <button id="unfollow-btn" class="btn w-full mt-2 bg-black hover:bg-dark-lavanda border-2 border-lavanda text-white normal-case font-montserrat">
-                            Non seguire più
-                        </button>
-                    @else
-                        <button id="follow-btn" class="btn w-full mt-2 bg-lavanda hover:bg-dark-lavanda border-none text-white normal-case font-montserrat">
-                            Segui
-                        </button>
+                <div id="toggle-follow" class="w-full">
+                    @if (!$isItMe)
+                        @if ($isFollowing !== null)
+                            <button id="unfollow-btn" class="btn w-full mt-2 bg-black hover:bg-dark-lavanda border-2 border-lavanda text-white normal-case font-montserrat">
+                                Non seguire più
+                            </button>
+                        @else
+                            <button id="follow-btn" class="btn w-full mt-2 bg-lavanda hover:bg-dark-lavanda border-none text-white normal-case font-montserrat">
+                                Segui
+                            </button>
+                        @endif
                     @endif
-                @endif
+                </div>
                 <input id="my-username" type="hidden" name="me" value="{{ Session::get('username') }}" />
                 <input id="other-username" type="hidden" name="other" value="{{ $user->username }}" />
             </header>
