@@ -6,11 +6,11 @@
         <section class="flex gap-12 text-white font-quicksand py-4">
             <ul class="font-bold flex flex-col gap-4">
                 @foreach ($trends as $trend)
-                    <li>#{{ $trend->name }}</li>
+                    <li>{{ $trend->name }}</li>
                 @endforeach
             </ul>
             <ul class="flex flex-col gap-4">
-                @foreach ($trends as $key => $value)
+                @foreach ($trends as $trend)
                     <li>{{ $trend->posts_count }}</li>
                 @endforeach
             </ul>
