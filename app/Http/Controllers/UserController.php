@@ -75,12 +75,4 @@ final class UserController extends Controller
     {
         //
     }
-
-    public function isFollowing(string $follower, string $followee)
-    {
-        return Follower::where('follower', $follower)
-            ->where('followee', $followee)
-            ->get()
-            ->isEmpty();
-    }
 }

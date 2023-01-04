@@ -24,8 +24,8 @@ final class FeedController extends Controller
     private function recentPosts(string $user_id)
     {
         return Post::whereIn('user_id', 
-            Follower::select('follower')
-                ->where('followee', $user_id)
+            Follower::select('followee')
+                ->where('follower', $user_id)
                 ->get()
                 ->toArray())
             ->orderBy('created_at')

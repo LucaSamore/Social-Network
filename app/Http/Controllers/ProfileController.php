@@ -18,7 +18,8 @@ final class ProfileController extends Controller
             'trends' => $this->topTrends(),
             'user' => $this->show($username),
             'posts' => $this->index($username),
-            'isItMe' => $request->session()->get('username') === $username
+            'isItMe' => $request->session()->get('username') === $username,
+            'isFollowing' => $this->isFollowing($request->session()->get('username'), $username)
         ]);
     }
 }

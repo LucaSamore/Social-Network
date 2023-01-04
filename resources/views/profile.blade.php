@@ -46,17 +46,22 @@
                     {{ $user->bio }}
                 </p>
                 @if (!$isItMe)
-                    <button class="btn w-full mt-2 bg-lavanda hover:bg-dark-lavanda border-none text-white normal-case font-montserrat">
-                        Segui
-                    </button>
+                    @if ($isFollowing !== null)
+                        <button class="btn w-full mt-2 bg-black hover:bg-dark-lavanda border-2 border-lavanda text-white normal-case font-montserrat">
+                            Non seguire più
+                        </button>
+                    @else
+                        <button class="btn w-full mt-2 bg-lavanda hover:bg-dark-lavanda border-none text-white normal-case font-montserrat">
+                            Segui
+                        </button>
+                    @endif
                 @endif
                 {{-- <button class="btn w-full mt-2 bg-lavanda hover:bg-dark-lavanda border-none text-white normal-case font-montserrat">
                     Segui
                 </button>
                 <button class="btn w-full mt-2 bg-black border-lavanda border-2 text-white normal-case font-montserrat">
                     Non seguire più
-                </button>
-                <a href="/{{ $username }}/posts">Posts</a> --}}
+                </button> --}}
             </header>
             <section id="feeds" class="flex flex-col justify-start items-center w-3/4 pb-12
                             xl:w-4/5 lg:w-3/4 md:w-3/4 sm:w-4/5 rounded-xl">
