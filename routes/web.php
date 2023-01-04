@@ -5,6 +5,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/like/{post_id}', [PostController::class, 'like'])->name('post.like');
     Route::get('/{username}/posts', [PostController::class, 'index'])->name('post.index');
     Route::post('/posts/store', [PostController::class, 'store'])->name('post.store');
+    Route::post('/follow', [UserController::class, 'follow'])->name('user.follow');
+    Route::delete('/unfollow', [UserController::class, 'unfollow'],)->name('user.unfollow');
     Route::post('comment/{post_id}/create', [CommentController::class, 'store'])->whereUuid('post_id')->name('comment.store');
     Route::any('/logout', [AuthController::class, 'logout'])->name('logout');
 });

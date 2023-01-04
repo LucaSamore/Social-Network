@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Traits\UserTrait;
 use App\Models\Follower;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 final class UserController extends Controller
@@ -74,5 +75,25 @@ final class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function follow(Request $request)
+    {
+        $follower = new Follower([
+            'id' => (string) Str::uuid(),
+            'follower' => User::where('username', $request->my_username)->first()->id,
+            'followee' => User::where('username', $request->other_username)->first()->id
+        ]);
+
+        return $follower->save();
+    }
+
+    public function unfollow(Request $request)
+    {
+        $follow = Follower::where('follower', User::where('username', $request->my_username)->first()->id)
+            ->where('followee', User::where('username', $request->other_username)->first()->id)
+            ->first();
+
+        return $follow->delete();
     }
 }
