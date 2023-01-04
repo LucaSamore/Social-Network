@@ -21,13 +21,22 @@
                     <a href="/profile/{{$f->userFollower->username}}" 
                         class="text-white font-quicksand text-lg hover:underline">{{"@".$f->userFollower->username}}</a>
                 </div>
-                <div class="toggle-follow-modal">
-                    <button class="toggle-follower unfollow btn border-lavanda border-2 hover:border-dark-lavanda bg-dark-mode-2 hover:bg-dark-lavanda normal-case text-white font-montserrat">
-                        Non seguire più
-                    </button>
+                <div>
+                    {{-- {{ dd($f->userFollowee->followees->find($f) === null) }} --}}
+
+                    {{-- {{ dd($f->userFollower->followers->where('follower', $me)->first()) }} --}}
+
+                    @if ($f->userFollower->followers->where('follower', $me)->first())
+                        <button class="unfollow btn border-lavanda border-2 hover:border-dark-lavanda bg-dark-mode-2 hover:bg-dark-lavanda normal-case text-white font-montserrat">
+                            Non seguire più
+                        </button>
+                    @else
+                        <button class="follow btn w-36 border-none bg-lavanda hover:bg-dark-lavanda normal-case text-white font-montserrat">
+                            Segui
+                        </button>
+                    @endif
+                    <input type="hidden" name="{{ $f->userFollower->username }}" value="{{ $f->userFollower->username }}" />
                 </div>
-                <input id="my-username-modal" type="hidden" name="me" value="{{ Session::get('username') }}" />
-                <input id="other-username-modal" type="hidden" name="other" value="{{ $f->userFollower->username }}" />
             </div>
         @endforeach
     </div>

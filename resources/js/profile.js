@@ -1,7 +1,6 @@
 import { followUser } from './ajax/follow';
 import { unfollowUser } from './ajax/unfollow';
 
-const laravelToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 const followButton = document.getElementById('follow-btn');
 const unfollowButton = document.getElementById('unfollow-btn');
 const myUsername = document.getElementById('my-username').value;
@@ -9,7 +8,7 @@ const otherUsername = document.getElementById('other-username').value;
 const container = document.getElementById('toggle-follow');
 
 const follow = (e) => {
-    if (followUser(e.target.myUsername, e.target.otherUsername, laravelToken)) {
+    if (followUser(e.target.myUsername, e.target.otherUsername)) {
         showUnfollowButton();
     } else {
         console.log('Andata male fratello');
@@ -17,7 +16,7 @@ const follow = (e) => {
 }
 
 const unfollow = (e) => {
-    if (unfollowUser(e.target.myUsername, e.target.otherUsername, laravelToken)) {
+    if (unfollowUser(e.target.myUsername, e.target.otherUsername)) {
         showFollowButton();
     } else {
         console.log('Andata male fratello');

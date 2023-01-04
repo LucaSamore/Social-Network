@@ -8,14 +8,17 @@ final class FollowingModal extends Component
 {
     public $following;
 
+    public $me;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($following)
+    public function __construct($following, $me)
     {
         $this->following = $following;
+        $this->me = $me;
     }
 
     /**

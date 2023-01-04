@@ -1,6 +1,8 @@
 import axios from "axios";
 
-export const followUser = async (myUsername, otherUsername, laravelToken) => {
+const laravelToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+export const followUser = async (myUsername, otherUsername) => {
     try {
         return await axios.post(`/follow`, {
                 my_username: myUsername, 

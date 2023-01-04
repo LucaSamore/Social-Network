@@ -1,6 +1,8 @@
 import axios from "axios";
 
-export const unfollowUser = async (myUsername, otherUsername, laravelToken) => {
+const laravelToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+export const unfollowUser = async (myUsername, otherUsername) => {
     try {
         return await axios.delete(`/unfollow`, {
             headers: {
@@ -12,6 +14,6 @@ export const unfollowUser = async (myUsername, otherUsername, laravelToken) => {
             }
         });
     } catch (error) {
-        console.log(error);
+        console.log(error.response.data);
     }
 }
