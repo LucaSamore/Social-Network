@@ -21,7 +21,13 @@
                     <a href="/profile/{{$f->userFollower->username}}" 
                         class="text-white font-quicksand text-lg hover:underline">{{"@".$f->userFollower->username}}</a>
                 </div>
-                <button class="btn border-none w-1/3 bg-lavanda hover:bg-dark-lavanda normal-case text-white font-montserrat">Segui</button>
+                <div class="toggle-follow-modal">
+                    <button class="toggle-follower unfollow btn border-lavanda border-2 hover:border-dark-lavanda bg-dark-mode-2 hover:bg-dark-lavanda normal-case text-white font-montserrat">
+                        Non seguire più
+                    </button>
+                </div>
+                <input id="my-username-modal" type="hidden" name="me" value="{{ Session::get('username') }}" />
+                <input id="other-username-modal" type="hidden" name="other" value="{{ $f->userFollower->username }}" />
             </div>
         @endforeach
     </div>
