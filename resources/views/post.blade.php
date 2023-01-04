@@ -16,7 +16,7 @@
             <div class="avatar">
                 <div class="w-12 rounded-full">
                     <img src="https://placeimg.com/192/192/people" />
-             </div>
+                </div>
             </div>
 
             <h2 class="card-title float-right p-2">@Username</h2>

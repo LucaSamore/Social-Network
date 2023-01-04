@@ -28,3 +28,7 @@ Route::get('/leftMenu', function () {
 Route::get('/rightMenu', function () {
     return view('rightMenu');
 });
+
+Route::get('/notification', function () {
+    return view('Notification');
+});
