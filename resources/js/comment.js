@@ -1,13 +1,12 @@
-import axios from 'axios';
 import { deleteComment } from './ajax/delete-comment';
 import { updateComment } from './ajax/update-comment';
+import { createComment } from './ajax/create-comment';
 
-const laravelToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 const commentButtons = Array.from(document.getElementsByClassName('comment-btn'));
 const updateCommentButtons = Array.from(document.getElementsByClassName('update-comment-btn'));
 const deleteButtons = Array.from(document.getElementsByClassName('delete-comment-btn'));
 
-const createComment = (e) => {
+const createCommentEvent = (e) => {
     const postId = e.target.postId;
     const comment = e.target.comment;
 
@@ -17,13 +16,9 @@ const createComment = (e) => {
         return
     }
 
-    axios.post(`/comment/${postId}/create`, {comment: comment}, { 
-        headers: {
-            'X-CSRF-TOKEN': laravelToken,
-        },
-    })
-    .then(_ => document.location.reload())
-    .catch(err => console.log(err.response.data));
+    if (createComment(postId, comment)) {
+        window.location.reload();
+    }
 }
 
 const deleteCommentEvent = async e => {
@@ -53,7 +48,7 @@ commentButtons.forEach(btn => {
     document.getElementById(`area/${postId}`)
         .addEventListener('change', e => btn.comment = e.target.value);
     btn.postId = postId;
-    btn.addEventListener("click", createComment);
+    btn.addEventListener("click", createCommentEvent);
 });
 
 deleteButtons.forEach(btn => {

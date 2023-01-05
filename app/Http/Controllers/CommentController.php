@@ -36,22 +36,22 @@ final class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CommentRequest $request, string $post_id)
+    public function store(CommentRequest $request)
     {
         $request->validated();
 
         $comment = new Comment([
             'id' => (string) Str::uuid(),
             'user_id' => $request->session()->get('user_id'),
-            'post_id' => $post_id,
+            'post_id' => $request->post_id,
             'textual_content' => $request->comment,
             'number_of_likes' => 0
         ]);
 
         if ($comment->save()) {
-            Post::where('id', $post_id)
-                ->update(['number_of_comments' => 
-                    Post::where('id', $post_id)->first()->number_of_comments + 1]);
+            Post::where('id', $request->post_id)
+                ->update(['number_of_comments' =>
+                    Post::where('id', $request->post_id)->first()->number_of_comments + 1]);
             return $comment->toArray();
         }
 

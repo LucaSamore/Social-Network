@@ -1,15 +1,15 @@
 import axios from "axios";
 import { laravelToken } from "./laravel-token";
 
-export const updateComment = async (commentId, textualContent) => {
+export const createComment = async (postId, comment) => {
     try {
-        return await axios.put(`/comment/update`, {
-            comment_id: commentId,
-            textual_content: textualContent
+        return await axios.post(`/comment/create`, {
+            post_id: postId,
+            comment: comment
         }, {
             headers: {
                 'X-CSRF-TOKEN': laravelToken,
-            }
+            },
         });
     } catch (error) {
         console.log(error.response.data);

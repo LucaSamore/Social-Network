@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const laravelToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+import { laravelToken } from "./laravel-token";
 
 export const followUser = async (myUsername, otherUsername) => {
     try {

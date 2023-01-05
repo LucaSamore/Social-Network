@@ -14,7 +14,8 @@ final class CommentRequest extends FormRequest
     public function rules()
     {
         return [
-            'textual_content' => ['string', 'size:500']
+            'post_id' => ['uuid'],
+            'textual_content' => ['string', 'max:500']
         ];
     }
 
@@ -27,7 +28,7 @@ final class CommentRequest extends FormRequest
     {
         return [
             'textual_content.string' => 'Il contenuto non è valido',
-            'textual_content.size:500' => 'Il commento è troppo lungo'
+            'textual_content.max:500' => 'Il commento è troppo lungo'
         ];
     }
 }
