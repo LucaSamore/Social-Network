@@ -98,8 +98,8 @@ final class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        return Comment::destroy($request->comment_id);
     }
 }

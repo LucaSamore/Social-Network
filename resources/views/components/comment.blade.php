@@ -47,14 +47,13 @@
                         bg-red-600 font-bold border-none mr-auto
                         text-white font-montserrat text-sm normal-case">
                     Elimina
-                <input type="hidden" value="{{ $comment->id }}" />
             </button>
             <button class="btn update-comment-btn px-6 py-2 rounded-lg hover:bg-dark-lavanda
                          bg-lavanda font-bold border-none
                          text-white font-quicksand text-sm normal-case">
               Aggiorna
-              <input type="hidden" value="{{ $comment->id }}" />
             </button>
+            <input type="hidden" value="{{ $comment->id }}" />
         </footer>
     </section>
   </div>
