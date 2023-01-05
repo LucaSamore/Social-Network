@@ -18,7 +18,7 @@ return new class extends Migration
             $table->uuid('post_id');
             $table->string('path', 500)->unique();
             $table->primary('id');
-            $table->foreign('post_id')->references('id')->on('posts');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });
     }
 

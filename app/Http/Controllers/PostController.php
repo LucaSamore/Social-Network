@@ -122,12 +122,12 @@ final class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request  $request
+     * @return int
      */
-    public function destroy(Post $post)
+    public function destroy(Request $request)
     {
-        //
+        return Post::destroy($request->post_id);
     }
 
     public function like(Request $request, string $post_id): int

@@ -1,3 +1,5 @@
+import { deletePost } from "./ajax/delete-post";
+
 const textArea = document.getElementById('textual-content');
 const sendButton = document.getElementById('send-new-post');
 const file = document.getElementById('file-upload');
@@ -6,6 +8,13 @@ const dropzone = document.getElementById('dropzone');
 
 const isFileOfType = (file, type) => {
     return file && file['type'].split('/')[0] === type;
+}
+
+const deletePostEvent = async e => {
+    const result = await deletePost(e.target.postId);
+    if (result.data > 0) {
+        window.location.reload();
+    }
 }
 
 const preventDefaults = (e) => {
@@ -96,14 +105,16 @@ const handleFile = (uploaded) => {
 dropzone.addEventListener('drop', handleDrop, false);
 
 textArea.onkeyup = e => {
-    if (e.target.value === "" && file.files.length == 0) {
-        sendButton.disabled = true;
-    } else {
-        sendButton.disabled = false;
-    }
+    sendButton.disabled = e.target.value === "" && file.files.length == 0;
 }
 
 file.onchange = e => {
     const [uploaded] = file.files;
     handleFile(uploaded);
 }
+
+Array.from(document.getElementsByClassName('delete-btn'))
+    .forEach(btn => {
+        btn.postId = btn.lastElementChild.value;
+        btn.addEventListener("click", deletePostEvent, false);
+    });

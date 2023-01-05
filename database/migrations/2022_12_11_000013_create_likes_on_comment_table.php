@@ -19,7 +19,7 @@ return new class extends Migration
             $table->uuid('comment_id');
             $table->primary('id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('comment_id')->references('id')->on('comments');
+            $table->foreign('comment_id')->references('id')->on('comments')->onDelete('cascade');
         });
     }
 

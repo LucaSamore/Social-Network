@@ -34,8 +34,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/{username}/posts', [PostController::class, 'index'])->name('post.index');
     Route::post('/posts/store', [PostController::class, 'store'])->name('post.store');
     Route::post('/follow', [UserController::class, 'follow'])->name('user.follow');
-    Route::delete('/unfollow', [UserController::class, 'unfollow'],)->name('user.unfollow');
     Route::post('comment/{post_id}/create', [CommentController::class, 'store'])->whereUuid('post_id')->name('comment.store');
+    Route::delete('/unfollow', [UserController::class, 'unfollow'],)->name('user.unfollow');
+    Route::delete('/post/delete', [PostController::class, 'destroy'])->name('post.delete');
     Route::any('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
