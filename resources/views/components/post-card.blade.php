@@ -1,6 +1,6 @@
 <section class="flex flex-col bg-dark-mode-2 w-full xl:w-3/4 lg:w-3/4 md:w-3/4 sm:w-full rounded-xl mt-8 p-8">
     <header>
-        <div class="w-full flex flex-col xl:flex-row lg:flex-row md:flex-row sm:flex-col gap-6">
+        <div class="w-full flex flex-col xl:flex-row lg:flex-row md:flex-col sm:flex-col gap-6 justify-start">
             <div class="flex flex-col items-center gap-4">
                 @if ($creator->profile_image !== null)
                     <img src="{{$creator->profile_image}}" alt="user profile picture" width="64" height="64" 
@@ -11,12 +11,27 @@
                 @endif
                 <a href="/profile/{{$creator->username}}" class="text-white font-bold font-quicksand text-lg hover:underline">{{ "@".$creator->username }}</a>
             </div>
-            <div class="flex flex-col gap-1 items-start">
+            <div class="flex flex-col gap-1 items-center xl:items-start lg:items-start md:items-center sm:items-center">
                 <h2 class="text-white font-quicksand text-xl font-bold">{{ $creator->name }} {{ $creator->surname }}</h2>
                 <p class="text-white text-sm xl:text-lg lg:text-lg md:text-sm sm:text-sm font-quicksand">
                     Membro dal {{date('Y', strtotime($creator->created_at))}}
                 </p>
             </div>
+            @if ($editable)
+            <div class="dropdown dropdown-end ml-auto">
+                <label tabindex="0" class="btn m-1 bg-lavanda hover:bg-dark-lavanda border-none normal-case text-white font-montserrat text-lg">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </label>
+                <ul tabindex="0" class="dropdown-content menu p-4 shadow bg-dark-mode-3 rounded-box w-52">
+                  <li><a class="text-white font-quicksand active:bg-dark-mode-4">Modifica</a></li>
+                  <li>
+                    <label for="post/{{ $post->id }}/delete" class="text-white font-quicksand hover:bg-red-500 mt-2 active:bg-dark-mode-4">
+                        Elimina
+                    </label>
+                </li>
+                </ul>
+              </div>
+            @endif
         </div>
     </header>
     <p class="text-white font-quicksand text-xl text-left xl:text-justify lg:text-justify md:text-justify sm:text-left mt-6 mb-3">
@@ -88,6 +103,7 @@
     </footer>
 </section>
 
+<!-- Post details modal -->
 <input type="checkbox" id="post/{{ $post->id }}" class="modal-toggle" />
 <div class="modal">
   <div class="modal-box relative bg-dark-mode-3 w-11/12 max-w-5xl flex flex-col xl:flex-row lg:flex-row md:flex-row sm:flex-col">
@@ -149,6 +165,7 @@
   </div>
 </div>
 
+<!-- Create comment modal -->
 <input type="checkbox" id="post/{{ $post->id }}/comment" class="modal-toggle" />
 <div class="modal">
   <div class="modal-box relative bg-dark-mode-3">
@@ -173,6 +190,28 @@
                          text-white font-quicksand text-sm normal-case">
               Commenta
               <input type="hidden" value="{{ $post->id }}" />
+            </button>
+        </footer>
+    </section>
+  </div>
+</div>
+
+<!-- Confirm elimination modal -->
+<input type="checkbox" id="post/{{ $post->id }}/delete" class="modal-toggle" />
+<div class="modal">
+  <div class="modal-box relative bg-dark-mode-3">
+    <label for="post/{{ $post->id }}/delete" class="btn btn-sm btn-circle absolute right-2 top-2 bg-dark-mode-4 hover:bg-dark-mode-2 border-none">✕</label>
+    <section>
+        <header>
+            <h3 class="text-xl text-white font-montserrat font-bold">Elimina post</h3>
+        </header>
+        <p class="py-4 text-white font-quicksand text-lg">Sei sicuro?</p>
+        <footer class="flex justify-end gap-4 items-end">
+            <button class="delete-btn rounded-lg px-6 py-2 btn hover:bg-red-500
+                        bg-red-600 font-bold border-none
+                        text-white font-montserrat text-sm normal-case">
+                Elimina
+                <input type="hidden" value="{{ $post->id }}" />
             </button>
         </footer>
     </section>

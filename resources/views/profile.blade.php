@@ -72,7 +72,7 @@
                         :bookmarked="false"
                         :comments="$post->comments"
                         :tags="$post->tags"
-                        :editable="true"
+                        :editable="$isItMe"
                     />
                 @empty
                     <h2 class="text-white font-quicksand text-2xl">Non ci sono post</h2>
