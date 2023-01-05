@@ -127,6 +127,21 @@ final class PostController extends Controller
      */
     public function destroy(Request $request)
     {
+        $image = Image::where('post_id', $request->post_id)->first();
+        $video = Video::where('post_id', $request->post_id)->first();
+
+        if ($image) {
+            $splitURL = explode("/", $image->path);
+            $lastElement = end($splitURL);
+            $id = explode(".", $lastElement)[0];
+            Cloudinary::destroy($id);
+        } elseif ($video) {
+            $splitURL = explode("/", $video->path);
+            $lastElement = end($splitURL);
+            $id = explode(".", $lastElement)[0];
+            Cloudinary::destroy($id, ["resource_type" => "video"]);
+        }
+
         return Post::destroy($request->post_id);
     }
 
