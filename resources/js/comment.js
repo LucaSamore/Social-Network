@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { deleteComment } from './ajax/delete-comment';
+import { updateComment } from './ajax/update-comment';
 
 const laravelToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 const commentButtons = Array.from(document.getElementsByClassName('comment-btn'));
+const updateCommentButtons = Array.from(document.getElementsByClassName('update-comment-btn'));
 const deleteButtons = Array.from(document.getElementsByClassName('delete-comment-btn'));
 
 const createComment = (e) => {
@@ -32,6 +34,20 @@ const deleteCommentEvent = async e => {
     }
 }
 
+const updateCommentEvent = async e => {
+    e.target.textualContent = document.getElementById(`textarea/${e.target.commentId}`).value;
+
+    if (!e.target.textualContent) {
+        return;
+    }
+
+    const result = await updateComment(e.target.commentId, e.target.textualContent);
+
+    if (result.data > 0) {
+        window.location.reload();
+    }
+}
+
 commentButtons.forEach(btn => {
     const postId = Array.from(btn.children)[0].value;
     document.getElementById(`area/${postId}`)
@@ -43,4 +59,9 @@ commentButtons.forEach(btn => {
 deleteButtons.forEach(btn => {
     btn.commentId = btn.parentElement.lastElementChild.value;
     btn.addEventListener("click", deleteCommentEvent, false);
+});
+
+updateCommentButtons.forEach(btn => {
+    btn.commentId = btn.parentElement.lastElementChild.value;
+    btn.addEventListener("click", updateCommentEvent, false);
 });

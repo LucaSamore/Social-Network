@@ -84,19 +84,19 @@ final class CommentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return int
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        return Comment::where('id', $request->comment_id)
+            ->update(['textual_content' => $request->textual_content]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  string  $comment_id
+     * @return int
      */
     public function destroy(string $comment_id)
     {

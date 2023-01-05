@@ -38,7 +38,7 @@
         <header>
             <h3 class="text-xl font-bold text-white font-montserrat">Modifica commento</h3>
         </header>
-        <textarea id="area/{{ $comment->id }}" name="comment" class="rounded-xl text-white font-xl font-quicksand px-4 py-4">{{ $comment->textual_content }}</textarea>
+        <textarea id="textarea/{{ $comment->id }}" name="comment" class="rounded-xl text-white font-xl font-quicksand px-4 py-4">{{ $comment->textual_content }}</textarea>
         @error('error')
             <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
         @enderror
