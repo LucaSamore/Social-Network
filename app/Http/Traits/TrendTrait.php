@@ -37,7 +37,11 @@ trait TrendTrait {
         }
 
         foreach ($tags as $tag) {
-            $newTag = new Tag(['name' => $tag]);
+            
+            if (!Tag::where('name', $tag)->first()) {
+                $newTag = new Tag(['name' => $tag]);
+                $newTag->save();
+            }
 
             $tagInPost = new TagsInPost([
                 'id' => (string) Str::uuid(),
@@ -45,7 +49,6 @@ trait TrendTrait {
                 'tag_name' => $tag
             ]);
 
-            $newTag->save();
             $tagInPost->save();
         }
     }
