@@ -34,10 +34,6 @@ class NotificationController extends Controller
             $notify->follow = Follower::where('follower',  $notify->from)->where('followee', $userId->id)->exists();
             //var_dump($notify->follow);
         }
-
-        //echo $userId;
-        //$username = User::findOrFail($userId);
-        //echo $userId->username;
         return View('Notification', ['notifications' => $notifications]);
     }
 
