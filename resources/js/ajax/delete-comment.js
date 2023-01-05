@@ -4,12 +4,9 @@ const laravelToken = document.querySelector('meta[name="csrf-token"]').getAttrib
 
 export const deleteComment = async (commentId) => {
     try {
-        return await axios.delete(`/comment/delete`, {
+        return await axios.delete(`/comment/delete/${commentId}`, {
             headers: {
                 'X-CSRF-TOKEN': laravelToken,
-            },
-            data: {
-                comment_id: commentId,
             }
         });
     } catch (error) {

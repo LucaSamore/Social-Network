@@ -98,8 +98,10 @@ final class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(string $comment_id)
     {
-        return Comment::destroy($request->comment_id);
+        $post = Comment::findOrFail($comment_id)->post;
+        $post->update(['number_of_comments' => $post->number_of_comments - 1]);
+        return Comment::destroy($comment_id);
     }
 }
