@@ -1,10 +1,13 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FeedController;
 use App\Http\Controllers\MediaController;
-use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
-use Illuminate\Auth\Notifications\VerifyEmail;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -23,16 +26,21 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 // Public routes
 Route::view('/login', 'login')->name('login');
 Route::view('/register', 'register')->name('register');
-Route::view('/upload', 'test.upload')->name('upload');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
-Route::post('/upload/image', [MediaController::class, 'uploadImage']);
-Route::post('/upload/video', [MediaController::class, 'uploadVideo']);
 
 // Protected routes
 Route::middleware('auth')->group(function () {
-    Route::view('/', 'home');
-    Route::view('/home', 'home')->name('home');
+    Route::get('/', [FeedController::class, 'feed'])->name('root');
+    Route::get('/home', [FeedController::class, 'feed'])->name('home');
+    Route::get('/profile/{username}', [ProfileController::class, 'profile'])->name('user.profile');
+    Route::get('/like/{post_id}', [PostController::class, 'like'])->name('post.like');
+    Route::get('/{username}/posts', [PostController::class, 'index'])->name('post.index');
+    Route::post('/posts/store', [PostController::class, 'store'])->name('post.store');
+    Route::post('/follow', [UserController::class, 'follow'])->name('user.follow');
+    Route::post('comment/{post_id}/create', [CommentController::class, 'store'])->whereUuid('post_id')->name('comment.store');
+    Route::delete('/unfollow', [UserController::class, 'unfollow'],)->name('user.unfollow');
+    Route::delete('/post/delete', [PostController::class, 'destroy'])->name('post.delete');
     Route::any('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
@@ -60,35 +68,5 @@ Route::controller(NotificationController::class)->group(function () {
     
     Route::get('/Notification/{userId}/{n}', 'show')->whereNumber('n');
 });
-
-
-/* route that will return a view instructing the user to click the email verification link that was emailed to them 
-   by Laravel after registration.*/
-/*
-Route::get('/email/verify', function () {
-    return view('auth.verify-email');
-})->middleware('auth')->name('verification.notice');
-*/
-/* route that will handle requests generated when the user clicks the email verification link that was emailed to them*/
-/*
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
- 
-    return redirect('/home');
-})->middleware(['auth', 'signed'])->name('verification.verify');
-*/
-/* route to allow the user to request that the verification email be resent*/
-/*
-Route::post('/email/verification-notification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
- 
-    return back()->with('message', 'Verification link sent!');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-*/
-/*
-Route::get('/email', function(){
-    return new VerifyEmail();
-});*/
-
 
 Route::fallback(fn() => view('fallback'));

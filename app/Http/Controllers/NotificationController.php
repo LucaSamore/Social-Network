@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\TrendTrait;
 use App\Models\Follower;
 use App\Models\Notification;
 use App\Models\NotificationType;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
+    use TrendTrait;
     /**
      * Display the specified resource.
      *
@@ -18,23 +20,17 @@ class NotificationController extends Controller
      */
     public function show(User $userId, int $n)
     {
-        //$userId = $request->session()->get("user_id");
         $notifications = Notification::where('to', $userId->id)->orderBy('created_at', 'desc')->take($n)->get();
         
         $today = date_create(date('Y-m-d H:i:s'));
         foreach($notifications as $notify){
             $notifyDate = date_create($notify->created_at);
-            //echo "today: ".$today->format('Y-m-d H:i:s')."<br>";
-            //echo "notify: ".$notifyDate->format('Y-m-d H:i:s')."<br>";
             $diff = $today->diff($notifyDate);
             $notify->created_at = $diff->format('%a d %h h %i m %s s');
             $notify->fromUsername = User::findOrFail($notify->from)->username; 
-            //echo $notify->from."<br>";
-            //echo $userId->id."<br>";
             $notify->follow = Follower::where('follower',  $notify->from)->where('followee', $userId->id)->exists();
-            //var_dump($notify->follow);
         }
-        return View('Notification', ['notifications' => $notifications]);
+        return View('Notification', ['notifications' => $notifications, 'trends' => $this->topTrends()]);
     }
 
   

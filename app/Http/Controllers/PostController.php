@@ -3,23 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
-use App\Models\Post;
+use App\Http\Traits\PostTrait;
+use App\Http\Traits\TrendTrait;
 use App\Models\Image;
-use Illuminate\Support\Facades\Storage;
-
+use App\Models\Post;
+use App\Models\Like;
+use App\Models\Video;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
-class PostController extends Controller
+final class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+    use PostTrait, TrendTrait;
 
     /**
      * Show the form for creating a new resource.
@@ -41,47 +37,53 @@ class PostController extends Controller
     {
         $request->validated();
 
-
-        /*Bisogna prendere l'id dell'utente che pubblica il post dalla sessione*/
-        $user_id = '0198cc50-2b38-3a65-9216-90aca113f6bc';
-        $user_id = $request->session()->get("user_id");
-        echo "ID:".$user_id;
-
-        /*SAVE THE POST*/
-        $post = new Post(['user_id' => $user_id, 'textual_content' => $request->input('textual_content'), ]);
-        $post->save();
-
-        //save the image in a folder 
-        /*if per controllare se l'immagine è presente*/
-        if($request->hasFile('photoPath')){
-            $path = $request->file("photoPath")->path();
-            $extension = $request->file("photoPath")->extension();
-            //$size = $request->file("photoPath")->getSize();
-            //echo "SIZE:".$size;
-            /*if per controllare estensione e dimensione file*/
-            $validExtensions = array("png", "jpeg","jpg");
-            //$MAX_SIZE_IMAGE = ;
-            if (in_array( $extension, $validExtensions) /*&& extension <= MAX_SIZE_IMAGE*/){
-                //echo $path."\n";
-                //echo $extension."\n";
-                $path = $request->file('photoPath')->storeAs(
-                    "public/images/".$user_id, $post->id.".".$extension
-                );
-                Storage::setVisibility($path, 'private');
-                $image = new Image(['post_id' => $post["id"], 'path' => "/storage/".$path]);
-                $image->save();
-                
-                $url = Storage::url($path);
-                echo "URL:".asset($path);
-    
-                /*$contents = Storage::get($path);
-                echo "CONTENT:".$contents;*/
-                //echo $request[""]."\n";
-                return $request->input('textual_content') . " published <img src='".asset($url)."'/>" ;
+        if (!$request->hasFile('media') && $request->textual_content === null) {
+            return back()->with('error', '🙃 Contenuto non specificato 🙃');
         }
-        return "post saved without image.";
+
+        $user_id = $request->session()->get('user_id');
+
+        $post = new Post([
+            'id' => (string) Str::uuid(),
+            'user_id' => $user_id,
+            'textual_content' => $request->textual_content,
+            'created_at' => now(),
+            'number_of_likes' => 0,
+            'number_of_comments' => 0,
+            'number_of_reposts' => 0
+        ]);
+
+        $res = $post->save();
+
+        $this->storeTags($post->id, $this->parseTags($request->tags));
+
+        if ($request->hasFile('media')) {
+            $fileType = explode('/', $request->file('media')->getMimeType())[0];
+            if ($fileType === 'image') {
+                $uploadedFileUrl = Cloudinary::upload($request->file('media')->getRealPath())->getSecurePath();
+                $image = new Image([
+                    'id' => (string) Str::uuid(),
+                    'post_id' => $post->id,
+                    'path' => $uploadedFileUrl
+                ]);
+                $res = $image->save();
+            } else if ($fileType === 'video') {
+                $uploadedFileUrl = Cloudinary::uploadVideo($request->file('media')->getRealPath())->getSecurePath();
+                $video = new Video([
+                    'id' => (string) Str::uuid(),
+                    'post_id' => $post->id,
+                    'path' => $uploadedFileUrl
+                ]);
+                $res = $video->save();
+            }
+        }
+
+        if ($res) {
+            return back()->with('success', '🥳 Post creato con successo! 🥳');
+        }
+
+        return back()->withErrors('error', '😢 Errore durante la creazione del post 😢');
     }
-}
 
     /**
      * Display the specified resource.
@@ -91,17 +93,7 @@ class PostController extends Controller
      */
     public function show($post)
     {
-        /*$data = [
-            /*"username" => "username",
-            /*"textual_content" => $post->textual_content,
-            /*"number_of_likes" => 0/*$post->number_of_likes,
-            /*"number_of_comments" => 0 /*$post->number_of_comments,
-            /*"photo_path" => "",
-        ];*/
-        $data = Post::findOrFail($post)->user()->first();
-        echo $data->username;
-        dd($data);
-        return View("post", $data);
+        //
     }
 
     /**
@@ -130,11 +122,50 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request  $request
+     * @return int
      */
-    public function destroy(Post $post)
+    public function destroy(Request $request)
     {
-        //
+        $image = Image::where('post_id', $request->post_id)->first();
+        $video = Video::where('post_id', $request->post_id)->first();
+
+        if ($image) {
+            $splitURL = explode("/", $image->path);
+            $lastElement = end($splitURL);
+            $id = explode(".", $lastElement)[0];
+            Cloudinary::destroy($id);
+        } elseif ($video) {
+            $splitURL = explode("/", $video->path);
+            $lastElement = end($splitURL);
+            $id = explode(".", $lastElement)[0];
+            Cloudinary::destroy($id, ["resource_type" => "video"]);
+        }
+
+        return Post::destroy($request->post_id);
+    }
+
+    public function like(Request $request, string $post_id): int
+    {
+        $user_id = $request->session()->get('user_id');
+        $like = Like::where('user_id', $user_id)->where('post_id', $post_id);
+        $numberOfLikes = Like::where('post_id', $post_id)->get()->count();
+
+        if ($like->get()->isEmpty()) {
+            $newLike = new Like([
+                'id' => (string) Str::uuid(),
+                'user_id' => $user_id,
+                'post_id' => $post_id
+            ]);
+            $newLike->save();
+            $numberOfLikes += 1;
+            Post::where('id', $post_id)->update(['number_of_likes' => $numberOfLikes]);
+        } else {
+            $like->delete();
+            $numberOfLikes = $numberOfLikes <= 0 ? 0 : $numberOfLikes - 1;
+            Post::where('id', $post_id)->update(['number_of_likes' => $numberOfLikes]);
+        }
+
+        return $numberOfLikes;
     }
 }

@@ -2,12 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\Media;
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostRequest extends FormRequest
+final class PostRequest extends FormRequest
 {
-
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -16,9 +15,21 @@ class PostRequest extends FormRequest
     public function rules()
     {
         return [
-            'textual_content' => 'max:255',
-            'photoPath' => 'max:500',
-            'videoPath' => 'max:500',
+            'textual_content' => ['string', 'nullable'],
+            'file_upload' => [new Media],
+            'tags' => ['string', 'nullable']
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'textual_content.string' => 'Il contenuto non è valido',
         ];
     }
 }

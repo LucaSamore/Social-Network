@@ -17,8 +17,11 @@ final class AuthController extends Controller
     {
         if (Auth::attempt($request->validated())) {
             $request->session()->regenerate();
-            session(['user_id' => User::where('email', $request->email)->first()->id]);
-            return redirect()->intended('home');
+            $user = User::where('email', $request->email)->first();
+            session(['user_id' => $user->id]);
+            session(['user_name' => $user->name]);
+            session(['username' => $user->username]);
+            return redirect('/home');
         }
 
         return back()->withErrors(['error' => 'Login fallito, utente non trovato']);
@@ -51,10 +54,12 @@ final class AuthController extends Controller
             $user->refresh();
             auth()->login($user);
             session(['user_id' => $user->id]);
-            return redirect('/home')->with('success', 'Account creato con successo');
+            session(['user_name' => $user->name]);
+            session(['username' => $user->username]);
+            return redirect('/home')->with('success', '🥳 Account creato con successo! 🥳');
         }
 
-        return back()->withErrors(['error' => 'Registrazione fallita']);
+        return back()->with('error', 'Registrazione fallita 🙄');
     }
 
     public function logout(Request $request)

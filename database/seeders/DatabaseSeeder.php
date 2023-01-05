@@ -33,14 +33,14 @@ class DatabaseSeeder extends Seeder
         Post::factory()->count(250)->create();
         NotificationType::factory()->count(4)->create();
         Tag::factory()->count(100)->create();
-        Like::factory()->count(200)->create();
-        Repost::factory()->count(100)->create();
-        Comment::factory()->count(200)->create();
-        TagsInPost::factory()->count(50)->create();
-        Bookmark::factory()->count(50)->create();
-        Follower::factory()->count(150)->create();
+        Like::factory()->count(100)->create();
+        Repost::factory()->count(250)->create();
+        Comment::factory()->count(500)->create();
+        TagsInPost::factory()->count(500)->create();
+        Bookmark::factory()->count(100)->create();
+        Follower::factory()->count(500)->create();
         Notification::factory()->count(150)->create();
-        LikesOnComment::factory()->count(100)->create();
+        LikesOnComment::factory()->count(500)->create();
         DuplicatesHelper::removeDuplicates();
         RedundancyHelper::updateRedundancies();
     }

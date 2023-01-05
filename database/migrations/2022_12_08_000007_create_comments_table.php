@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->uuid('id');
             $table->text('textual_content');
-            $table->bigInteger('number_of_likes');
+            $table->bigInteger('number_of_likes')->default('0');
             $table->uuid('user_id');
             $table->uuid('post_id');
             $table->primary('id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('post_id')->references('id')->on('posts');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });
     }
 

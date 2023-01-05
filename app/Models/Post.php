@@ -14,8 +14,13 @@ class Post extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'textual_content',
+        'id',
         'user_id',
+        'textual_content',
+        'created_at',
+        'number_of_likes',
+        'number_of_comments',
+        'number_of_reposts'
     ];
 
     public function user()
@@ -45,7 +50,7 @@ class Post extends Model
 
     public function comments()
     {
-        return $this->belongsToMany(User::class, 'comments', 'post_id')->using(Comment::class);
+        return $this->hasMany(Comment::class);
     }
 
     public function bookmarks()

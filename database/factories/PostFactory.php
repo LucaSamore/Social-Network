@@ -23,7 +23,8 @@ class PostFactory extends Factory
             'number_of_likes' => 0,
             'number_of_comments' => 0,
             'number_of_reposts' => 0,
-            'user_id' => User::all()->random()->id
+            'user_id' => User::all()->random()->id,
+            'created_at' => now()
         ];
     }
 }
