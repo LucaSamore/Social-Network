@@ -4,13 +4,9 @@ const laravelToken = document.querySelector('meta[name="csrf-token"]').getAttrib
 
 export const unfollowUser = async (myUsername, otherUsername) => {
     try {
-        return await axios.delete(`/unfollow`, {
+        return await axios.delete(`/unfollow/${myUsername}/${otherUsername}`, {
             headers: {
                 'X-CSRF-TOKEN': laravelToken,
-            },
-            data: {
-                my_username: myUsername, 
-                other_username: otherUsername
             }
         });
     } catch (error) {

@@ -125,10 +125,10 @@ final class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return int
      */
-    public function destroy(Request $request)
+    public function destroy(string $post_id)
     {
-        $image = Image::where('post_id', $request->post_id)->first();
-        $video = Video::where('post_id', $request->post_id)->first();
+        $image = Image::where('post_id', $post_id)->first();
+        $video = Video::where('post_id', $post_id)->first();
 
         if ($image) {
             $splitURL = explode("/", $image->path);
@@ -142,7 +142,7 @@ final class PostController extends Controller
             Cloudinary::destroy($id, ["resource_type" => "video"]);
         }
 
-        return Post::destroy($request->post_id);
+        return Post::destroy($post_id);
     }
 
     public function like(Request $request, string $post_id): int

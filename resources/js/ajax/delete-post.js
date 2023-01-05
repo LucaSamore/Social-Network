@@ -4,12 +4,9 @@ const laravelToken = document.querySelector('meta[name="csrf-token"]').getAttrib
 
 export const deletePost = async (postId) => {
     try {
-        return await axios.delete(`/post/delete`, {
+        return await axios.delete(`/post/delete/${postId}`, {
             headers: {
                 'X-CSRF-TOKEN': laravelToken,
-            },
-            data: {
-                post_id: postId,
             }
         });
     } catch (error) {

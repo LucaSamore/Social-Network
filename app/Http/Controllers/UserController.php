@@ -88,10 +88,10 @@ final class UserController extends Controller
         return $follower->save();
     }
 
-    public function unfollow(Request $request)
+    public function unfollow(string $my_username, string $other_username)
     {
-        $follow = Follower::where('follower', User::where('username', $request->my_username)->first()->id)
-            ->where('followee', User::where('username', $request->other_username)->first()->id)
+        $follow = Follower::where('follower', User::where('username', $my_username)->first()->id)
+            ->where('followee', User::where('username', $other_username)->first()->id)
             ->first();
 
         return $follow->delete();
