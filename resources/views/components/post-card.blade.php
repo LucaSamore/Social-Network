@@ -18,19 +18,19 @@
                 </p>
             </div>
             @if ($editable)
-            <div class="dropdown dropdown-end ml-auto">
-                <label tabindex="0" class="btn m-1 bg-lavanda hover:bg-dark-lavanda border-none normal-case text-white font-montserrat text-lg">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                </label>
-                <ul tabindex="0" class="dropdown-content menu p-4 shadow bg-dark-mode-3 rounded-box w-52">
-                  <li><a class="text-white font-quicksand active:bg-dark-mode-4">Modifica</a></li>
-                  <li>
-                    <label for="post/{{ $post->id }}/delete" class="text-white font-quicksand hover:bg-red-500 mt-2 active:bg-dark-mode-4">
-                        Elimina
+                <div class="dropdown dropdown-end ml-auto">
+                    <label tabindex="0" class="btn m-1 bg-dark-lavanda hover:bg-dark-lavanda border-none normal-case text-white font-montserrat text-lg">
+                        <i class="fa-solid fa-pen-to-square"></i>
                     </label>
-                </li>
-                </ul>
-              </div>
+                    <ul tabindex="0" class="dropdown-content menu p-4 shadow bg-dark-mode-3 rounded-box w-52">
+                    <li><a class="text-white font-quicksand active:bg-dark-mode-4">Modifica</a></li>
+                    <li>
+                        <label for="post/{{ $post->id }}/delete" class="text-white font-quicksand hover:bg-red-500 mt-2 active:bg-dark-mode-4">
+                            Elimina
+                        </label>
+                    </li>
+                    </ul>
+                </div>
             @endif
         </div>
     </header>
