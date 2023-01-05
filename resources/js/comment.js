@@ -6,7 +6,7 @@ const commentButtons = Array.from(document.getElementsByClassName('comment-btn')
 const updateCommentButtons = Array.from(document.getElementsByClassName('update-comment-btn'));
 const deleteButtons = Array.from(document.getElementsByClassName('delete-comment-btn'));
 
-const createCommentEvent = (e) => {
+const createCommentEvent = async e => {
     const postId = e.target.postId;
     const comment = e.target.comment;
 
@@ -16,7 +16,7 @@ const createCommentEvent = (e) => {
         return
     }
 
-    if (createComment(postId, comment)) {
+    if (await createComment(postId, comment)) {
         window.location.reload();
     }
 }
