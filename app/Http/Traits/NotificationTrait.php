@@ -19,6 +19,8 @@ trait NotificationTrait {
             'created_at' => date("Y-m-d H:i:s"),
         ]);
 
+        session(['hasNoti' => true]);
+
         return $notification->save();
     }
 

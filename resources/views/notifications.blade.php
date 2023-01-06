@@ -10,6 +10,11 @@
         @vite('resources/css/app.css')
     </head>
     <body class="flex overflow-hidden">
+        @if (Session::get('hasNoti'))
+            @php
+                Session::forget('hasNoti');
+            @endphp
+        @endif
         <x-side-menu/>
         <main class="w-11/12 xl:w-3/5 lg:w-4/5 md:w-11/12 sm:w-11/12 flex flex-col justify-start items-center gap-4 h-screen overflow-auto">
             <header class="pt-8 pb-4 w-3/4 flex flex-col gap-4 justify-center items-center">

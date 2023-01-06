@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Traits\TrendTrait;
 use App\Models\Notification;
-use App\Models\NotificationType;
 use App\Models\User;
 
 final class NotificationController extends Controller
