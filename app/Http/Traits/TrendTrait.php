@@ -52,4 +52,10 @@ trait TrendTrait {
             $tagInPost->save();
         }
     }
+
+    private function updateTags(string $post_id, ?array $tags)
+    {
+        TagsInPost::where('post_id', $post_id)->delete();
+        $this->storeTags($post_id, $tags);
+    }
 }

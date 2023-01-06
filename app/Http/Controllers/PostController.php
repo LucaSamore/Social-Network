@@ -112,12 +112,14 @@ final class PostController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request)
     {
-        //
+        $this->updateTags($request->post_id, $this->parseTags($request->tags));
+
+        return Post::findOrFail($request->post_id)
+            ->update(['textual_content' => $request->textual_content]);
     }
 
     /**
