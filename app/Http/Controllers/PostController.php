@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
+use App\Http\Traits\NotificationTrait;
 use App\Http\Traits\PostTrait;
 use App\Http\Traits\TrendTrait;
 use App\Models\Image;
@@ -15,7 +16,7 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 final class PostController extends Controller
 {
-    use PostTrait, TrendTrait;
+    use PostTrait, TrendTrait, NotificationTrait;
 
     /**
      * Show the form for creating a new resource.
@@ -148,6 +149,7 @@ final class PostController extends Controller
     public function like(Request $request, string $post_id): int
     {
         $user_id = $request->session()->get('user_id');
+        $post = Post::where('id', $post_id);
         $like = Like::where('user_id', $user_id)->where('post_id', $post_id);
         $numberOfLikes = Like::where('post_id', $post_id)->get()->count();
 
@@ -159,11 +161,12 @@ final class PostController extends Controller
             ]);
             $newLike->save();
             $numberOfLikes += 1;
-            Post::where('id', $post_id)->update(['number_of_likes' => $numberOfLikes]);
+            $post->update(['number_of_likes' => $numberOfLikes]);
+            $this->notifyLikeToPost($user_id, $post->first()->user->id);
         } else {
             $like->delete();
             $numberOfLikes = $numberOfLikes <= 0 ? 0 : $numberOfLikes - 1;
-            Post::where('id', $post_id)->update(['number_of_likes' => $numberOfLikes]);
+            $post->update(['number_of_likes' => $numberOfLikes]);
         }
 
         return $numberOfLikes;

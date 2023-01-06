@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentRequest;
+use App\Http\Traits\NotificationTrait;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -10,6 +11,8 @@ use Illuminate\Support\Str;
 
 final class CommentController extends Controller
 {
+    use NotificationTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -49,9 +52,9 @@ final class CommentController extends Controller
         ]);
 
         if ($comment->save()) {
-            Post::where('id', $request->post_id)
-                ->update(['number_of_comments' =>
-                    Post::where('id', $request->post_id)->first()->number_of_comments + 1]);
+            $post = Post::where('id', $request->post_id);
+            $post->update(['number_of_comments' => $post->first()->number_of_comments + 1]);
+            $this->notifyCommentToPost($request->session()->get('user_id'), $post->first()->user->id);
             return $comment->toArray();
         }
 
