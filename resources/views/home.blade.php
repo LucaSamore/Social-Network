@@ -39,7 +39,7 @@
                         :images="$feed->images"
                         :videos="$feed->videos"
                         :bookmarked="false"
-                        :comments="$feed->comments"
+                        :comments="$feed->comments->sortByDesc('number_of_likes')"
                         :tags="$feed->tags"
                         :editable="false" 
                     />

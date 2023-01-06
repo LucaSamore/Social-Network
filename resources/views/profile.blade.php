@@ -70,7 +70,7 @@
                         :images="$post->images"
                         :videos="$post->videos"
                         :bookmarked="false"
-                        :comments="$post->comments"
+                        :comments="$post->comments->sortByDesc('number_of_likes')"
                         :tags="$post->tags"
                         :editable="$isItMe"
                     />
