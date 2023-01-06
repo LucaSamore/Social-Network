@@ -14,11 +14,6 @@ final class Notification extends Pivot
     public $incrementing = false;
     public $timestamps = false;
 
-    public function notificationType()
-    {
-        return $this->belongsTo(NotificationType::class, 'type', 'name');
-    }
-
     public function sender()
     {
         return $this->belongsTo(User::class, 'from');

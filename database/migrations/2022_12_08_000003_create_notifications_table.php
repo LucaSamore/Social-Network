@@ -22,7 +22,6 @@ return new class extends Migration
             $table->primary('id');
             $table->foreign('from')->references('id')->on('users');
             $table->foreign('to')->references('id')->on('users');
-            $table->foreign('type')->references('name')->on('notification_types');
         });
     }
 

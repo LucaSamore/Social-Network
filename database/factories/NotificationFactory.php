@@ -22,7 +22,12 @@ final class NotificationFactory extends Factory
             'id' => fake()->uuid(),
             'from' => User::all()->random()->id,
             'to' => User::all()->random()->id,
-            'type' => NotificationType::all()->random()->name,
+            'type' => fake()->randomElement([
+                'ha iniziato a seguirti', 
+                'ha messo mi piace ad un tuo post', 
+                'ha commentato un tuo post',
+                'ha messo mi piace ad un tuo commento'
+            ]),
             'created_at' => now()
         ];
     }

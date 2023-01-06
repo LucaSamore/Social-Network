@@ -31,7 +31,6 @@ class DatabaseSeeder extends Seeder
     {
         User::factory()->count(100)->create();
         Post::factory()->count(250)->create();
-        NotificationType::factory()->count(4)->create();
         Tag::factory()->count(100)->create();
         Like::factory()->count(100)->create();
         Repost::factory()->count(250)->create();

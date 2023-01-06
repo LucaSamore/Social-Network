@@ -3,16 +3,15 @@
 namespace App\Http\Traits;
 
 use App\Models\Notification;
-use App\Models\NotificationType;
 
 trait NotificationTrait {
     
-    private function storeNotification(string $sender, string $receiver, NotificationType $notificationType)
+    private function storeNotification(string $sender, string $receiver, string $notificationType)
     {
         $notification = new Notification([
             'from' => $sender, 
-            'to' => $receiver, 
-            'type' =>  $notificationType->name, 
+            'to' => $receiver,
+            'type' =>  $notificationType, 
             'created_at' => date("Y-m-d H:i:s"),
         ]);
 
@@ -21,21 +20,21 @@ trait NotificationTrait {
 
     public function notifyFollow(string $sender, string $receiver)
     {
-        $this->storeNotification($sender, $receiver, NotificationType::findOrFail("ha iniziato a seguirti"));
+        $this->storeNotification($sender, $receiver, "ha iniziato a seguirti");
     }
 
     public function notifyLikeToPost(string $sender, string $receiver)
     {
-        $this->storeNotification($sender, $receiver, NotificationType::findOrFail("ha messo mi piace ad un tuo post"));
+        $this->storeNotification($sender, $receiver, "ha messo mi piace ad un tuo post");
     }
 
     public function notifyCommentToPost(string $sender, string $receiver)
     {
-        $this->storeNotification($sender, $receiver, NotificationType::findOrFail("ha commentato un tuo post"));  
+        $this->storeNotification($sender, $receiver, "ha commentato un tuo post");  
     }
 
     public function notifyLikeToComment(string $sender, string $receiver)
     {
-        $this->storeNotification($sender, $receiver, NotificationType::findOrFail("ha messo mi piace ad un tuo commento"));  
+        $this->storeNotification($sender, $receiver, "ha messo mi piace ad un tuo commento");  
     }
 }
