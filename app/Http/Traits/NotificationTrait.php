@@ -8,6 +8,10 @@ trait NotificationTrait {
     
     private function storeNotification(string $sender, string $receiver, string $notificationType)
     {
+        if ($sender === $receiver) {
+            return;
+        }
+
         $notification = new Notification([
             'from' => $sender, 
             'to' => $receiver,
