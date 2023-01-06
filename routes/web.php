@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/{username}', [ProfileController::class, 'profile'])->name('user.profile');
     Route::get('/like/{post_id}', [PostController::class, 'like'])->name('post.like');
     Route::get('/{username}/posts', [PostController::class, 'index'])->name('post.index');
+    Route::get('/{username}/notifications', [NotificationController::class, 'show'])->name('notifications.show');
     Route::post('/posts/store', [PostController::class, 'store'])->name('post.store');
     Route::post('/follow', [UserController::class, 'follow'])->name('user.follow');
     Route::post('comment/create', [CommentController::class, 'store'])->name('comment.store');
@@ -46,29 +47,14 @@ Route::middleware('auth')->group(function () {
     Route::any('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-
-Route::get('/leftMenu', function () {
-    return view('leftMenu');
-});
-
-Route::get('/rightMenu', function () {
-    return view('rightMenu');
-});
-
-Route::get('/testPostView', function () {
-    return view('test/testPost');
-});
-
-Route::resource('/testPostController', PostController::class);
-
-Route::controller(NotificationController::class)->group(function () {
-    //Route::get('/orders/{id}', 'show');
-    Route::get('/NotificationControllerLikeToPost/{userDo}/{userReceive}', 'notifyLikeToPost');
-    Route::get('/NotificationControllerLikeToComment/{userDo}/{userReceive}', 'notifyLikeToComment');
-    Route::get('/NotificationControllerCommentToPost/{userDo}/{userReceive}', 'notifyCommentToPost');
-    Route::get('/NotificationControllerFollow/{userDo}/{userReceive}', 'notifyFollow');
+// Route::controller(NotificationController::class)->group(function () {
+//     //Route::get('/orders/{id}', 'show');
+//     Route::get('/NotificationControllerLikeToPost/{userDo}/{userReceive}', 'notifyLikeToPost');
+//     Route::get('/NotificationControllerLikeToComment/{userDo}/{userReceive}', 'notifyLikeToComment');
+//     Route::get('/NotificationControllerCommentToPost/{userDo}/{userReceive}', 'notifyCommentToPost');
+//     Route::get('/NotificationControllerFollow/{userDo}/{userReceive}', 'notifyFollow');
     
-    Route::get('/Notification/{userId}/{n}', 'show')->whereNumber('n');
-});
+//     Route::get('/Notification/{userId}/{n}', 'show')->whereNumber('n');
+// });
 
 Route::fallback(fn() => view('fallback'));

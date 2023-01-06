@@ -9,28 +9,38 @@ use App\Models\NotificationType;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class NotificationController extends Controller
+final class NotificationController extends Controller
 {
     use TrendTrait;
+
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function show(User $userId, int $n)
+    public function show(string $username)
     {
-        $notifications = Notification::where('to', $userId->id)->orderBy('created_at', 'desc')->take($n)->get();
+        // $notifications = Notification::where('to', $userId->id)->orderBy('created_at', 'desc')->take($n)->get();
         
-        $today = date_create(date('Y-m-d H:i:s'));
-        foreach($notifications as $notify){
-            $notifyDate = date_create($notify->created_at);
-            $diff = $today->diff($notifyDate);
-            $notify->created_at = $diff->format('%a d %h h %i m %s s');
-            $notify->fromUsername = User::findOrFail($notify->from)->username; 
-            $notify->follow = Follower::where('follower',  $notify->from)->where('followee', $userId->id)->exists();
-        }
-        return View('Notification', ['notifications' => $notifications, 'trends' => $this->topTrends()]);
+        // $today = date_create(date('Y-m-d H:i:s'));
+        // foreach($notifications as $notify){
+        //     $notifyDate = date_create($notify->created_at);
+        //     $diff = $today->diff($notifyDate);
+        //     $notify->created_at = $diff->format('%a d %h h %i m %s s');
+        //     $notify->fromUsername = User::findOrFail($notify->from)->username; 
+        //     $notify->follow = Follower::where('follower',  $notify->from)->where('followee', $userId->id)->exists();
+        //}
+
+        $notifications = Notification::where('to', User::where('username', $username)->first()->id)
+            ->orderBy('created_at', 'desc')
+            ->take(10)
+            ->get();
+
+        return view('notifications', [
+            'notifications' => $notifications, 
+            'trends' => $this->topTrends()
+        ]);
     }
 
   
@@ -65,8 +75,4 @@ class NotificationController extends Controller
         NotificationController::store($userDo, $userReceive, NotificationType::findOrFail("ha messo mi piace ad un tuo commento"));  
         return back();
     }
-
-    
-
-
 }
