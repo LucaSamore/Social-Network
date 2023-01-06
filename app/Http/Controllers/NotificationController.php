@@ -18,14 +18,22 @@ final class NotificationController extends Controller
      */
     public function show(string $username)
     {
-        $notifications = Notification::where('to', User::where('username', $username)->first()->id)
+        $user_id = User::where('username', $username)->first()->id;
+        $notifications = Notification::where('to', $user_id)
             ->orderBy('created_at', 'desc')
             ->take(10)
             ->get();
+
+        $this->readAll($user_id);
 
         return view('notifications', [
             'notifications' => $notifications, 
             'trends' => $this->topTrends()
         ]);
+    }
+
+    private function readAll(string $user_id)
+    {
+        return Notification::where('to', $user_id)->where('read', 0)->update(['read' => 1]);
     }
 }

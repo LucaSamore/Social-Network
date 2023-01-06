@@ -30,7 +30,7 @@
                     @endphp
                 @endif
 
-                @if (Session::get('hasNoti'))
+                @if ($isRead)
                     <div class="chat chat-start mt-6 mr-auto w-full">
                         <div class="chat-image avatar">
                         <p class="w-10 text-6xl">

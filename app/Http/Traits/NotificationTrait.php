@@ -17,9 +17,8 @@ trait NotificationTrait {
             'to' => $receiver,
             'type' =>  $notificationType, 
             'created_at' => date("Y-m-d H:i:s"),
+            'read' => 0
         ]);
-
-        session(['hasNoti' => true]);
 
         return $notification->save();
     }
@@ -42,5 +41,12 @@ trait NotificationTrait {
     public function notifyLikeToComment(string $sender, string $receiver)
     {
         $this->storeNotification($sender, $receiver, "ha messo mi piace ad un tuo commento");  
+    }
+
+    private function toRead(string $receiver)
+    {
+        return Notification::where('to', $receiver)
+            ->where('read', 0)
+            ->count() > 0;
     }
 }
