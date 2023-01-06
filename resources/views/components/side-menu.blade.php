@@ -23,7 +23,7 @@
                             xl:transition lg:transition md:transition sm:transition-none
                             xl:hover:-translate-y-1 lg:hover:-translate-y-1 md:hover:-translate-y-1 sm:hover:-translate-y-0
                             hover:-translate-y-0 hover:scale-110 duration-300 flex gap-4 items-center">
-                <a href="/{{Session::get('username')}}/notifications" class="flex gap-4 items-center">
+                <a href="/{{Session::get('username')}}/notifications" class="flex gap-4 justify-between items-center">
                     <i class="fa-solid fa-bell"></i>
                     <span class="hidden xl:block lg:hidden md:hidden sm:hidden">Notifiche</span>
                 </a>
