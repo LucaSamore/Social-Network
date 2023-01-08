@@ -9,7 +9,8 @@
             class="w-16 h-16 object-cover xl:rounded-full lg:rounded-full md:rounded-none sm:rounded-none rounded-none border-2 border-gray-500" />
     @endif
     <div class="flex flex-col gap-1">
-        <div class="flex flex-col xl:flex-row lg:flex-row md:flex-col sm:flex-col gap-2 justify-center xl:justify-start lg:justify-start md:justify-center sm:justify-center">
+        <div class="flex flex-col xl:flex-row lg:flex-row md:flex-col sm:flex-col gap-2 items-center xl:items-start lg:items-start md:items-center sm:items-center
+            justify-center xl:justify-start lg:justify-start md:justify-center sm:justify-center">
             <a href="/profile/{{$user->username}}" 
                 class="text-white font-bold text-lg font-quicksand hover:underline">{{ "@".$user->username }}</a>
             <p class="text-lg font-quicksand">Membro dal {{date('Y', strtotime($user->created_at))}}</p>

@@ -13,7 +13,7 @@
         <x-side-menu/>
         <main class="w-11/12 xl:w-3/5 lg:w-4/5 md:w-11/12 sm:w-11/12 flex flex-col justify-start items-center gap-4 h-screen overflow-auto">
             <header class="pt-8 pb-4 w-3/4 flex flex-col gap-4 justify-center items-center">
-                <h1 class="text-white text-center font-bold font-montserrat pb-16 text-4xl xl:text-8xl lg:text-8xl md:text-6xl sm:text-6xl">Cerca 🧐</h1>
+                <h1 class="text-white text-center font-bold font-montserrat pb-16 text-4xl xl:text-8xl lg:text-8xl md:text-6xl sm:text-6xl">Cerca 🕵🏻‍♀️</h1>
                 <x-search-bar/>
                 @if ($isRead)
                     <div class="chat chat-start mt-6 mr-auto w-full">
