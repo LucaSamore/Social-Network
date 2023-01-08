@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/{username}/posts', [PostController::class, 'index'])->name('post.index');
     Route::get('/{username}/notifications', [NotificationController::class, 'show'])->name('notifications.show');
     Route::get('/search', [SearchController::class, 'search'])->name('search');
+    Route::get('/search/user', [SearchController::class, 'search'])->name('user.search');
     Route::post('/posts/store', [PostController::class, 'store'])->name('post.store');
     Route::post('/follow', [UserController::class, 'follow'])->name('user.follow');
     Route::post('comment/create', [CommentController::class, 'store'])->name('comment.store');
