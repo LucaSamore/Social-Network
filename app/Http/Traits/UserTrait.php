@@ -19,6 +19,7 @@ trait UserTrait {
             ->orWhere('name', 'like', '%'.$search.'%')
             ->orWhere('surname', 'like', '%'.$search.'%')
             ->orderBy('username')
+            ->take(50)
             ->get();
     }
 

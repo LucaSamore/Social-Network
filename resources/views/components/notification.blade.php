@@ -1,8 +1,13 @@
 <div class="w-3/4 xl:w-3/4 lg:w-3/4 md:w-1/2 sm:w-1/2 flex flex-col xl:flex-row lg:flex-row md:flex-col sm:flex-col gap-6 mt-6
       items-center xl:items-start lg:items-start md:items-center sm:items-center
     bg-dark-mode-2 hover:bg-dark-mode-3 rounded-xl px-4 py-4">
-    <img src="{{asset('img/default-avatar.png')}}" alt="user profile picture" width="64" height="64" 
+    @if ($notification->sender->profile_image !== null)
+    <img src="{{ $notification->sender->profile_image }}" alt="user profile picture" width="64" height="64" 
         class="w-16 h-16 object-cover xl:rounded-full lg:rounded-full md:rounded-none sm:rounded-none rounded-none border-2 border-gray-500" />
+    @else
+        <img src="{{asset('img/default-avatar.png')}}" alt="user profile picture" width="64" height="64" 
+            class="w-16 h-16 object-cover xl:rounded-full lg:rounded-full md:rounded-none sm:rounded-none rounded-none border-2 border-gray-500" />
+    @endif
     <div class="flex flex-col gap-1">
         <div class="flex gap-2 justify-center xl:justify-start lg:justify-start md:justify-center sm:justify-center">
             <a href="/profile/{{$notification->sender->username}}" 
