@@ -13,20 +13,23 @@
         <x-side-menu/>
         <main class="w-11/12 xl:w-3/5 lg:w-4/5 md:w-11/12 sm:w-11/12 flex flex-col justify-start items-center gap-4 h-screen overflow-auto">
             <header class="pt-8 pb-4 w-3/4 flex flex-col gap-4 justify-center items-center">
-                <h1 class="text-white text-center font-bold font-montserrat text-4xl xl:text-8xl lg:text-8xl md:text-6xl sm:text-6xl">Notifiche 🔔</h1>
+                <h1 class="text-white text-center font-bold font-montserrat text-4xl xl:text-8xl lg:text-8xl md:text-6xl sm:text-6xl">Cerca 🔍</h1>
+
+                @if ($isRead)
+                    <div class="chat chat-start mt-6 mr-auto w-full">
+                        <div class="chat-image avatar">
+                        <p class="w-10 text-6xl">
+                            😸
+                        </p>
+                        </div>
+                        <p class="chat-bubble bg-dark-mode-3 text-white font-quicksand font-bold text-xl">Hey! Hai delle nuove notifiche!</p>
+                    </div>
+                @endif
             </header>
             <section class="flex flex-col justify-start items-center w-3/4 pb-12
                             xl:w-4/5 lg:w-3/4 md:w-3/4 sm:w-4/5 rounded-xl">
-                @forelse ($notifications as $noti)
-                    <x-notification :notification="$noti" />
-                @empty
-                    <h2>Non ci sono notifiche</h2>
-                @endforelse
-                <input type="hidden" name="my-username" id="my-username" value="{{Session::get('username')}}">
             </section>
         </main>
-        <x-top-trends :trends="$trends"/>
-        @vite('resources/js/follow-modals.js')
         @vite('resources/js/refresh.js')
         <script src="https://kit.fontawesome.com/6b12fba364.js" crossorigin="anonymous"></script>
     </body>

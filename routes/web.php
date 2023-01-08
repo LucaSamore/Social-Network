@@ -7,6 +7,7 @@ use App\Http\Controllers\MediaController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -37,6 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/like/{post_id}', [PostController::class, 'like'])->name('post.like');
     Route::get('/{username}/posts', [PostController::class, 'index'])->name('post.index');
     Route::get('/{username}/notifications', [NotificationController::class, 'show'])->name('notifications.show');
+    Route::get('/search', [SearchController::class, 'search'])->name('search');
     Route::post('/posts/store', [PostController::class, 'store'])->name('post.store');
     Route::post('/follow', [UserController::class, 'follow'])->name('user.follow');
     Route::post('comment/create', [CommentController::class, 'store'])->name('comment.store');
