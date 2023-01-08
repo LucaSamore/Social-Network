@@ -26,6 +26,7 @@
             </section>
         </main>
         <x-top-trends :trends="$trends"/>
+        @vite('resources/js/post.js')
         @vite('resources/js/follow-modals.js')
         @vite('resources/js/refresh.js')
         <script src="https://kit.fontawesome.com/6b12fba364.js" crossorigin="anonymous"></script>
