@@ -42,7 +42,9 @@
         {{ $post->textual_content }}
     </p>
 
-    <div class="w-full flex flex-wrap gap-4 py-3">
+    <p class="font-quicksand text-lg my-2">{{ (now()->diff($post->created_at)->format('%a') + 1)." giorni fa" }}</p>
+
+    <div class="w-full flex flex-wrap gap-4 py-3 mt-2">
         @foreach ($tags as $tag)
             <p class="text-white font-quicksand text-lg bg-lavanda px-4 py-2 rounded-full">{{ $tag->name }}</p>
         @endforeach
@@ -64,7 +66,7 @@
         @endforelse
     </div>
 
-    <label for="post/{{$post->id}}" class="text-white font-lg font-quicksand font-bold hover:underline hover:cursor-pointer py-8">
+    <label for="post/{{$post->id}}" class="text-white font-lg font-quicksand font-bold hover:underline hover:cursor-pointer mb-8">
         Mostra tutto
     </label>
     <footer>
@@ -136,7 +138,8 @@
         <p class="text-white font-quicksand text-lg text-justify my-6">
             {{ $post->textual_content }}
         </p>
-        <div class="w-full flex flex-wrap gap-4 py-3">
+        <p class="font-quicksand text-lg my-2">{{ (now()->diff($post->created_at)->format('%a') + 1)." giorni fa" }}</p>
+        <div class="w-full flex flex-wrap gap-4 py-3 mt-2">
             @foreach ($tags as $tag)
                 <p class="text-white font-quicksand text-lg bg-lavanda px-4 py-2 rounded-full">{{ $tag->name }}</p>
             @endforeach
