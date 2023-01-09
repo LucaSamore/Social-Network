@@ -8,6 +8,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -40,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/{username}/notifications', [NotificationController::class, 'show'])->name('notifications.show');
     Route::get('/search', [SearchController::class, 'search'])->name('search');
     Route::get('/search/user', [SearchController::class, 'search'])->name('user.search');
+    Route::get('/settings', [SettingsController::class, 'settings'])->name('settings');
     Route::post('/posts/store', [PostController::class, 'store'])->name('post.store');
     Route::post('/follow', [UserController::class, 'follow'])->name('user.follow');
     Route::post('comment/create', [CommentController::class, 'store'])->name('comment.store');
