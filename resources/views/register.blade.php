@@ -49,6 +49,7 @@
                                     class="w-32 h-32 mb-6 object-cover xl:rounded-full lg:rounded-full md:rounded-none sm:rounded-none rounded-none border-4 border-gray-500" />
                                 <input type="file" id="input-preview" name="profile_image" value="{{ old('profile_image') }}" accept=".png, .jpg, .jpeg" 
                                     class="text-white font-quicksand w-3/4 mt-6 border-2 border-gray-400 rounded-lg" />
+                                <button id="delete-preview" class="px-4 py-2 text-white font-bold font-quicksand rounded-xl bg-red-500 hover:bg-red-700 invisible">Elimina</button>
                                 @error('profile_image')
                                     <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
                                 @enderror
