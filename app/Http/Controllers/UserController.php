@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\NotificationTrait;
 use App\Http\Traits\UserTrait;
 use App\Models\Follower;
 use App\Models\User;
@@ -10,17 +11,7 @@ use Illuminate\Http\Request;
 
 final class UserController extends Controller
 {
-    use UserTrait;
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+    use UserTrait, NotificationTrait;
 
     /**
      * Show the form for creating a new resource.
@@ -79,19 +70,28 @@ final class UserController extends Controller
 
     public function follow(Request $request)
     {
+        $myId = User::where('username', $request->my_username)->first()->id;
+        $otherId = User::where('username', $request->other_username)->first()->id;
+
         $follower = new Follower([
             'id' => (string) Str::uuid(),
-            'follower' => User::where('username', $request->my_username)->first()->id,
-            'followee' => User::where('username', $request->other_username)->first()->id
+            'follower' => $myId,
+            'followee' => $otherId
         ]);
 
-        return $follower->save();
+        $result = $follower->save();
+
+        if ($result) {
+            $this->notifyFollow($myId, $otherId);
+        }
+
+        return $result;
     }
 
-    public function unfollow(Request $request)
+    public function unfollow(string $my_username, string $other_username)
     {
-        $follow = Follower::where('follower', User::where('username', $request->my_username)->first()->id)
-            ->where('followee', User::where('username', $request->other_username)->first()->id)
+        $follow = Follower::where('follower', User::where('username', $my_username)->first()->id)
+            ->where('followee', User::where('username', $other_username)->first()->id)
             ->first();
 
         return $follow->delete();

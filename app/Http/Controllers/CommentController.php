@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentRequest;
+use App\Http\Traits\NotificationTrait;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -10,6 +11,8 @@ use Illuminate\Support\Str;
 
 final class CommentController extends Controller
 {
+    use NotificationTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -36,22 +39,22 @@ final class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CommentRequest $request, string $post_id)
+    public function store(CommentRequest $request)
     {
         $request->validated();
 
         $comment = new Comment([
             'id' => (string) Str::uuid(),
             'user_id' => $request->session()->get('user_id'),
-            'post_id' => $post_id,
+            'post_id' => $request->post_id,
             'textual_content' => $request->comment,
             'number_of_likes' => 0
         ]);
 
         if ($comment->save()) {
-            Post::where('id', $post_id)
-                ->update(['number_of_comments' => 
-                    Post::where('id', $post_id)->first()->number_of_comments + 1]);
+            $post = Post::where('id', $request->post_id);
+            $post->update(['number_of_comments' => $post->first()->number_of_comments + 1]);
+            $this->notifyCommentToPost($request->session()->get('user_id'), $post->first()->user->id);
             return $comment->toArray();
         }
 
@@ -84,22 +87,24 @@ final class CommentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return int
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        return Comment::where('id', $request->comment_id)
+            ->update(['textual_content' => $request->textual_content]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  string  $comment_id
+     * @return int
      */
-    public function destroy($id)
+    public function destroy(string $comment_id)
     {
-        //
+        $post = Comment::findOrFail($comment_id)->post;
+        $post->update(['number_of_comments' => $post->number_of_comments - 1]);
+        return Comment::destroy($comment_id);
     }
 }

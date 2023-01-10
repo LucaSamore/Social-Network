@@ -1,9 +1,13 @@
 import axios from "axios";
 import { laravelToken } from "./laravel-token";
 
-export const unfollowUser = async (myUsername, otherUsername) => {
+export const updatePost = async (postId, textualContent, tags) => {
     try {
-        return await axios.delete(`/unfollow/${myUsername}/${otherUsername}`, {
+        return await axios.put(`/post/update`, {
+            post_id: postId,
+            textual_content: textualContent,
+            tags: tags
+        }, {
             headers: {
                 'X-CSRF-TOKEN': laravelToken,
             }

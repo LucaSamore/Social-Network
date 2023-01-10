@@ -37,7 +37,11 @@ trait TrendTrait {
         }
 
         foreach ($tags as $tag) {
-            $newTag = new Tag(['name' => $tag]);
+            
+            if (!Tag::where('name', $tag)->first()) {
+                $newTag = new Tag(['name' => $tag]);
+                $newTag->save();
+            }
 
             $tagInPost = new TagsInPost([
                 'id' => (string) Str::uuid(),
@@ -45,8 +49,13 @@ trait TrendTrait {
                 'tag_name' => $tag
             ]);
 
-            $newTag->save();
             $tagInPost->save();
         }
+    }
+
+    private function updateTags(string $post_id, ?array $tags)
+    {
+        TagsInPost::where('post_id', $post_id)->delete();
+        $this->storeTags($post_id, $tags);
     }
 }

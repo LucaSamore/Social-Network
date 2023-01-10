@@ -18,19 +18,23 @@
                 </p>
             </div>
             @if ($editable)
-            <div class="dropdown dropdown-end ml-auto">
-                <label tabindex="0" class="btn m-1 bg-lavanda hover:bg-dark-lavanda border-none normal-case text-white font-montserrat text-lg">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                </label>
-                <ul tabindex="0" class="dropdown-content menu p-4 shadow bg-dark-mode-3 rounded-box w-52">
-                  <li><a class="text-white font-quicksand active:bg-dark-mode-4">Modifica</a></li>
-                  <li>
-                    <label for="post/{{ $post->id }}/delete" class="text-white font-quicksand hover:bg-red-500 mt-2 active:bg-dark-mode-4">
-                        Elimina
+                <div class="dropdown dropdown-end ml-auto">
+                    <label tabindex="0" class="btn m-1 bg-dark-lavanda hover:bg-dark-lavanda border-none normal-case text-white font-montserrat text-lg">
+                        <i class="fa-solid fa-pen-to-square"></i>
                     </label>
-                </li>
-                </ul>
-              </div>
+                    <ul tabindex="0" class="dropdown-content menu p-4 shadow bg-dark-mode-3 rounded-box w-52">
+                    <li>
+                        <label for="post/{{ $post->id }}/update" class="text-white font-quicksand active:bg-dark-mode-4">
+                            Modifica
+                        </label>
+                    </li>
+                    <li>
+                        <label for="post/{{ $post->id }}/delete" class="text-white font-quicksand hover:bg-red-500 mt-2 active:bg-dark-mode-4">
+                            Elimina
+                        </label>
+                    </li>
+                    </ul>
+                </div>
             @endif
         </div>
     </header>
@@ -38,13 +42,15 @@
         {{ $post->textual_content }}
     </p>
 
-    <div class="w-full flex flex-wrap gap-4 py-3">
+    <p class="font-quicksand text-lg my-2">{{ (now()->diff($post->created_at)->format('%a') + 1)." giorni fa" }}</p>
+
+    <div class="w-full flex flex-wrap gap-4 py-3 mt-2">
         @foreach ($tags as $tag)
             <p class="text-white font-quicksand text-lg bg-lavanda px-4 py-2 rounded-full">{{ $tag->name }}</p>
         @endforeach
     </div>
 
-    <div class="w-full flex justify-center items-center py-3">
+    <div id="media-{{$post->id}}" class="w-full flex justify-center items-center py-3">
         @forelse ($images as $image)
             <img src="{{ $image->path }}" alt="user image post" class="rounded-md object-cover">
         @empty
@@ -60,7 +66,7 @@
         @endforelse
     </div>
 
-    <label for="post/{{$post->id}}" class="text-white font-lg font-quicksand font-bold hover:underline hover:cursor-pointer py-8">
+    <label for="post/{{$post->id}}" class="text-white font-lg font-quicksand font-bold hover:underline hover:cursor-pointer mb-8">
         Mostra tutto
     </label>
     <footer>
@@ -132,7 +138,8 @@
         <p class="text-white font-quicksand text-lg text-justify my-6">
             {{ $post->textual_content }}
         </p>
-        <div class="w-full flex flex-wrap gap-4 py-3">
+        <p class="font-quicksand text-lg my-2">{{ (now()->diff($post->created_at)->format('%a') + 1)." giorni fa" }}</p>
+        <div class="w-full flex flex-wrap gap-4 py-3 mt-2">
             @foreach ($tags as $tag)
                 <p class="text-white font-quicksand text-lg bg-lavanda px-4 py-2 rounded-full">{{ $tag->name }}</p>
             @endforeach
@@ -217,3 +224,6 @@
     </section>
   </div>
 </div>
+
+<!-- Update post modal -->
+<x-modals.edit-post :post="$post" />

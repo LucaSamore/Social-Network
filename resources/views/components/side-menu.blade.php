@@ -13,6 +13,15 @@
             <li class="hover:bg-lavanda px-4 xl:px-8 lg:px-8 md:px-8 sm:px-4 py-2 rounded-full transition-none ease-in-out delay-100
                             xl:transition lg:transition md:transition sm:transition-none
                             xl:hover:-translate-y-1 lg:hover:-translate-y-1 md:hover:-translate-y-1 sm:hover:-translate-y-0
+                            hover:-translate-y-0 hover:scale-110 duration-150">
+                <a href="/search" class="flex gap-4 items-center">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span class="hidden xl:block lg:hidden md:hidden sm:hidden">Cerca</span>
+                </a>
+            </li>
+            <li class="hover:bg-lavanda px-4 xl:px-8 lg:px-8 md:px-8 sm:px-4 py-2 rounded-full transition-none ease-in-out delay-100
+                            xl:transition lg:transition md:transition sm:transition-none
+                            xl:hover:-translate-y-1 lg:hover:-translate-y-1 md:hover:-translate-y-1 sm:hover:-translate-y-0
                             hover:-translate-y-0 hover:scale-110 duration-300">
                 <a href="/profile/{{ Session::get('username') }}" class="flex gap-4 items-center">
                     <i class="fa-solid fa-user"></i>
@@ -23,7 +32,7 @@
                             xl:transition lg:transition md:transition sm:transition-none
                             xl:hover:-translate-y-1 lg:hover:-translate-y-1 md:hover:-translate-y-1 sm:hover:-translate-y-0
                             hover:-translate-y-0 hover:scale-110 duration-300 flex gap-4 items-center">
-                <a href="/Notification/{{Session::get('user_id')}}/50" class="flex gap-4 items-center">
+                <a href="/{{Session::get('username')}}/notifications" class="flex gap-4 justify-between items-center">
                     <i class="fa-solid fa-bell"></i>
                     <span class="hidden xl:block lg:hidden md:hidden sm:hidden">Notifiche</span>
                 </a>

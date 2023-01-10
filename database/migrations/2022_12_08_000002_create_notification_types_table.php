@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('notification_types', function (Blueprint $table) {
-            $table->string('name');
-            $table->primary('name');
-        });
+        // Schema::create('notification_types', function (Blueprint $table) {
+        //     $table->string('name');
+        //     $table->primary('name');
+        // });
     }
 
     /**

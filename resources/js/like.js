@@ -1,13 +1,11 @@
-import axios from 'axios';
+import { numberOfLikes } from './ajax/get-likes';
 
-const laravelToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+const updateLikes = async e => {
+    const result = await numberOfLikes(e.target.postId);
 
-const updateLikes = (e) => {
-    const postId = e.target.postId;
-    
-    axios.get(`/like/${postId}`, { headers: {'X-CSRF-TOKEN': laravelToken}})
-        .then(res => document.getElementById(`like-span/${postId}`).innerHTML = res.data)
-        .catch(err => console.log(err));
+    if (result) {
+        document.getElementById(`like-span/${e.target.postId}`).innerHTML = result.data;
+    }
 }
 
 Array.from(document.getElementsByClassName('like')).forEach(ith => {

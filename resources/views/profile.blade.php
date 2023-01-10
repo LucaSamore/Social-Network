@@ -70,7 +70,7 @@
                         :images="$post->images"
                         :videos="$post->videos"
                         :bookmarked="false"
-                        :comments="$post->comments"
+                        :comments="$post->comments->sortByDesc('number_of_likes')"
                         :tags="$post->tags"
                         :editable="$isItMe"
                     />
@@ -85,6 +85,7 @@
         @vite('resources/js/profile.js')
         @vite('resources/js/follow-modals.js')
         @vite('resources/js/post.js')
+        @vite('resources/js/post-edit.js')
         @vite('resources/js/like.js')
         @vite('resources/js/comment.js')
         @vite('resources/js/refresh.js')

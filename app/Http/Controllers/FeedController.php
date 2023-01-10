@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\NotificationTrait;
 use App\Http\Traits\TrendTrait;
 use App\Models\Follower;
 use App\Models\Post;
@@ -9,15 +10,14 @@ use Illuminate\Http\Request;
 
 final class FeedController extends Controller
 {
-    use TrendTrait;
+    use TrendTrait, NotificationTrait;
 
     public function feed(Request $request)
     {
-        $feeds = $this->recentPosts($request->session()->get('user_id'));
-
         return view('/home', [
-            'feeds' => $feeds,
+            'feeds' => $this->recentPosts($request->session()->get('user_id')),
             'trends' => $this->topTrends(),
+            'isRead' => $this->toRead($request->session()->get('user_id'))
         ]);
     }
 
