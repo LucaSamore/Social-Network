@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\MediaController;
@@ -67,6 +68,15 @@ Route::controller(NotificationController::class)->group(function () {
     Route::get('/NotificationControllerFollow/{userDo}/{userReceive}', 'notifyFollow');
     
     Route::get('/Notification/{userId}/{n}', 'show')->whereNumber('n');
+});
+
+
+Route::controller(BookmarkController::class)->group(function () {
+    
+    Route::get('/bookmarks/', 'show');
+    Route::get('/bookmarks/{post}', 'store');
+    Route::get('/bookmarksDelete/{bookmark}', 'destroy');
+    Route::get('/bookmarksExist/{post}', 'isABookmark');
 });
 
 Route::fallback(fn() => view('fallback'));
