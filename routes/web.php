@@ -67,6 +67,14 @@ Route::get('/testPostView', function () {
 
 Route::resource('/testPostController', PostController::class);
 
-
+Route::controller(NotificationController::class)->group(function () {
+    //Route::get('/orders/{id}', 'show');
+    Route::get('/NotificationControllerLikeToPost/{userDo}/{userReceive}', 'notifyLikeToPost');
+    Route::get('/NotificationControllerLikeToComment/{userDo}/{userReceive}', 'notifyLikeToComment');
+    Route::get('/NotificationControllerCommentToPost/{userDo}/{userReceive}', 'notifyCommentToPost');
+    Route::get('/NotificationControllerFollow/{userDo}/{userReceive}', 'notifyFollow');
+    
+    Route::get('/Notification/{userId}/{n}', 'show')->whereNumber('n');
+});
 
 Route::fallback(fn() => view('fallback'));
