@@ -7,7 +7,7 @@ use App\Models\Bookmark;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
-class BookmarkController extends Controller
+final class BookmarkController extends Controller
 {
     use TrendTrait;
 
@@ -32,17 +32,17 @@ class BookmarkController extends Controller
      *
      *      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Request $request)
     {
-        $userId = auth()->user()->id;
-        $feeds = Post::whereIn('id', Bookmark::select('post_id')->where('user_id', $userId))->get();
-        //echo $feeds;
-        return View('bookmark',  [
-            'feeds' => $feeds,
+        $bookmarks = Post::whereIn('id', Bookmark::select('post_id')
+            ->where('user_id', $request->session()->get('user_id')))
+            ->get();
+
+        return view('bookmarks',  [
+            'bookmarks' => $bookmarks,
             'trends' => $this->topTrends(),
         ]);
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -51,10 +51,10 @@ class BookmarkController extends Controller
      */
     public function destroy(Bookmark $bookmark)
     {
-        Bookmark::destroy(  $bookmark->id); 
+        Bookmark::destroy($bookmark->id); 
     }
 
-      /**
+    /**
      * Check if the logged in user has already saved the post passed as argument.
      *
      * @return \Illuminate\Http\Response
@@ -62,7 +62,8 @@ class BookmarkController extends Controller
     public function isABookmark(Post $post)
     {
         $userId = auth()->user()->id;
-        //dd(Bookmark::where('user_id', $userId)->where('post_id',$post->id)->exists());
-        return Bookmark::where('user_id', $userId)->where('post_id',$post->id)->exists();
+        return Bookmark::where('user_id', $userId)
+            ->where('post_id', $post->id)
+            ->exists();
     }
 }

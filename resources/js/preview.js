@@ -2,7 +2,6 @@ const image = document.getElementById('input-preview');
 const preview = document.getElementById('preview');
 const deletePreviewButton = document.getElementById('delete-preview');
 
-
 const removePreview = e => {
     e.preventDefault();
     image.value = "";

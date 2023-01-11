@@ -65,7 +65,7 @@
                     </div>
                     <fieldset class="w-full flex flex-col gap-2 justify-center items-start">
                         <label for="username" class="text-white font-quicksand text-lg">Username:</label>
-                        <input type="text" placeholder="Username" name="username" value="{{$user->username}}" class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
+                        <input type="text" placeholder="Username" name="username" value="{{$user->username}}" required class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
                     </fieldset>
                     <fieldset class="w-full flex flex-col gap-2 justify-center items-start">
                         <label for="bio" class="text-white font-quicksand text-lg">Bio:</label>
@@ -73,27 +73,27 @@
                     </fieldset>
                     <fieldset class="w-full flex flex-col gap-2 justify-center items-start">
                         <label for="name" class="text-white font-quicksand text-lg">Nome:</label>
-                        <input type="text" placeholder="Nome" name="name" value="{{$user->name}}" class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
+                        <input type="text" placeholder="Nome" name="name" value="{{$user->name}}" required class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
                     </fieldset>
                     <fieldset class="w-full flex flex-col gap-2 justify-center items-start">
                         <label for="surname" class="text-white font-quicksand text-lg">Cognome:</label>
-                        <input type="text" placeholder="Cognome" name="surname" value="{{$user->surname}}" class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
+                        <input type="text" placeholder="Cognome" name="surname" value="{{$user->surname}}" required class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
                     </fieldset>
                     <fieldset class="w-full flex flex-col gap-2 justify-center items-start">
                         <label for="date_of_birth" class="text-white font-quicksand text-lg">Data di nascita:</label>
-                        <input type="date" placeholder="Data di nascita" name="date_of_birth" value="{{$user->date_of_birth}}" class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
+                        <input type="date" placeholder="Data di nascita" name="date_of_birth" required value="{{$user->date_of_birth}}" class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
                     </fieldset>
                     <fieldset class="w-full flex flex-col gap-2 justify-center items-start">
                         <label for="email" class="text-white font-quicksand text-lg">Email:</label>
-                        <input type="email" placeholder="Email" name="email" value="{{$user->email}}" class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
+                        <input type="email" placeholder="Email" name="email" value="{{$user->email}}" required class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
                     </fieldset>
                     <fieldset class="w-full flex flex-col gap-2 justify-center items-start">
                         <label for="password" class="text-white font-quicksand text-lg">Password:</label>
-                        <input type="password" placeholder="Password" name="password" class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
+                        <input type="password" placeholder="Password" name="password" required class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
                     </fieldset>
                     <fieldset class="w-full flex flex-col gap-2 justify-center items-start">
-                        <label for="password_confirmation" class="text-white font-quicksand text-lg">Password:</label>
-                        <input type="password" placeholder="Conferma password" name="password_confirmation" class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
+                        <label for="password_confirmation" class="text-white font-quicksand text-lg">Conferma password:</label>
+                        <input type="password" placeholder="Conferma password" required name="password_confirmation" class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
                     </fieldset>
                     <input type="submit" value="Aggiorna" 
                         class="btn border-none px-16 hover:bg-lavanda text-white font-bold font-montserrat text-lg bg-lavanda rounded-lg py-1 mt-6 normal-case"/>
