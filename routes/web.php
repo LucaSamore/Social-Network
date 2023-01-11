@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\MediaController;
@@ -51,6 +52,39 @@ Route::middleware('auth')->group(function () {
     Route::delete('/post/delete/{post_id}', [PostController::class, 'destroy'])->whereUuid('post_id')->name('post.delete');
     Route::delete('/comment/delete/{comment_id}', [CommentController::class, 'destroy'])->whereUuid('comment_id')->name('comment.delete');
     Route::any('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+
+
+Route::get('/leftMenu', function () {
+    return view('leftMenu');
+});
+
+Route::get('/rightMenu', function () {
+    return view('rightMenu');
+});
+
+Route::get('/testPostView', function () {
+    return view('test/testPost');
+});
+
+Route::resource('/testPostController', PostController::class);
+
+Route::controller(NotificationController::class)->group(function () {
+    //Route::get('/orders/{id}', 'show');
+    Route::get('/NotificationControllerLikeToPost/{userDo}/{userReceive}', 'notifyLikeToPost');
+    Route::get('/NotificationControllerLikeToComment/{userDo}/{userReceive}', 'notifyLikeToComment');
+    Route::get('/NotificationControllerCommentToPost/{userDo}/{userReceive}', 'notifyCommentToPost');
+    Route::get('/NotificationControllerFollow/{userDo}/{userReceive}', 'notifyFollow');
+    
+    Route::get('/Notification/{userId}/{n}', 'show')->whereNumber('n');
+});
+
+Route::controller(BookmarkController::class)->group(function () {
+
+    Route::get('/bookmarks/', 'show');
+    Route::get('/bookmarks/{post}', 'store');
+    Route::get('/bookmarksDelete/{bookmark}', 'destroy');
+    Route::get('/bookmarksExist/{post}', 'isABookmark');
 });
 
 Route::fallback(fn() => view('fallback'));
