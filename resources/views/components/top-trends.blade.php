@@ -4,7 +4,7 @@
         <header class="text-center">
             <h2 class="text-white font-quicksand font-bold text-lg xl:text-lg lg:text:lg md:text-sm sm:text-sm mt-8">Trend più seguiti</h2>
         </header>
-        <section class="flex gap-12 text-white font-quicksand py-4">
+        <div class="flex gap-12 text-white font-quicksand py-4">
             <ul class="font-bold flex flex-col gap-4">
                 @foreach ($trends as $trend)
                     <li>{{ $trend->name }}</li>
@@ -15,6 +15,6 @@
                     <li>{{ $trend->posts_count }}</li>
                 @endforeach
             </ul>
-        </section>
+        </div>
     </section>
 </aside>
