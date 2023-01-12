@@ -69,7 +69,7 @@
                         :creator="$post->user"
                         :images="$post->images"
                         :videos="$post->videos"
-                        :bookmarked="false"
+                        :bookmarked="$post->bookmarks->where('user_id', Session::get('user_id'))->isNotEmpty()"
                         :comments="$post->comments->sortByDesc('number_of_likes')"
                         :tags="$post->tags"
                         :editable="$isItMe"

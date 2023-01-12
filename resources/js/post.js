@@ -6,13 +6,16 @@ const sendButton = document.getElementById('send-new-post');
 const file = document.getElementById('file-upload');
 const mediaContainer = document.getElementById('media-content');
 const dropzone = document.getElementById('dropzone');
-const bookmarkButtons = Array.from(document.getElementsByClassName('bookmark'));
 
 const updateBookmarkEvent = async e => {
-    console.log(e.target.postId);
     const result = await updateBookmark(e.target.postId);
-    console.log(result.data);
-    e.target.lastElementChild.previousElementSibling.innerHTML = result.data; 
+    const el = e.target.lastElementChild;
+
+    if (el) {
+        el.innerHTML = result.data; 
+    } else {
+        e.target.parentNode.lastElementChild.innerHTML = result.data;
+    }
 }
 
 const isFileOfType = (file, type) => {
@@ -122,13 +125,14 @@ file.onchange = e => {
     handleFile(uploaded);
 }
 
-Array.from(document.getElementsByClassName('delete-btn'))
-    .forEach(btn => {
-        btn.postId = btn.lastElementChild.value;
-        btn.addEventListener("click", deletePostEvent, false);
-    });
-
-bookmarkButtons.forEach(btn => {
+Array.from(document.getElementsByClassName('delete-btn')).forEach(btn => {
     btn.postId = btn.lastElementChild.value;
-    btn.addEventListener("click", updateBookmarkEvent, false);
+    btn.addEventListener("click", deletePostEvent, false);
+});
+
+Array.from(document.getElementsByClassName('bookmark')).forEach(ith => {
+    const button = ith.closest('.bookmark-btn');
+    button.postId = ith.value;
+    Array.from(button.children).forEach(c => c.postId = ith.value);
+    button.addEventListener("click", updateBookmarkEvent, false);
 });

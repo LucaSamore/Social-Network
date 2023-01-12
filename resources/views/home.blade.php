@@ -49,7 +49,7 @@
                         :creator="$feed->user"
                         :images="$feed->images"
                         :videos="$feed->videos"
-                        :bookmarked="false"
+                        :bookmarked="$feed->bookmarks->where('user_id', Session::get('user_id'))->isNotEmpty()"
                         :comments="$feed->comments->sortByDesc('number_of_likes')"
                         :tags="$feed->tags"
                         :editable="false" 

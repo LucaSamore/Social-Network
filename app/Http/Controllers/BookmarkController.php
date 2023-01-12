@@ -26,6 +26,7 @@ final class BookmarkController extends Controller
 
             $newBookmark->save();
             return 1;
+
         } else {
             $bookmark->delete();
             return 0;
@@ -60,7 +61,7 @@ final class BookmarkController extends Controller
             ->where('user_id', $request->session()->get('user_id'))->get()->toArray())
             ->get();
 
-        return view('bookmarks',  [
+        return view('bookmarks', [
             'bookmarks' => $bookmarks,
             'trends' => $this->topTrends(),
         ]);
