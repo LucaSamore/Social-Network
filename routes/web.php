@@ -43,18 +43,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/search/user', [SearchController::class, 'search'])->name('user.search');
     Route::get('/settings', [SettingsController::class, 'settings'])->name('settings');
     Route::get('/bookmarks', [BookmarkController::class, 'show'])->name('bookmark.show');
-
     Route::post('/posts/store', [PostController::class, 'store'])->name('post.store');
     Route::post('/follow', [UserController::class, 'follow'])->name('user.follow');
     Route::post('comment/create', [CommentController::class, 'store'])->name('comment.store');
-
     Route::put('/comment/update', [CommentController::class, 'update'])->name('comment.update');
     Route::put('/post/update', [PostController::class, 'update'])->name('post.update');
-
+    Route::put('/bookmark/update', [BookmarkController::class, 'update'])->name('bookmark.update');
     Route::delete('/unfollow/{my_username}/{other_username}', [UserController::class, 'unfollow'],)->name('user.unfollow');
     Route::delete('/post/delete/{post_id}', [PostController::class, 'destroy'])->whereUuid('post_id')->name('post.delete');
     Route::delete('/comment/delete/{comment_id}', [CommentController::class, 'destroy'])->whereUuid('comment_id')->name('comment.delete');
-
     Route::any('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 

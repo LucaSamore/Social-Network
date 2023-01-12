@@ -96,13 +96,14 @@
                 </button>
             </li>
             <li>
-                <button class="flex gap-2 items-center btn bg-lavanda text-white border-none hover:bg-dark-lavanda">
+                <button class="bookmark flex gap-2 items-center btn bg-lavanda text-white border-none hover:bg-dark-lavanda">
                     <i class="fa-solid fa-bookmark"></i>
                     @if ($bookmarked)
                         <span>1</span>
                     @else
                         <span>0</span>
                     @endif
+                    <input type="hidden" value="{{ $post->id }}" />
                 </button>
             </li>
         </ul>

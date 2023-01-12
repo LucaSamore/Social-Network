@@ -1,10 +1,19 @@
 import { deletePost } from "./ajax/delete-post";
+import { updateBookmark } from "./ajax/bookmark";
 
 const textArea = document.getElementById('textual-content');
 const sendButton = document.getElementById('send-new-post');
 const file = document.getElementById('file-upload');
 const mediaContainer = document.getElementById('media-content');
 const dropzone = document.getElementById('dropzone');
+const bookmarkButtons = Array.from(document.getElementsByClassName('bookmark'));
+
+const updateBookmarkEvent = async e => {
+    console.log(e.target.postId);
+    const result = await updateBookmark(e.target.postId);
+    console.log(result.data);
+    e.target.lastElementChild.previousElementSibling.innerHTML = result.data; 
+}
 
 const isFileOfType = (file, type) => {
     return file && file['type'].split('/')[0] === type;
@@ -118,3 +127,8 @@ Array.from(document.getElementsByClassName('delete-btn'))
         btn.postId = btn.lastElementChild.value;
         btn.addEventListener("click", deletePostEvent, false);
     });
+
+bookmarkButtons.forEach(btn => {
+    btn.postId = btn.lastElementChild.value;
+    btn.addEventListener("click", updateBookmarkEvent, false);
+});

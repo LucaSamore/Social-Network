@@ -110,6 +110,6 @@ final class User extends Authenticatable
 
     public function bookmarks()
     {
-        return $this->belongsToMany(Post::class, 'bookmarks', 'user_id')->using(Bookmark::class);
+        return $this->hasMany(Bookmark::class);
     }
 }

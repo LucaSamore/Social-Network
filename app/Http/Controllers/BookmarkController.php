@@ -6,10 +6,32 @@ use App\Http\Traits\TrendTrait;
 use App\Models\Bookmark;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 final class BookmarkController extends Controller
 {
     use TrendTrait;
+
+    public function update(Request $request)
+    {
+        $bookmark = Bookmark::where('post_id', $request->post_id)
+            ->where('user_id', $request->session()->get('user_id'));
+
+        if ($bookmark->get()->isEmpty()) {
+            $newBookmark = new Bookmark([
+                'id' => (string) Str::uuid(),
+                'post_id' => $request->post_id,
+                'user_id' => $request->session()->get('user_id')
+            ]);
+
+            $newBookmark->save();
+            return 1;
+        } else {
+            $bookmark->delete();
+            return 0;
+        }
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -30,12 +52,12 @@ final class BookmarkController extends Controller
     /**
      * Display the specified resource.
      *
-     *      * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
     public function show(Request $request)
     {
         $bookmarks = Post::whereIn('id', Bookmark::select('post_id')
-            ->where('user_id', $request->session()->get('user_id')))
+            ->where('user_id', $request->session()->get('user_id'))->get()->toArray())
             ->get();
 
         return view('bookmarks',  [

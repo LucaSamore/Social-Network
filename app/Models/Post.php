@@ -55,7 +55,7 @@ class Post extends Model
 
     public function bookmarks()
     {
-        return $this->belongsToMany(User::class, 'bookmarks', 'post_id')->using(Bookmark::class);
+        return $this->hasMany(Bookmark::class);
     }
 
     public function tags()
