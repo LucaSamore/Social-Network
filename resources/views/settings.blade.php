@@ -38,7 +38,7 @@
                             <img src="{{asset('img/default-avatar.png')}}" alt="user profile picture" width="64" height="64" id="preview" 
                                 class="w-32 h-32 object-cover xl:rounded-full lg:rounded-full md:rounded-none sm:rounded-none rounded-none border-2 border-gray-500" />
                         @endif
-                        <div id="dropzone" class="w-full">
+                        <div id="dropzone-profile" class="w-full">
                             <label
                                 class="flex justify-center w-full h-32 px-4 transition border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
                                 <span class="flex items-center space-x-2">
@@ -153,6 +153,7 @@
             </div>
         </main>
         @vite('resources/js/account.js')
+        @vite('resources/js/post.js')
         @vite('resources/js/preview.js')
         @vite('resources/js/refresh.js')
         <script src="https://kit.fontawesome.com/6b12fba364.js" crossorigin="anonymous"></script>
