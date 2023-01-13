@@ -42,7 +42,7 @@
         {{ $post->textual_content }}
     </p>
 
-    <p class="font-quicksand text-lg my-2">{{ (now()->diff($post->created_at)->format('%a') + 1)." giorni fa" }}</p>
+    <p class="font-quicksand text-lg my-2">{{ explode(" ", $post->created_at)[0] }}</p>
 
     <div class="w-full flex flex-wrap gap-4 py-3 mt-2">
         @foreach ($tags as $tag)
@@ -139,7 +139,7 @@
         <p class="text-white font-quicksand text-lg text-justify my-6">
             {{ $post->textual_content }}
         </p>
-        <p class="font-quicksand text-lg my-2">{{ (now()->diff($post->created_at)->format('%a') + 1)." giorni fa" }}</p>
+        <p class="font-quicksand text-lg my-2">{{ explode(" ", $post->created_at)[0] }}</p>
         <div class="w-full flex flex-wrap gap-4 py-3 mt-2">
             @foreach ($tags as $tag)
                 <p class="text-white font-quicksand text-lg bg-lavanda px-4 py-2 rounded-full">{{ $tag->name }}</p>
