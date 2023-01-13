@@ -20,6 +20,7 @@ final class BookmarkController extends Controller
         if ($bookmark->get()->isEmpty()) {
             $newBookmark = new Bookmark([
                 'id' => (string) Str::uuid(),
+                'created_at' => now(),
                 'post_id' => $request->post_id,
                 'user_id' => $request->session()->get('user_id')
             ]);
@@ -42,12 +43,7 @@ final class BookmarkController extends Controller
      */
     public function store(Post $post)
     {
-        $userId = auth()->user()->id;
-        $bookmark = new BookMark([
-            'user_id' => $userId, 
-            'post_id' => $post->id,
-        ]); 
-        $bookmark->save();
+        //
     }
 
     /**
@@ -58,8 +54,9 @@ final class BookmarkController extends Controller
     public function show(Request $request)
     {
         $bookmarks = Post::whereIn('id', Bookmark::select('post_id')
-            ->where('user_id', $request->session()->get('user_id'))->get()->toArray())
-            ->get();
+                ->where('user_id', $request->session()->get('user_id'))
+                ->get()
+                ->toArray())->get();
 
         return view('bookmarks', [
             'bookmarks' => $bookmarks,

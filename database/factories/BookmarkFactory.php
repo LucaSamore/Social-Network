@@ -20,6 +20,7 @@ class BookmarkFactory extends Factory
     {
         return [
             'id' => fake()->uuid(),
+            'created_at' => now(),
             'user_id' => User::all()->random()->id,
             'post_id' => Post::all()->random()->id
         ];

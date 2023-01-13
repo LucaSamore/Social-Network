@@ -12,6 +12,7 @@ final class Bookmark extends Model
 
     protected $fillable = [
         'id',
+        'created_at',
         'user_id',
         'post_id'
     ];
