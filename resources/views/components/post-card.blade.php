@@ -1,4 +1,5 @@
-<section class="flex flex-col bg-dark-mode-2 w-full xl:w-3/4 lg:w-3/4 md:w-3/4 sm:w-full rounded-xl mt-8 p-8">
+<section class="flex flex-col w-full xl:w-3/4 lg:w-3/4 md:w-3/4 sm:w-full mt-8 p-8
+    border-2 rounded-xl border-dark-mode-4 hover:bg-dark-mode-2 transition ease-in-out delay-100">
     <header>
         <div class="w-full flex flex-col xl:flex-row lg:flex-row md:flex-col sm:flex-col gap-6 justify-start">
             <div class="flex flex-col items-center gap-4">
