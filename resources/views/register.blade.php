@@ -44,12 +44,13 @@
                                         class="textarea h-28 rounded-lg bg-white text-sm font-bold font-quicksand text-black px-2 border-2 border-gray-500"></textarea>
                                 </fieldset>
                             </div>
-                            <div class="flex flex-col gap-4 xl:items-end lg:items-center md:items-center sm:items-center items-center w-full xl:w-1/2 lg:w-1/2 md:w-full sm:w-full">
+                            <div class="flex flex-col gap-2 xl:items-end lg:items-center md:items-center sm:items-center items-center w-full xl:w-1/2 lg:w-1/2 md:w-full sm:w-full">
                                 <img src="{{asset('img/default-avatar.png')}}" id="preview" alt="preview profile image" width="128" height="128" 
                                     class="w-32 h-32 mb-6 object-cover xl:rounded-full lg:rounded-full md:rounded-none sm:rounded-none rounded-none border-4 border-gray-500" />
+                                <label for="input-preview" class="text-white font-quicksand text-xl font-bold">Immagine profilo:</label>
                                 <input type="file" id="input-preview" name="profile_image" value="{{ old('profile_image') }}" accept=".png, .jpg, .jpeg" 
                                     class="text-white font-quicksand w-3/4 mt-6 border-2 border-gray-400 rounded-lg" />
-                                <button id="delete-preview" class="px-4 py-2 text-white font-bold font-quicksand rounded-xl bg-red-500 hover:bg-red-700 invisible">Elimina</button>
+                                <button id="delete-preview" class="px-4 py-2 mt-4 text-white font-bold font-quicksand rounded-md bg-red-500 hover:bg-red-700 invisible">Elimina</button>
                                 @error('profile_image')
                                     <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
                                 @enderror
