@@ -18,7 +18,7 @@ return new class extends Migration
             $table->uuid('user_id');
             $table->uuid('comment_id');
             $table->primary('id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('comment_id')->references('id')->on('comments')->onDelete('cascade');
         });
     }

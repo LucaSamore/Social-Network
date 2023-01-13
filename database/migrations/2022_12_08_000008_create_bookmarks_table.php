@@ -19,7 +19,7 @@ return new class extends Migration
             $table->uuid('post_id');
             $table->dateTime('created_at');
             $table->primary('id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });
     }

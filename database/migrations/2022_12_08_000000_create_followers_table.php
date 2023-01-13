@@ -18,8 +18,8 @@ return new class extends Migration
             $table->uuid('follower');
             $table->uuid('followee');
             $table->primary('id');
-            $table->foreign('follower')->references('id')->on('users');
-            $table->foreign('followee')->references('id')->on('users');
+            $table->foreign('follower')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('followee')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

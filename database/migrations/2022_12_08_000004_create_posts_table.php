@@ -22,7 +22,7 @@ return new class extends Migration
             $table->bigInteger('number_of_reposts')->default('0');
             $table->uuid('user_id');
             $table->primary('id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->uuid('user_id');
             $table->uuid('post_id');
             $table->primary('id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });
     }

@@ -50,6 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/unfollow/{my_username}/{other_username}', [UserController::class, 'unfollow'],)->name('user.unfollow');
     Route::delete('/post/delete/{post_id}', [PostController::class, 'destroy'])->whereUuid('post_id')->name('post.delete');
     Route::delete('/comment/delete/{comment_id}', [CommentController::class, 'destroy'])->whereUuid('comment_id')->name('comment.delete');
+    Route::delete('/user/delete', [UserController::class, 'destroy'])->name('user.delete');
     Route::any('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
