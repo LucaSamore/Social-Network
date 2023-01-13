@@ -17,8 +17,6 @@
             </header>
             <section class="flex flex-col justify-start items-center w-3/4 pb-12
                             xl:w-4/5 lg:w-3/4 md:w-3/4 sm:w-4/5 rounded-xl">
-                
-                {{ dd($bookmarks->map->bookmarks)}}
                 @forelse ($bookmarks as $bookmark)
                     <x-post-card 
                         :post="$bookmark"

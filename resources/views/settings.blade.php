@@ -27,9 +27,10 @@
             </header>
             <section class="flex flex-col justify-start items-center w-3/4 pb-8 rounded-xl
                             xl:w-4/5 lg:w-3/4 md:w-3/4 sm:w-4/5">
+                <h2 class="text-white text-3xl font-bold font-quicksand pb-12 mb-12 text-center">Modifica i dati del tuo account</h2>
                 <form action="/user/edit" method="post" enctype="multipart/form-data" class="flex flex-col gap-6 justify-center items-center w-3/4 xl:w-3/5 lg:w-3/4 md:w-3/4 sm:w-3/4">
                     @csrf
-                    <fieldset class="w-full flex gap-12 mb-4">
+                    <fieldset class="w-full flex flex-col xl:flex-row lg:flex-row md:flex-col sm:flex-col gap-12 items-center mb-4">
                         @if ($user->profile_image !== null)
                         <img src="{{ $user->profile_image }}" alt="user profile picture" width="64" height="64" id="preview"
                             class="w-32 h-32 object-cover xl:rounded-full lg:rounded-full md:rounded-none sm:rounded-none rounded-none border-2 border-gray-500" />
@@ -61,7 +62,7 @@
                         </div>
                     </fieldset>
                     <div class="flex justify-end items-end w-full">
-                        <button id="delete-preview" class="px-4 py-2 text-white font-bold font-quicksand rounded-xl bg-red-500 hover:bg-red-700">Elimina</button>
+                        <button id="delete-preview" class="px-4 py-2 text-white font-bold font-quicksand rounded-md bg-red-500 hover:bg-red-700">Elimina</button>
                     </div>
                     <fieldset class="w-full flex flex-col gap-2 justify-center items-start">
                         <label for="username" class="text-white font-quicksand text-lg">Username:</label>
@@ -122,10 +123,36 @@
                     <input type="submit" value="Aggiorna" 
                         class="btn border-none px-16 hover:bg-lavanda text-white font-bold font-montserrat text-lg bg-lavanda rounded-lg py-1 mt-6 normal-case"/>
                 </form>
+                <footer class="border-2 border-red-700 rounded-lg w-3/4 mt-12 flex flex-col">
+                    <h3 class="text-white font-montserrat text-2xl p-4">Danger Zone 💀</h3>
+                    <div class="flex flex-col xl:flex-row lg:flex-row md:flex-row sm:flex-col justify-evenly items-center gap-6 py-6">
+                        <p class="text-white font-quicksand text-xl">Cancella il tuo account</p>
+                        <label for="delete-account" class="text-white font-montserrat font-bold bg-red-500 px-6 py-2 rounded-md btn normal-case hover:bg-red-700 border-none">Elimina</lab>
+                    </div>
+                </footer>
             </section>
+            <!-- Confirm account elimination -->
+            <input type="checkbox" id="delete-account" class="modal-toggle" />
+            <div class="modal">
+            <div class="modal-box relative bg-dark-mode-3">
+                <label for="delete-account" class="btn btn-sm btn-circle absolute right-2 top-2 bg-dark-mode-4 hover:bg-dark-mode-2 border-none">✕</label>
+                <section>
+                    <header>
+                        <h3 class="text-xl text-white font-montserrat font-bold">Elimina account</h3>
+                    </header>
+                    <p class="py-4 text-white font-quicksand text-lg">Sei sicuro?</p>
+                    <footer class="flex justify-end gap-4 items-end">
+                        <button id="delete-account" class="rounded-lg px-6 py-2 btn hover:bg-red-700
+                                    bg-red-500 font-bold border-none
+                                    text-white font-montserrat text-sm normal-case">
+                            Elimina
+                        </button>
+                    </footer>
+                </section>
+            </div>
+            </div>
         </main>
         @vite('resources/js/preview.js')
-        @vite('resources/js/post.js')
         @vite('resources/js/refresh.js')
         <script src="https://kit.fontawesome.com/6b12fba364.js" crossorigin="anonymous"></script>
     </body>
