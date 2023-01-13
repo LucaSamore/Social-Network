@@ -28,9 +28,9 @@
                             <span class="text-white underline">seleziona</span>
                         </span>
                     </span>
-                    <label>
+                    <div>
                         <input type="file" id="file-upload" accept="image/*, video/*" name="media" class="hidden" />
-                    </label>
+                    </div>
                 </label>
                 @error('media')
                         <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>

@@ -52,9 +52,9 @@
                                         <span class="text-white underline">seleziona</span>
                                     </span>
                                 </span>
-                                <label>
+                                <div>
                                     <input type="file" id="input-preview" accept="image/*" name="profile_image" class="hidden" />
-                                </label>
+                                </div>
                             </label>
                             @error('media')
                                     <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
@@ -66,56 +66,56 @@
                     </div>
                     <fieldset class="w-full flex flex-col gap-2 justify-center items-start">
                         <label for="username" class="text-white font-quicksand text-lg">Username:</label>
-                        <input type="text" placeholder="Username" name="username" value="{{$user->username}}" required class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
+                        <input id="username" type="text" placeholder="Username" name="username" value="{{$user->username}}" required class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
                         @error('username')
                             <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
                         @enderror
                     </fieldset>
                     <fieldset class="w-full flex flex-col gap-2 justify-center items-start">
                         <label for="bio" class="text-white font-quicksand text-lg">Bio:</label>
-                        <textarea class="textarea textarea-bordered w-full bg-dark-mode-3 text-white font-quicksand" name="bio" placeholder="Bio">{{$user->bio}}</textarea>
+                        <textarea id="bio" class="textarea textarea-bordered w-full bg-dark-mode-3 text-white font-quicksand" name="bio" placeholder="Bio">{{$user->bio}}</textarea>
                         @error('bio')
                             <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
                         @enderror
                     </fieldset>
                     <fieldset class="w-full flex flex-col gap-2 justify-center items-start">
                         <label for="name" class="text-white font-quicksand text-lg">Nome:</label>
-                        <input type="text" placeholder="Nome" name="name" value="{{$user->name}}" required class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
+                        <input id="name" type="text" placeholder="Nome" name="name" value="{{$user->name}}" required class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
                         @error('name')
                             <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
                         @enderror
                     </fieldset>
                     <fieldset class="w-full flex flex-col gap-2 justify-center items-start">
                         <label for="surname" class="text-white font-quicksand text-lg">Cognome:</label>
-                        <input type="text" placeholder="Cognome" name="surname" value="{{$user->surname}}" required class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
+                        <input id="surname" type="text" placeholder="Cognome" name="surname" value="{{$user->surname}}" required class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
                         @error('surname')
                             <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
                         @enderror
                     </fieldset>
                     <fieldset class="w-full flex flex-col gap-2 justify-center items-start">
                         <label for="date_of_birth" class="text-white font-quicksand text-lg">Data di nascita:</label>
-                        <input type="date" placeholder="Data di nascita" name="date_of_birth" required value="{{$user->date_of_birth}}" class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
+                        <input id="date_of_birth" type="date" name="date_of_birth" required value="{{$user->date_of_birth}}" class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
                         @error('date_of_birth')
                             <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
                         @enderror
                     </fieldset>
                     <fieldset class="w-full flex flex-col gap-2 justify-center items-start">
                         <label for="email" class="text-white font-quicksand text-lg">Email:</label>
-                        <input type="email" placeholder="Email" name="email" value="{{$user->email}}" required class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
+                        <input id="email" type="email" placeholder="Email" name="email" value="{{$user->email}}" required class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
                         @error('email')
                             <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
                         @enderror
                     </fieldset>
                     <fieldset class="w-full flex flex-col gap-2 justify-center items-start">
                         <label for="password" class="text-white font-quicksand text-lg">Password:</label>
-                        <input type="password" placeholder="Password" required name="password" class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
+                        <input id="password" type="password" placeholder="Password" required name="password" class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
                         @error('password')
                             <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
                         @enderror
                     </fieldset>
                     <fieldset class="w-full flex flex-col gap-2 justify-center items-start">
                         <label for="password_confirmation" class="text-white font-quicksand text-lg">Conferma password:</label>
-                        <input type="password" placeholder="Conferma password" required name="password_confirmation" class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
+                        <input id="password_confirmation" type="password" placeholder="Conferma password" required name="password_confirmation" class="input input-bordered w-full bg-dark-mode-3 text-white font-quicksand" />
                         @error('password_confirmation')
                             <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>
                         @enderror
@@ -127,7 +127,7 @@
                     <h3 class="text-white font-montserrat text-2xl p-4">Danger Zone 💀</h3>
                     <div class="flex flex-col xl:flex-row lg:flex-row md:flex-row sm:flex-col justify-evenly items-center gap-6 py-6">
                         <p class="text-white font-quicksand text-xl">Cancella il tuo account</p>
-                        <label for="delete-account" class="text-white font-montserrat font-bold bg-red-500 px-6 py-2 rounded-md btn normal-case hover:bg-red-700 border-none">Elimina</lab>
+                        <label for="delete-account" class="text-white font-montserrat font-bold bg-red-500 px-6 py-2 rounded-md btn normal-case hover:bg-red-700 border-none">Elimina</label>
                     </div>
                 </footer>
             </section>

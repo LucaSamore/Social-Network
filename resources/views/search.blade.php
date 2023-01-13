@@ -26,14 +26,14 @@
                     </div>
                 @endif
             </header>
-            <section class="flex flex-col justify-start items-center w-3/4 pb-8 mt-16
+            <div class="flex flex-col justify-start items-center w-3/4 pb-8 mt-16
                             xl:w-4/5 lg:w-3/4 md:w-3/4 sm:w-4/5 rounded-xl">
                 @forelse ($results as $result)
                     <x-search-result :user="$result"/>
                 @empty
                     <h2 class="text-white font-quicksand mt-16 text-2xl">Non ci sono risultati</h2>
                 @endforelse
-            </section>
+            </div>
         </main>
         @vite('resources/js/post.js')
         @vite('resources/js/refresh.js')
