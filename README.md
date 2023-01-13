@@ -6,20 +6,23 @@ A social network application built for my Web Technologies course.
 * [Tailwindcss](https://tailwindcss.com/)
 * [daisyUI](https://daisyui.com/)
 * [MySQL](https://www.mysql.com/)
+* [Cloudinary](https://cloudinary.com/)
 
 ## Requirements
 * [PHP 8+](https://www.apachefriends.org/)
 * [Composer](https://getcomposer.org/)
-* [npm](https://nodejs.org/en/)
+* [Node/npm](https://nodejs.org/en/)
 * [MySQL](https://www.mysql.com/)
 
 ## Project setup
-1. Copy file `.env.example` to `.env`, configure your database params
+1. Copy file `.env.example` to `.env`, configure your database and Cloudinary params
 2. Install project dependencies running `composer install` and `npm install` commands
 4. Run migration and seeder running `php artisan migrate --seed` command
 5. Generate application encryption key running `php artisan key:generate` command
 6. Run node server with `npm run dev` command
 7. Run the application with `php artisan serve` command
+
+The project can also run using Docker containers.
 
 ## Authors
 * [Luca Samorè](https://github.com/LucaSamore)
