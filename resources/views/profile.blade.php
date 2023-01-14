@@ -60,6 +60,17 @@
                 </div>
                 <input id="my-username" type="hidden" name="me" value="{{ Session::get('username') }}" />
                 <input id="other-username" type="hidden" name="other" value="{{ $user->username }}" />
+
+                @if ($isRead)
+                    <div class="chat chat-start mt-6 mr-auto w-full">
+                        <div class="chat-image avatar">
+                        <p class="w-10 text-6xl">
+                            😸
+                        </p>
+                        </div>
+                        <p class="chat-bubble bg-dark-mode-3 text-white font-quicksand font-bold text-xl">Hey! Hai delle nuove notifiche!</p>
+                    </div>
+                @endif
             </header>
             <section id="feeds" class="flex flex-col justify-start items-center w-3/4 pb-12
                             xl:w-4/5 lg:w-3/4 md:w-3/4 sm:w-4/5 rounded-xl">

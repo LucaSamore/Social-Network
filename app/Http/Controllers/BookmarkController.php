@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\NotificationTrait;
 use App\Http\Traits\TrendTrait;
 use App\Models\Bookmark;
 use App\Models\Post;
@@ -10,7 +11,7 @@ use Illuminate\Support\Str;
 
 final class BookmarkController extends Controller
 {
-    use TrendTrait;
+    use TrendTrait, NotificationTrait;
 
     public function update(Request $request)
     {
@@ -61,6 +62,7 @@ final class BookmarkController extends Controller
         return view('bookmarks', [
             'bookmarks' => $bookmarks,
             'trends' => $this->topTrends(),
+            'isRead' => $this->toRead($request->session()->get('user_id'))
         ]);
     }
 
