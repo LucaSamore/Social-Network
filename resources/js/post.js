@@ -36,8 +36,9 @@ const preventDefaults = (e) => {
 
 const handleDrop = (e) => {
     const dt = e.dataTransfer;
-    const file = dt.files[0];
-    handleFile(file);
+    const dtfile = dt.files[0];
+    //console.log(dtfile);
+    handleFile(dtfile);
 }
 
 const createDeleteButton = () => {
@@ -80,6 +81,10 @@ const deleteMedia = (e) => {
 }
 
 const handleFile = (uploaded) => {
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(uploaded);
+    file.files = dataTransfer.files;
+
     removeDeleteButton();
     removeMedia();
 
@@ -112,7 +117,7 @@ const handleFile = (uploaded) => {
 
 ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
     dropzone.addEventListener(eventName, preventDefaults, false);
-})
+});
 
 dropzone.addEventListener('drop', handleDrop, false);
 

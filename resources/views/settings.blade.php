@@ -52,9 +52,9 @@
                                         <span class="text-white underline">seleziona</span>
                                     </span>
                                 </span>
-                                <div>
+                                <label>
                                     <input type="file" id="input-preview" accept="image/*" name="profile_image" class="hidden" />
-                                </div>
+                                </label>
                             </label>
                             @error('media')
                                     <span class="text-red-600 font-quicksand font-bold text-sm">{{ $message }}</span>

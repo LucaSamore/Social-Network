@@ -39,7 +39,7 @@ final class PostController extends Controller
         $request->validated();
 
         if (!$request->hasFile('media') && $request->textual_content === null) {
-            return back()->with('error', '🙃 Contenuto non specificato 🙃');
+            return back()->with('error', 'Contenuto non specificato 🙃');
         }
 
         $user_id = $request->session()->get('user_id');
