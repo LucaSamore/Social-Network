@@ -91,7 +91,7 @@
                 </label>
             </li>
             <li>
-                <button disabled class="flex gap-2 items-center btn bg-lavanda text-white border-none hover:bg-dark-lavanda">
+                <button class="flex gap-2 items-center btn bg-lavanda text-white border-none hover:bg-dark-lavanda">
                     <i class="fa-solid fa-retweet"></i>
                     <span>{{ $post->number_of_reposts }}</span>
                 </button>

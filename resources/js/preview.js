@@ -21,11 +21,14 @@ const handleDrop = (e) => {
     handleFile(file);
 }
 
-const handleFile = (file) => {
-    if (file) {
+const handleFile = (uploaded) => {
+    if (uploaded) {
         preview.classList.remove('invisible');
-        preview.src = URL.createObjectURL(file);
+        preview.src = URL.createObjectURL(uploaded);
         deletePreviewButton.classList.remove('invisible');
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(uploaded);
+        image.files = dataTransfer.files;
     }
 }
 
